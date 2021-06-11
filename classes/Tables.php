@@ -22,7 +22,7 @@ endif;
 
 $conexao = conexao::getInstance();
 
-$sql = 'SELECT id, name_pag, name_form, tabela, tabelasinan, tabelaexameccz, tabelaexameial, caminho, unidade FROM pag_system WHERE name_pag = :name_pag';
+$sql = 'SELECT id, name_pag, name_form, caminho, tabela, unidade FROM pag_system WHERE name_pag = :name_pag';
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':name_pag', $get_pag);
 $stm->execute();
@@ -30,32 +30,7 @@ $retorno = $stm->execute();
 $pags = $stm->fetch(PDO::FETCH_OBJ);
 
 $nametabela = isset($pags->tabela) ? $pags->tabela : '';
-$nametabelaarq = $nametabela.'_'.$get_year;
-$nametabelasinan = isset($pags->tabelasinan) ? $pags->tabelasinan : '';
-$nametabelasinanarq = $nametabelasinan.'_'.$get_year;
-$nametabelaexameccz = isset($pags->tabelaexameccz) ? $pags->tabelaexameccz : '';
-$nametabelaexameial = isset($pags->tabelaexameial) ? $pags->tabelaexameial : '';
-$nametabelaexamecczarq = $nametabelaexameccz.'_'.$get_year;
-$nametabelaexameialarq = $nametabelaexameial.'_'.$get_year;
 $nameform = isset($pags->name_form) ? $pags->name_form : 'SISDAMWEB';
-
-if($get_year > 2015 && $get_year < $ano_atual):
-$sqlsinan = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = '$nametabelasinanarq' ORDER BY `CREATE_TIME` DESC LIMIT 1";
-$sqlccz = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = '$nametabelaexamecczarq' ORDER BY `CREATE_TIME` DESC LIMIT 1";
-else:
-$sqlsinan = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = '$nametabelasinan' ORDER BY `CREATE_TIME` DESC LIMIT 1";
-$sqlccz = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = '$nametabelaexameccz' ORDER BY `CREATE_TIME` DESC LIMIT 1";
-endif;
-
-$stm = $conexaotable->prepare($sqlsinan);
-$stm->execute();
-$row_sinan = $stm->fetch(PDO::FETCH_OBJ);
-$createsinan = $row_sinan->CREATE_TIME ?? '';
-
-$stms = $conexaotable->prepare($sqlccz);
-$stms->execute();
-$row_ccz = $stms->fetch(PDO::FETCH_OBJ);
-$createccz = $row_ccz->CREATE_TIME ?? '';
 
 $stm = null;
 
@@ -67,39 +42,6 @@ class Tables {
                 return $nametabela;
             else:
                 return $nametabela.'_' .$get_year;
-            endif;
-        endif;
-
-    }
-
-    public function TableSinan($get_year,$ano_atual,$get_pag, $nametabelasinan) {
-        if(!empty($get_pag)):
-            if (!empty(is_numeric($get_year)) && $get_year == $ano_atual):
-                return $nametabelasinan;
-            else:
-                return $nametabelasinan.'_' .$get_year;
-            endif;
-        endif;
-
-    }
-
-    public function TableExameCcz($get_year,$ano_atual,$get_pag, $nametabelaexameccz) {
-        if(!empty($get_pag)):
-            if (!empty(is_numeric($get_year)) && $get_year == $ano_atual):
-                return $nametabelaexameccz;
-            else:
-                return $nametabelaexameccz.'_' .$get_year;
-            endif;
-        endif;
-
-    }
-
-    public function TableExameIal($get_year,$ano_atual,$get_pag, $nametabelaexameial) {
-        if(!empty($get_pag)):
-            if (!empty(is_numeric($get_year)) && $get_year == $ano_atual):
-                return $nametabelaexameial;
-            else:
-                return $nametabelaexameial.'_' .$get_year;
             endif;
         endif;
 
@@ -121,49 +63,6 @@ class Tables {
         if(!empty($get_pag)):
             return 'sistema/lista_serverside/proc-list-'.$nametabela.'.php?tabela='.$tabela.'&year='.$get_year.'&getlixeira='.$get_lixeira;
         endif;
-    }
-
-    public function ListAedes($get_year, $ano_atual, $get_pag, $tabela, $tabelasinan, $tabelaexame, $get_lixeira) {
-        if(!empty($get_pag)):
-            if (!empty(is_numeric($get_year))):
-                return 'sistema/lista_serverside/proc-list-aedes.php?aedes='.$tabela.'&sinan='.$tabelasinan.'&ccz='.$tabelaexame.'&year='.$get_year.'&getlixeira='.$get_lixeira;
-            else:
-                return 'sistema/lista_serverside/proc-list-aedes.php?aedes=bloqueio_dengue&sinan=dengnet&ccz=ccz_dengue&year='.$get_year.'&getlixeira='.$get_lixeira;
-            endif;
-        endif;
-    }
-
-    /*Função para consultar a tabela do bd e após gera a senha de hash*/
-    function countCasosNovos($get_lixeira, $tabelasinan, $tabela, $conexaotable, $get_pag, $usuarioniveldeacesso) {
-
-        if(!empty($get_pag)):
-
-            //Selecionar todos os casos da tabela
-            $sql = "SELECT $tabelasinan.NU_NOTIFIC FROM $tabelasinan LEFT JOIN $tabela ON $tabelasinan.NU_NOTIFIC = $tabela.nu_sinan WHERE ((($tabelasinan.ID_DISTRIT)=\"70\") AND (($tabela.nu_sinan) Is Null))";
-            $stm = $conexaotable->prepare($sql);
-            $stm->execute(); //Contar o total de registros
-            //Contar o total de registros
-            $sqlcountcasos = $stm->rowCount();
-
-            if($get_lixeira === 1) :
-                return '';
-            elseif($sqlcountcasos === '1' && $usuarioniveldeacesso <= 2) :
-                return '<div class="alert alert-danger text-center" role="alert"><i class="fa fa-exclamation-circle me-2"></i><strong>ATENÇÃO !!! </strong>
-                            <a href="'.PAGSYSTEM.'?pag=edicao_bloqueio_dengue&pagina=1" class="alert-link">CLIQUE AQUI </a>. <strong class="ms-1">EXISTE '.$sqlcountcasos.' NOVO CASO PARA ATUALIZAR !!!</strong>
-                        </div>';
-            elseif($sqlcountcasos > '1' && $usuarioniveldeacesso <= 2) :
-                return '<div class="alert alert-danger text-center" role="alert"><i class="fa fa-exclamation-circle me-2"></i><strong>ATENÇÃO !!! </strong>
-                            <a href="'.PAGSYSTEM.'?pag=edicao_bloqueio_dengue&pagina=1" class="alert-link">CLIQUE AQUI</a>. <strong class="ms-1">EXISTEM '.$sqlcountcasos.' NOVOS CASOS PARA ATUALIZAR !!!</strong>
-                        </div>';
-            elseif($sqlcountcasos < '1' && $usuarioniveldeacesso >= 1 && $usuarioniveldeacesso < 3):
-                return '<div class="alert alert-success text-center" role="alert"><i class="fa fa-grin-beam-sweat me-2"></i><strong class="ms-1">NÃO EXISTEM NOVOS CASOS PARA ATUALIZAR !!!</strong>
-                        </div>';
-
-            else:
-                return '';
-            endif;
-        endif;
-
     }
 
     /*Função para consultar a tabela do bd e após gera a senha de hash*/

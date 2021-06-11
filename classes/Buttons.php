@@ -81,7 +81,7 @@ class Buttons extends Tables {
     }
 
     public function BtnColor($get_lixeira, $get_year, $ano_atual) {
-        if ($get_lixeira === 1):
+        if ($get_lixeira == 1):
             return 'secondary';
         elseif($get_year < $ano_atual):
             return 'danger';

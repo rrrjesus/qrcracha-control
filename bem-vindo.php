@@ -23,10 +23,10 @@ $imagemjumbo = '/imagens/sistemsisdam.jpg';
 
     <div class="bemv p-5 mb-4 mt-4 rounded-3">
             <div class="fw-bold fs-3 text-center">Olá, <?php if(isset($_SESSION['usuarioId'])){echo $usuarionome;}else{echo 'Visitante';} ?> !!!</div>
-            <h4>Este é um Sistema desenvolvido por colaboradores da Suvis Jaçanã-Tremembé. Ele inclui muitas horas de
-                esforço e dedidação buscando um aperfeiçoamento no serviço. Use-o como um ponto de partida para a
-                criação de sistemas cada vez melhores para pessoas que trabalham diariamente com o compromiso de
-                agilizar e melhorar o serviço publico com qualidade e dedicação.</h4>
+            <h4>Este é um Sistema criado e mantido por desenvolvedores independentes que professam a mesma fé e doutrina apregoada na Congregação Cristã no Brasil.
+                Ele em nada se vincula ao nome e/ou Ministério/Fiéis da Congregação Cristã do Brasil, o desenvolvimento inclui muitas horas de
+                esforço e dedidação buscando um aperfeiçoamento no serviço. Use-o como um ponto de partida para a criação de sistemas cada vez melhores
+                para pessoas que trabalham diariamente com o compromiso de agilizar e melhorar o serviço com qualidade e dedicação.</h4>
     </div>
 </div>
 

@@ -8,7 +8,6 @@ include_once 'locked/seguranca.php';
 include_once 'conexao.php';
 include_once 'functions.php';
 include_once 'classes/Tables.php';
-include_once 'classes/Sv2.php';
 include_once 'classes/Buttons.php';
 include_once 'classes/Modal.php';
 
@@ -17,7 +16,7 @@ $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
 $_SESSION['url'] = $url;
 
 $usuarionome = isset($_SESSION['usuarioNome']) ? $_SESSION['usuarioNome'] : 'VISITANTE';
-$usuariosobrenome = isset($_SESSION['usuarioSobreNome']) ? $_SESSION['usuarioSobreNome'] : 'SISDAMWEB';
+$usuariosobrenome = isset($_SESSION['usuarioSobreNome']) ? $_SESSION['usuarioSobreNome'] : 'JAÇANÃ CONTROLE';
 $usuariosobrenome = isset($_SESSION['usuarioNomeSocial']) ? $_SESSION['usuarioNomeSocial'] : 'VIST';
 $usuariologin = isset($_SESSION['usuarioLogin']) ? $_SESSION['usuarioLogin'] : 'D000000';
 $usuariostatus = isset($_SESSION['usuarioStatus']) ? $_SESSION['usuarioStatus'] : 0;

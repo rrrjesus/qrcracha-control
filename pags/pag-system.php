@@ -43,7 +43,7 @@ if($pags):
             if(file_exists($pags->caminho)):
             echo '<div class="card shadow-lg"> <!-- Início do Card -->
                     <div class="card-header text-center fw-bold fs-6">
-                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icone-inicial-4.png">   SISTEMA SISDAMWEB - '.$pags->unidade.' - '.$today_year.'
+                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icone-inicial-4.png">   SISTEMA JAÇANA CONTROLE - '.$pags->unidade.' - '.$today_year.'
                     </div>
                         <div class="card-body">';
 

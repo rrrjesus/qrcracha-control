@@ -43,7 +43,7 @@ if($pags):
 
         if(file_exists('../'.$pags->caminho)):
          echo  '<div class="card shadow-lg"> <!-- Início do Card -->
-                <h5 class="card-header text-center"><img class="img-fluid rounded-circle" height="20" width="20" src="../imagens/icone-inicial-4.png">   SISTEMA SISDAMWEB - '.$pags->unidade.' - '.$today_year.'</h5>
+                <h5 class="card-header text-center"><img class="img-fluid rounded-circle" height="20" width="20" src="../imagens/icone-inicial-4.png">   SISTEMA JAÇANÃ CONTROLE - '.$pags->unidade.' - '.$today_year.'</h5>
                     <div class="card-body">';
                         include '../'.$pags->caminho;  //inclui o arquivo
 

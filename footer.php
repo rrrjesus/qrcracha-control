@@ -15,7 +15,7 @@
             <li class="list-inline-item px-0 px-sm-2"><i class="fa fa-whatsapp me-1" style="color: forestgreen"></i>
                 <!-- Link original -> "https://wa.me/5511991091365?text=Olá,%20meu%20amigo/a!%0AEsse%20é%20o%20suporte%20do%20Sistema%20SisdamWeb%0A.Como%20podemos%20te%20ajudar?"
                         Link encurtado -> "https://bit.ly/3m7H0iQ" no site -> https://app.bitly.com/ -->
-                <a target="_blank" href="https://bit.ly/3m7H0iQ" class="link-light">Whatsapp</a></li>
+                <a target="_blank" href="https://bit.ly/3cCLMkG" class="link-light">Whatsapp</a></li>
             <li class="list-inline-item px-0 px-sm-2"><i class="fa fa-mail-bulk me-1" style="color: #0a53be"></i> <a href="mailto:<?=$systemfetch->email_contato;?>" target="_blank" class="link-light">Contato</a></li>
         </ul>
     </div>
