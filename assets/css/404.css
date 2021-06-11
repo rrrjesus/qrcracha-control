@@ -1,0 +1,123 @@
+.fade {
+    animation: fade 3s;
+    opacity: 1; }
+
+.logo {
+    padding: 20px; }
+@media (max-width: 960px) {
+    .logo {
+        display: none; } }
+
+.ilha {
+    position: absolute;
+    bottom: 0;
+    background-color: #e0c09b;
+    width: 100%;
+    height: 31%; }
+@media (max-width: 960px) {
+    .ilha {
+        height: 16%; } }
+.ilha .farol {
+    background-image: url("../../imagens/404-farol.png");
+    float: right;
+    width: 86px;
+    height: 270px;
+    margin-top: -270px;
+    margin-right: 200px; }
+@media (max-width: 960px) {
+    .ilha .farol {
+        display: none; } }
+.ilha .farol .luz-farol {
+    background-image: url("../../imagens/404-luz-farol.png");
+    position: absolute;
+    width: 187px;
+    height: 63px;
+    margin-left: -145px;
+    animation: farol 1s alternate infinite;
+    transform-origin: right; }
+
+.oceano-bg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #32bbe3; }
+
+.oceano {
+    position: absolute;
+    bottom: 0;
+    left: -15px;
+    background-color: #5fcae9;
+    background-image: linear-gradient(to bottom, #5fcae9, #32bbe3);
+    height: 30%;
+    width: 2000px;
+    transition: 1s all;
+    animation: onda 1s ease-in-out infinite alternate; }
+@media (max-width: 960px) {
+    .oceano {
+        height: 15%; } }
+.oceano .barco {
+    background-image: url("../../imagens/404-barco.png");
+    width: 240px;
+    height: 137px;
+    margin-top: -137px;
+    transform: translateX(120px);
+    animation: barco 5s; }
+@media (max-width: 960px) {
+    .oceano .barco {
+        transform: translateX(50px); } }
+
+.mensagem {
+    transition: .3s all;
+    color: #495a5e;
+    text-align: center;
+    width: 33%;
+    margin: auto;
+    display: block; }
+@media (max-width: 960px) {
+    .mensagem {
+        width: 90%; } }
+.mensagem h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1; }
+@media (max-width: 960px) {
+    .mensagem h1 {
+        font-size: 30px; } }
+.mensagem p {
+    font-size: 20px;
+    font-weight: 100; }
+@media (max-width: 960px) {
+    .mensagem p {
+        font-size: 15px; } }
+.mensagem a {
+    transition: .3s all;
+    border-bottom: 1px solid #5fcae9;
+    color: #495a5e;
+    text-decoration: none; }
+.mensagem a:hover {
+    text-decoration: none;
+    color: #5fcae9; }
+
+@keyframes onda {
+    from {
+        transform: rotate(1deg); }
+    to {
+        transform: rotate(-1deg); } }
+@keyframes barco {
+    from {
+        margin-left: -240px; }
+    to {
+        margin-left: 0px; } }
+@keyframes fade {
+    from {
+        opacity: 0; }
+    to {
+        opacity: 1; } }
+@keyframes farol {
+    from {
+        transform: scaleX(-1); }
+    to {
+        transform: scaleX(1); } }
+
+/*# sourceMappingURL=404.css.map */

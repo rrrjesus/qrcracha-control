@@ -1,0 +1,70 @@
+span.twitter-typeahead .tt-menu {
+    cursor: pointer;
+}
+
+.dropdown-menu, span.twitter-typeahead .tt-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 1rem;
+    color: #373a3c;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem; }
+
+span.twitter-typeahead .tt-suggestion {
+    display: block;
+    width: 100%;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #373a3c;
+    text-align: inherit;
+    white-space: nowrap;
+    background: none;
+    border: 0;
+    border-radius: 10px;
+    }
+span.twitter-typeahead .tt-suggestion:focus, .dropdown-item:hover, span.twitter-typeahead .tt-suggestion:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #0275d8; }
+span.twitter-typeahead .active.tt-suggestion, span.twitter-typeahead .tt-suggestion.tt-cursor, span.twitter-typeahead .active.tt-suggestion:focus, span.twitter-typeahead .tt-suggestion.tt-cursor:focus, span.twitter-typeahead .active.tt-suggestion:hover, span.twitter-typeahead .tt-suggestion.tt-cursor:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #0275d8;
+    outline: 0; }
+span.twitter-typeahead .disabled.tt-suggestion, span.twitter-typeahead .disabled.tt-suggestion:focus, span.twitter-typeahead .disabled.tt-suggestion:hover {
+    color: #818a91; }
+span.twitter-typeahead .disabled.tt-suggestion:focus, span.twitter-typeahead .disabled.tt-suggestion:hover {
+    text-decoration: none;
+    cursor: not-allowed;
+    background-color: transparent;
+    background-image: none;
+    filter: "progid:DXImageTransform.Microsoft.gradient(enabled = false)"; }
+span.twitter-typeahead {
+    width: 100%; }
+.input-group span.twitter-typeahead {
+    display: block !important; }
+.input-group span.twitter-typeahead .tt-menu {
+    top: 2.375rem !important; }
+
+.log,.da,.setor,.rua,.cidade,.ubs,.uniorigem,.suvis,.tipo,.tipotid,.assuntotid,.tipoagravo,.resptid,.unidestino,.unientrada,.agravo,.agravosiva,.agravosurto,.agravocovid,.localvd,.localate,.nomecad,.ocorrencia,.log,.setor,.tt-hint {position: absolute;padding: 0.12rem 0.4rem;font-size: .875rem;width: 100%; min-height: calc(1.5em + .5rem + 2px);border-radius: 1.5rem;}
+
+.tt-hint:disabled, .tt-hint[readonly] {background-color: #e9ecef;opacity: 1;}
+
+.tt-dropdown-menu {cursor: pointer;position: absolute;top: 100%;left: 0;z-index: 1000;display: none;float: left;padding: 4px 4px;margin: 2px 0 0;font-size: 14px;color: #373a3c;text-align: left;list-style: none;background-color: #fff;background-clip: padding-box;border: 1px solid rgba(0, 0, 0, 0.15);border-radius: 8px 8px 8px 8px;top: 5px;}
+
+.verm{color: #ff0000;} .verde{color: #4cae4c;} .amarelo{color: gold;}
+
+.logo-img {width: 96px;height: 96px;margin: 0 auto 10px;display: block;}
