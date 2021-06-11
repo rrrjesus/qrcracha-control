@@ -1,0 +1,64 @@
+<?php
+error_reporting(-1);
+
+// Recebe o id da pag do painel via GET
+$pag = isset($_GET['pag']) ? $_GET['pag'] : '';
+$pagyear = isset($_GET['year']) ? $_GET['year'] : '';
+$pagano = date('Y');
+
+$conexao = conexao::getInstance();
+
+$sql = 'SELECT id, name_pag, name_form, caminho, unidade FROM pag_system WHERE name_pag = :name_pag';
+$stm = $conexao->prepare($sql);
+$stm->bindValue(':name_pag', $pag);
+$stm->execute();
+$retorno = $stm->execute();
+$pags = $stm->fetch(PDO::FETCH_OBJ);
+
+if (isset($_SESSION['usuarioId'])){$home = $pag_system;}else{$home = $index;}
+
+
+if($pags):
+    echo '<div class="row mt-4 pe-3 ps-3"> <!-- Início da Página de Título -->
+                <div class="col-md-12 ml-auto"> <!-- https://getbootstrap.com/docs/4.0/layout/grid/#mix-and-match -->
+                    <nav style="--bs-breadcrumb-divider: \'\';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><i class="far fa-home-heart me-2 text-primary"></i> <a class="text-uppercase" href="'.$home.'"><strong>INÍCIO</strong></a> <i class="far fa-arrow-right ms-1 me-1"></i> </li>
+                            <li class="breadcrumb-item text-uppercase active"><strong>'.$pags->name_form.' - '.$get_year.'</strong></li>
+                        </ol>
+                    </nav>
+                </div>
+           </div>
+
+        <div class="row mb-0">
+            <div class="col-md-12 text-center">';
+
+                if ($usuarioid == 1) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong><i class="far fa-user-lock me-2"></i> APENAS VISUALIZAÇÃO DISPONÍVEL - FAÇA <i class="fa fa-hand-o-up"></i> LOGIN !!! </strong></div>';
+                elseif ($usuariostatus == 0) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong> PARA ACESSAR É NECESSARIO ATIVAR SEU USUÁRIO !!! </strong></div>';
+                elseif ($usuarioniveldeacesso > 3) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong> SEU NÍVEL DE USUÁRIO NÃO PERMITE CADASTRAR !!! </strong></div>';
+                else : '';
+                endif;
+        echo '</div>
+        </div>';
+            if(file_exists($pags->caminho)):
+            echo '<div class="card shadow-lg"> <!-- Início do Card -->
+                    <div class="card-header text-center fw-bold fs-6">
+                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icone-inicial-4.png">   SISTEMA SISDAMWEB - '.$pags->unidade.' - '.$today_year.'
+                    </div>
+                        <div class="card-body">';
+
+                            if(!empty(is_numeric($pagyear)) && $pagyear > 2015 && $pagyear <= $pagano):
+                                    include $pags->caminho;  //inclui o arquivo
+                            elseif(empty($pagyear)):
+                                include $pags->caminho;  //inclui o arquivo
+                            else:
+                                header("Location: 404.php");
+                            endif;
+                            else :
+                                header("Location: 404.php");
+                            endif;
+        else:
+            include 'bem-vindo.php';
+        endif;
+
+?>
