@@ -110,9 +110,9 @@
             </li> -->
 
             <li class="nav-item me-2">
-                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('imagens/'.$usuariologin.'/fotologin/'.$usuariofoto))
-                    {echo 'imagens/'.$usuariologin.'/fotologin/'.$usuariofoto;}
-                    else{ echo 'imagens/foto_exists.png';}?>">
+                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('sistema/imagens/'.$usuariologin.'/fotologin/'.$usuariofoto))
+                    {echo 'sistema/imagens/'.$usuariologin.'/fotologin/'.$usuariofoto;}
+                    else{ echo 'sistema/imagens/foto_exists.png';}?>">
             </li>
 
             <li class="nav-item dropdown me-2">

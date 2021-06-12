@@ -50,7 +50,13 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [1], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="imagens/' + full[2] + '/fotologin/'+ full[1] + '" target="_blank"><img  height="30" width="30" src="imagens/' + full[2] + '/fotologin/'+ full[1] + '" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente"></a>';
+                            return '<a href="sistema/imagens/' + full[2] + '/fotologin/'+ full[1] + '" target="_blank"><img src="sistema/imagens/' + full[2] + '/fotologin/'+ full[1] + '" class="rounded-circle float-left" height="50" width="50"></a>';
+                        }
+                    },
+                    {
+                        "aTargets": [2], // o numero 6 é o nº da coluna
+                        "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                            return '<a href="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://<?=PAGSYSTEM?>?pag=id='+full[0]+'&choe=UTF-8" target="_blank"><img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://<?=PAGSYSTEM?>pag=id='+full[0]+'&choe=UTF-8" class="rounded-circle float-left" height="50" width="50"></a>';
                         }
                     },
                     {
@@ -84,20 +90,20 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 if(lixos === '0') {
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja apagar o endereço id: <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[0] + '</span> ?</div>'
+                        '<div class="modal-title text-center">Deseja apagar o usuário id: <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[0] + '</span> ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_enderecos&idaction=' + data[0] + '&enderecoaction=' + data[2] + '&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[2] + '&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                 }else{
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja reativar o endereço id: <span class="badge rounded-pill bg-warning pt-2 pb-2">' + data[0] + '</span> ?</div>'
+                        '<div class="modal-title text-center">Deseja reativar o usuário id: <span class="badge rounded-pill bg-warning pt-2 pb-2">' + data[0] + '</span> ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_enderecos&idaction=' + data[0] + '&enderecoaction=' + data[5] + '&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[5] + '&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                     $('#myModalLixo').modal('show'); // calling the bootstrap modal
                 }

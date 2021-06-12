@@ -62,12 +62,12 @@ endif;
 
             <div class="row mb-3">
                 <div class="col-md-1 mb-1">
-                    <a href="<?php if (file_exists('imagens/'.$user->login.'/fotologin/'.$user->foto))
-                    {echo 'imagens/'.$user->login.'/fotologin/'.$user->foto;}
-                    else{ echo 'imagens/foto_exists.png';}?>">
-                        <img  height="90" width="90" src="<?php if (file_exists('imagens/'.$user->login.'/fotologin/'.$user->foto))
-                        {echo 'imagens/'.$user->login.'/fotologin/'.$user->foto;}
-                        else{ echo 'imagens/foto_exists.png';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
+                    <a href="<?php if (file_exists('sistema/imagens/'.$user->login.'/fotologin/'.$user->foto))
+                    {echo 'sistema/imagens/'.$user->login.'/fotologin/'.$user->foto;}
+                    else{ echo 'sistema/imagens/foto_exists.png';}?>">
+                        <img  height="90" width="90" src="<?php if (file_exists('sistema/imagens/'.$user->login.'/fotologin/'.$user->foto))
+                        {echo 'sistema/imagens/'.$user->login.'/fotologin/'.$user->foto;}
+                        else{ echo 'sistema/imagens/foto_exists.png';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
                     </a>
                 </div>
                 <div class="col-md-4 mb-1">
