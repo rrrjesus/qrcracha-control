@@ -14,7 +14,7 @@ const DBNAME = 'jacana_system';
 const USER = 'jacana_system';
 const PASSWORD = 'ZisYeMsoTJkbEhth';
 const PAGSYSTEM = 'menu-principal.php';
-const SYSTEM = 'JAÇANÃ CONTROLE';
+const SYSTEM = 'jacana-control';
 
 /** Algumas variáveis padrões utilizadas constantemente */
 

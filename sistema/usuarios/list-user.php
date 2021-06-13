@@ -56,7 +56,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [2], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://<?=PAGSYSTEM?>?pag=id='+full[0]+'&choe=UTF-8" target="_blank"><img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://<?=PAGSYSTEM?>pag=id='+full[0]+'&choe=UTF-8" class="rounded-circle float-left" height="50" width="50"></a>';
+                            return '<a href="<?=PAGSYSTEM?>?pag=visual_cracha&id=' + full[0] + '&session=<?=$hashprimary?>" target="_blank"><img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://<?=PAGSYSTEM?>pag=id='+full[0]+'&choe=UTF-8" class="rounded-circle float-left" height="50" width="50"></a>';
                         }
                     },
                     {

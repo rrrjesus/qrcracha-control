@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Jun-2021 às 21:19
--- Versão do servidor: 10.4.13-MariaDB
--- versão do PHP: 7.4.7
+-- Tempo de geração: 13-Jun-2021 às 06:26
+-- Versão do servidor: 10.4.18-MariaDB
+-- versão do PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -156,7 +156,8 @@ CREATE TABLE `menu_principal` (
 --
 
 INSERT INTO `menu_principal` (`id`, `id_menu`, `pag`, `nome`, `tipomenu`, `icon`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
-(1, NULL, 'index.php', 'Pesquisar', 'System', 'search-plus', 'D788796', '2021-06-11 11:05:22', 'D788796', '2021-06-11 08:12:11');
+(1, NULL, 'index.php', 'Credenciais', 'System', 'address-card', 'D788796', '2021-06-11 11:05:22', 'D788796', '2021-06-11 08:12:11'),
+(2, NULL, 'index.php', 'Cadastramento', 'System', 'user-plus', 'D788796', '2021-06-12 05:34:10', NULL, '2021-06-12 05:34:10');
 
 -- --------------------------------------------------------
 
@@ -181,7 +182,8 @@ CREATE TABLE `menu_sub` (
 --
 
 INSERT INTO `menu_sub` (`id`, `id_menu`, `nome`, `pag`, `icon`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
-(1, 1, 'Crachas', 'menu-principal.php', 'file-signature', NULL, NULL, 'D788796', '2021-06-11 10:06:55');
+(1, 1, 'Consultar', 'menu-principal.php', 'search-plus', NULL, NULL, 'D788796', '2021-06-11 10:06:55'),
+(2, 2, 'Colaboradores', 'menu-principal.php', 'laugh', 'D788796', '2021-06-12 05:38:43', NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -206,7 +208,9 @@ CREATE TABLE `menu_sub_sub` (
 --
 
 INSERT INTO `menu_sub_sub` (`id`, `id_menu`, `nome`, `pag`, `icon`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
-(1, 1, 'Lista', 'menu-principal.php?pag=lista_usuarios&year=2021', NULL, NULL, NULL, 'D788796', '2021-06-11 10:10:55');
+(1, 1, 'Listagem Ativos', 'menu-principal.php?pag=lista_usuarios&year=2021', 'clipboard-list-check', NULL, NULL, 'D788796', '2021-06-11 10:10:55'),
+(2, 1, 'Lixeira', 'menu-principal.php?pag=lista_usuarios&lixeira=1&year=2021', 'trash-restore', 'D788796', '2021-06-12 05:29:34', NULL, '2021-06-12 05:29:34'),
+(3, 2, 'Cadastrar Novo', 'menu-principal.php?pag=cadastro_usuarios&year=2021', 'plus-octagon', 'D788796', '2021-06-12 05:43:38', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -244,7 +248,7 @@ CREATE TABLE `pag_system` (
   `tabela` varchar(25) DEFAULT NULL,
   `unidade` varchar(100) NOT NULL DEFAULT 'JAÇANÃ',
   `usuariocad` varchar(10) DEFAULT NULL,
-  `criado` datetime DEFAULT NULL,
+  `criado` datetime DEFAULT current_timestamp(),
   `usuarioalt` varchar(10) DEFAULT NULL,
   `alterado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
@@ -254,10 +258,11 @@ CREATE TABLE `pag_system` (
 --
 
 INSERT INTO `pag_system` (`id`, `name_pag`, `name_form`, `caminho`, `tabela`, `unidade`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
-(1, 'cadastro_usuarios', 'CADASTRAR USUARIOS', 'sistema/usuarios/cad-user.php', 'usuarios', 'JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
-(2, 'edicao_usuarios', 'EDITAR USUARIOS', 'sistema/usuarios/edit-user.php', 'usuarios', 'JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
-(3, 'lista_usuarios', 'USUARIOS', 'sistema/usuarios/list-user.php', 'usuarios', 'JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
-(4, 'acao_usuarios', 'EDIÇÃO DE USUÁRIOS', 'sistema/usuarios/action-user.php', 'usuarios', 'JAÇANÃ', 'D788796', '2021-06-11 10:15:37', NULL, NULL);
+(1, 'cadastro_usuarios', 'CADASTRAR USUARIOS', 'sistema/usuarios/cad-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
+(2, 'edicao_usuarios', 'EDITAR USUARIOS', 'sistema/usuarios/edit-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
+(3, 'lista_usuarios', 'USUARIOS', 'sistema/usuarios/list-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
+(4, 'acao_usuarios', 'EDIÇÃO DE USUÁRIOS', 'sistema/usuarios/action-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', 'D788796', '2021-06-11 10:15:37', NULL, NULL),
+(5, 'visual_cracha', 'IDENTIFICAÇÃO', 'sistema/usuarios/ident-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', 'D788796', '2021-06-12 19:30:35', NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -304,13 +309,13 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `foto`, `login`, `nome`, `sobrenome`, `nomesocial`, `datanascimento`, `cpf`, `email`, `senha`, `nivel_acesso_id`, `telefone`, `celular`, `status`, `sexo`, `setor`, `usuariocad`, `acessotid`, `criado`, `usuarioalt`, `alterado`, `loginenvioemailsenha`, `chavesetsenha`, `datapedidochavesetsenha`, `datafeitonovasenha`, `dataenvioemailsenha`, `emailenviadosenha`, `resetsenha`, `dataresetsenha`, `date_alter_senha`, `lixeira`) VALUES
-(1, '03062021_esus_notifica.jpg', 'D000000', 'VISITANTE', 'DO SISTEMA', 'VISITS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 4, '1122413700', '11991091365', 0, 2, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 11:51:29', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 20:58:58', 0),
-(2, '11062021_icone-inicial-navbar.png', 'D788797', 'VITORINO', 'DA SILVA DE JESUS', 'VITINHO', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 1, '1122413700', '11991091365', 0, 1, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 15:44:56', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 23:58:58', 0),
-(3, '03062021_esus_notifica.jpg', 'D788798', 'LEANDRO', 'DA SILVA DE JESUS', 'LEANDRINHO', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 1, '1122413700', '11991091365', 1, 2, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 11:51:29', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 23:58:58', 0),
-(4, '03062021_esus_notifica.jpg', 'D788796', 'RODOLFO', 'ROMAIOLI RIBEIRO DE JESUS', 'RODS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 1, '1122413700', '11991091365', 1, 2, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 11:51:29', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 23:58:58', 0),
-(5, 'imagens/foto_exists.png', 'D788794', 'WALLACE', 'DA SILVA', 'WASS', '1971-06-11', '22068876817', 'wallace@gmail.com', '2ca28977ca2c7ae97aee1e9af6304d4b2383a9ab', 0, '1122406868', '11878989798', 0, 0, 0, 'D788796', 0, '2021-06-11 19:08:51', NULL, NULL, NULL, NULL, NULL, NULL, '2021-06-11 19:08:51', 'NAO', 'NAO', NULL, '2021-06-11 19:08:51', 0),
-(6, 'imagens/foto_exists.png', 'D879654', 'WALLACE', 'DA SILVA', 'WASS', '1971-02-07', '56456465465', 'waallace@gmail.com', '2ca28977ca2c7ae97aee1e9af6304d4b2383a9ab', 0, '1122406868', '11684654654', 0, 0, 0, 'D788796', 0, '2021-06-11 19:14:40', NULL, NULL, NULL, NULL, NULL, NULL, '2021-06-11 19:14:40', 'NAO', 'NAO', NULL, '2021-06-11 19:14:40', 0),
-(7, '11062021_icone-inicial-navbar.png', 'D879249', 'TESTANDO', 'TESTET', 'TET', '1984-08-05', '56465465465', 'rodolfo@gmail.com', '2ca28977ca2c7ae97aee1e9af6304d4b2383a9ab', 0, '1122406868', '11564564564', 0, 1, 0, 'D788796', 0, '2021-06-11 19:17:54', NULL, NULL, NULL, NULL, NULL, NULL, '2021-06-11 19:17:54', 'NAO', 'NAO', NULL, '2021-06-11 19:17:54', 0);
+(1, '12062021_foto_exists.png', 'D000000', 'VISITANTE', 'DO SISTEMA', 'VISITS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 0, '1122413700', '11991091365', 0, 2, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-12 00:47:01', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 20:58:58', 0),
+(2, '11062021_vitor.jpg', 'D788797', 'VITORINO', 'DA SILVA DE JESUS', 'VITINHO', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 1, '1122413700', '11991091365', 0, 1, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 23:51:19', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 23:58:58', 0),
+(3, '11062021_leandro.jpg', 'D788798', 'LEANDRO', 'DA SILVA DE JESUS', 'LEANDRINHO', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 1, '1122413700', '11991091365', 0, 2, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 23:41:29', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 23:58:58', 0),
+(4, '11062021_rodolfo.jpg', 'D788796', 'RODOLFO', 'ROMAIOLI RIBEIRO DE JESUS', 'RODS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 1, '1122413700', '11991091365', 0, 2, 0, 'D788796', 1, '0000-00-00 00:00:00', 'D788796', '2021-06-11 23:46:20', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 23:58:58', 0),
+(5, '12062021_foto_exists.png', 'D788794', 'WALLACE', 'DA SILVA', 'WASS', '1971-06-11', '22068876817', 'wallace@gmail.com', '2ca28977ca2c7ae97aee1e9af6304d4b2383a9ab', 0, '1122406868', '11878989798', 0, 0, 0, 'D788796', 0, '2021-06-11 19:08:51', 'D788796', '2021-06-12 01:41:57', NULL, NULL, NULL, NULL, '2021-06-11 19:08:51', 'NAO', 'NAO', NULL, '2021-06-11 19:08:51', 0),
+(6, '12062021_foto_exists.png', 'D879654', 'WALLACE', 'DA SILVA', 'WASS', '1971-02-07', '56456465465', 'waallace@gmail.com', '2ca28977ca2c7ae97aee1e9af6304d4b2383a9ab', 0, '1122406868', '11684654654', 0, 0, 0, 'D788796', 0, '2021-06-11 19:14:40', 'D788796', '2021-06-12 01:42:13', NULL, NULL, NULL, NULL, '2021-06-11 19:14:40', 'NAO', 'NAO', NULL, '2021-06-11 19:14:40', 0),
+(7, '12062021_foto_exists.png', 'D879249', 'TESTANDO', 'TESTET', 'TET', '1984-08-05', '56465465465', 'rodolfo@gmail.com', '2ca28977ca2c7ae97aee1e9af6304d4b2383a9ab', 0, '1122406868', '11564564564', 0, 1, 0, 'D788796', 0, '2021-06-11 19:17:54', 'D788796', '2021-06-12 01:42:27', NULL, NULL, NULL, NULL, '2021-06-11 19:17:54', 'NAO', 'NAO', NULL, '2021-06-11 19:17:54', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -338,6 +343,12 @@ ALTER TABLE `config_system`
 -- Índices para tabela `menu_principal`
 --
 ALTER TABLE `menu_principal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `menu_sub`
+--
+ALTER TABLE `menu_sub`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -384,19 +395,25 @@ ALTER TABLE `config_system`
 -- AUTO_INCREMENT de tabela `menu_principal`
 --
 ALTER TABLE `menu_principal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `menu_sub`
+--
+ALTER TABLE `menu_sub`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `menu_sub_sub`
 --
 ALTER TABLE `menu_sub_sub`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `pag_system`
 --
 ALTER TABLE `pag_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`

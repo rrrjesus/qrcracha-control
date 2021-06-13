@@ -58,7 +58,7 @@ endif;
 
     <fieldset <?php if ($usuarioid == 1) :  echo 'disabled'; endif; ?>>
 
-        <form class="needs-validation" novalidate action="menu-principal.php?pag=action-user&session=<?=$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
+        <form class="needs-validation" novalidate action="menu-principal.php?pag=acao_usuarios&session=<?=$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
 
             <div class="row mb-3">
                 <div class="col-md-1 mb-1">
