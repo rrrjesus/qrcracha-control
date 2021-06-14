@@ -50,7 +50,7 @@ if (empty($user)) {
     {
         header("Location: ".$_SESSION['url']);
     } else {
-        header("Location: ../menu-principal.php?hash=$loghash");
+        header("Location: ../painel");
     }
 }
 

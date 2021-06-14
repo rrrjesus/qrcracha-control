@@ -102,7 +102,7 @@ endif;
             </div>
             <div class="row">
                 <div class="col-7 text-center fw-bold">
-                    <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://192.168.15.122/<?=SYSTEM.'/'.PAGSYSTEM?>?pag=visual_cracha&id=<?=$user->id?>&choe=UTF-8" class="img-fluid float-left" height="150" width="150">
+                    <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://192.168.15.122/<?=SYSTEM.'/'.PAGSYSTEM?>?pag=visual_cracha%id=<?=$user->id?>%nome=<?=$user->nome?>%sobrenome=<?=$user->sobrenome?>&choe=UTF-8" class="img-fluid float-left" height="150" width="150">
                 </div>
             </div>
 

@@ -9,7 +9,7 @@
 
 /** Constantes de parâmetros para configuração da conexão */
 
-const HOST = '192.168.15.122';
+const HOST = '10.47.171.69';
 const DBNAME = 'jacana_system';
 const USER = 'jacana_system';
 const PASSWORD = 'ZisYeMsoTJkbEhth';
@@ -20,6 +20,7 @@ const SYSTEM = 'jacana-control';
 
 $admin = 'index.php';
 $pag_system = 'menu-principal.php';
+$pag_painel = 'index.php';
 $index = 'index.php';
 $today_year = date('Y');
 $system = 'JAÇANÃ CONTROLE';
