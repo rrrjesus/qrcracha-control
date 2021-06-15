@@ -4,8 +4,8 @@ error_reporting(-1);
 session_start(); // inicia a sessão php
 
 // inclui a classe pdo de conexao instaciada com getinstance
-include_once 'locked/seguranca.php';
-include_once 'conexao.php';
+//include_once 'locked/seguranca.php';
+include_once 'Conexao.php';
 include_once 'functions.php';
 include_once 'classes/Tables.php';
 include_once 'classes/Buttons.php';
