@@ -3,7 +3,7 @@
 <footer class="text-sm-start section mb-0 py-3 fs-sm-4 <?=$navfoofetch->footercolor.' '.$navfoofetch->footertext?>">
 
 <div class="row">
-    <div class="col-12 col-lg-3 mb-lg-0"><p class="mb-0 text-center text-xl-left ms-3">Jaçanã Controle © 2021 - <?=$today = date('Y')?><span
+    <div class="col-12 col-lg-4 mb-lg-0"><p class="mb-0 text-center text-xl-left ms-3">Jaçanã Controle © 2021 - <?=$today = date('Y')?><span
         class="current-year"></span> - versão: <?=$systemfetch->versao;?></p></div>
 
     <div class="col-12 col-lg-4 mb-lg-0"><p class="mb-0 text-center text-xl-center">Desenvolvido por : <?=$systemfetch->desenvolvedor;?></p></div>
