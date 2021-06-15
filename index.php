@@ -29,6 +29,18 @@ session_unset();
 
 <head>
     <?php require(__DIR__ . '/head.php'); ?>
+
+    <style type="text/css">
+        #index{
+            width: auto;
+            height: 500px;
+            background-image: url('imagens/ccb_jacana.jpg');
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
+            background-color: #cccccc;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,15 +49,15 @@ session_unset();
     <?php require(__DIR__ . '/nav-bar.php'); ?>
 </header>
 
-<main role="main">
+<main class="form-signin" id="index">
 
-    <?php
-        require(__DIR__ . '/carrossel.php');
-        require(__DIR__ . '/album.php');
-    ?>
+    <!-- Login Celular -->
+    <?php require(__DIR__ . '/login.php'); ?>
 
-    <!-- FOOTER -->
-    <?php require(__DIR__ . '/footer.php'); ?>
+</main>
+
+<!-- FOOTER -->
+<?php require(__DIR__ . '/footer.php'); ?>
 
     <script src="assets/js/jquery/validation/1.15.0.jquery.validate.min.js"></script>
     <script src="assets/js/jquery/validation/1.13.0.additional-methods.min.js"></script>

@@ -13,7 +13,7 @@ $(function() {
             errorClass: 'help-block',
 
             errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
+                error.addClass('invalid-tooltip');
                 if (element.parent('.input-group').length) {
                     error.insertAfter(element.parent());
                 }
@@ -281,8 +281,9 @@ $(function() {
 
         $("#head-login").validate({
             rules: {
-                login: {
-                    required: true
+                email: {
+                    required: true,
+                    remote: "remote/admin/val-email-index.php"
                 },
                 senha: {
                     required: true,
@@ -290,8 +291,9 @@ $(function() {
                 }
             },
             messages: {
-                login: {
-                    required: "Digite seu usuário"
+                email: {
+                    required: "Digite seu e-mail",
+                    remote: "E-mail não encontrado"
                 },
                 senha: {
                     required: "Digite sua Senha",

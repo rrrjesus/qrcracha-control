@@ -39,7 +39,6 @@ jQuery(function($){
     $("#docproc").mask("9999-9.999.999-9");
     $("#inspsivisa").mask("?999/99");
     $("#cpf").mask("999.999.999-99");
-    $("#login").mask("a999999");
 
 
 

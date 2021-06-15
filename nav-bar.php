@@ -132,38 +132,6 @@
             <button type="button" class="btn btn-danger btn-sm fw-bold" data-toggle="modal" data-target="#sairModal"><i class="far fa-reply-all me-1" data-toggle="tooltip" title="SAIR DO SISTEMA"></i> Sair</button>
         </ul>
 
-        <ul class="navbar-nav mr-auto" style="<?php if (isset($_SESSION['usuarioNivelAcesso'])) {
-            echo 'display: none;';
-        } ?>">
-
-            <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success nav-link dropdown-toggle" style="color:#fff;"><i class="far fa-lock-alt px-2"></i>  Login  </a>
-                        <ul class="dropdown-menu">
-                            <!-- <li> -->
-                                <form class="needs-validation p-2" novalidate id="head-login" method="POST" action="locked/valida-login.php">
-                                    <div class="form-group">
-                                        <div class="text-center"><label class="col-form-label fw-bold" for="DropdownFormEmail"><i class="far fa-lock-alt me-2"></i>Login</label></div>
-                                        <input type="text" class="form-control" id="login" name="login" data-toggle="tooltip" data-placement="right" maxlength="7" required
-                                               title="Digite seu login com D e 6 numeros do RF , Ex: D000000" placeholder="D123456" autofocus>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="text-center"><label class="col-form-label fw-bold" for="DropdownPassword"><i class="far fa-key me-2"></i>Senha</label></div>
-                                        <input type="password" id="senha" name="senha" data-toggle="tooltip" data-placement="right" required
-                                               title="Sua senha deve ter pelo menos 6 caracteres e conter pelo menos um número e um caractere"
-                                               placeholder="*****" maxlength="12" class="form-control">
-                                    </div>
-                                    <div class="row mb-3"></div>
-                                    <button type="submit" class="btn btn-outline-success btn-sm text-center" data-toggle="tooltip" data-placement="right" title="Clique para validar seu login"><i class="fa fa-unlock px-2"></i> Acessar</button>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="btn btn-outline-danger btn-sm" href="<?=$pag_system?>?pag=esqueci-senha" role="button" data-toggle="tooltip" data-placement="right" title="Caso tenha esquecido sua senha clique no botão"><i class="fa fa-question-circle"></i> Esqueceu Senha?</a>
-                                </form>
-
-                          <!--  </li> -->
-                        </ul
-
-            </li>
-        </ul>
-
 </nav>
 
 <!-- Modal Sair-->

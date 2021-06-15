@@ -1,12 +1,12 @@
 <!-- Arquivo para exibir o footer-->
 
-<footer class="text-sm-start section mt-3 mb-0 py-3 fs-sm-4 <?=$navfoofetch->footercolor.' '.$navfoofetch->footertext?>">
+<footer class="text-sm-start section mb-0 py-3 fs-sm-4 <?=$navfoofetch->footercolor.' '.$navfoofetch->footertext?>">
 
 <div class="row">
-    <div class="col-12 col-lg-3 mb-4 mb-lg-0"><p class="mb-0 text-center text-xl-left ms-3">Jaçanã Controle © 2021 - <?=$today = date('Y')?><span
+    <div class="col-12 col-lg-3 mb-lg-0"><p class="mb-0 text-center text-xl-left ms-3">Jaçanã Controle © 2021 - <?=$today = date('Y')?><span
         class="current-year"></span> - versão: <?=$systemfetch->versao;?></p></div>
 
-    <div class="col-12 col-lg-4 mb-4 mb-lg-0"><p class="mb-0 text-center text-xl-center">Desenvolvido por : <?=$systemfetch->desenvolvedor;?></p></div>
+    <div class="col-12 col-lg-4 mb-lg-0"><p class="mb-0 text-center text-xl-center">Desenvolvido por : <?=$systemfetch->desenvolvedor;?></p></div>
 
     <div class="col-12 col-lg-4">
         <ul class="list-inline list-group-flush list-group-borderless text-center text-xl-right mb-0">

@@ -2,12 +2,12 @@
 error_reporting(-1);
 
 //Criar a conexao ;
-include_once '../conexao.php';
+include_once '../Conexao.php';
 
-$usuariot = (isset($_POST['login'])) ? $_POST['login'] : '';
+$email = (isset($_POST['email'])) ? $_POST['email'] : '';
 $senhat   = (isset($_POST['senha'])) ? $_POST['senha'] : '';
 $senhat   = sha1(md5($senhat));
-$loghash  = sha1(md5(strtoupper($usuariot)));
+$loghash  = sha1(md5(strtoupper($email)));
 
 // Check connection
 if (mysqli_connect_errno()) {
@@ -16,9 +16,9 @@ if (mysqli_connect_errno()) {
 
 // Captura os dados do cliente solicitado
 $conexao = conexao::getInstance();
-$sql = 'SELECT id,foto, nome, sobrenome, nomesocial, datanascimento, cpf, email, telefone, celular, setor, login, senha, status, sexo, nivel_acesso_id, acessotid,usuariocad FROM usuarios WHERE login=:login && senha=:senha';
+$sql = 'SELECT id,foto, nome, sobrenome, nomesocial, datanascimento, cpf, email, telefone, celular, setor, login, senha, status, sexo, nivel_acesso_id, acessotid,usuariocad FROM usuarios WHERE email=:email && senha=:senha';
 $stm = $conexao->prepare($sql);
-$stm->bindValue(':login', $usuariot);
+$stm->bindValue(':email', $email);
 $stm->bindValue(':senha', $senhat);
 $stm->execute();
 $user = $stm->fetch(PDO::FETCH_OBJ);
@@ -50,7 +50,7 @@ if (empty($user)) {
     {
         header("Location: ".$_SESSION['url']);
     } else {
-        header("Location: ../painel");
+        header("Location: ../menu-principal.php");
     }
 }
 
