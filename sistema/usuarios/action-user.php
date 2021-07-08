@@ -53,7 +53,7 @@
     // Verifica se foi solicitada a inclusão de dados
     if ($acao == 'incluir'):
 
-        $nome_foto = 'sistema/imagens/foto_exists.png';
+        $nome_foto = 'sistema/imagens/padrao.jpg';
         if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0):
 
             $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
@@ -72,20 +72,20 @@
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
 
-                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/login" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$id)): // Verifica se o diretório "imagens/id" do novo usuário existe
+                    mkdir( 'sistema/imagens/'.$id); // Caso não exista cria o diretório
                 endif;
 
-                // Verifica se o diretório "imagens/login/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
+                // Verifica se o diretório "imagens/id/fotologin" de destino existe, senão existir cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$id.'/fotologin')): //
+                    mkdir( 'sistema/imagens/'.$id.'/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$id.'/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
@@ -109,7 +109,7 @@
         $stm->bindValue(':status', $status);
         $stm->bindValue(':sexo', $sexouser);
         $stm->bindValue(':nivel_acesso_id', $nivel_acesso_id);
-        $stm->bindValue(':usuariocad', $usuariologin);
+        $stm->bindValue(':usuariocad', $usuariocpf);
         $retorno = $stm->execute();
 
         if ($retorno):
@@ -130,9 +130,9 @@
         if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0):
 
             // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
-            if ($foto_atual <> 'sistema/imagens/foto_exists.png'):
+            if ($foto_atual <> 'sistema/imagens/padrao.jpg'):
                 //unlink("fotos/" . $foto_atual);
-                unlink('sistema/imagens/'.$cpf.'/fotologin/'.$foto_atual);
+                unlink('sistema/imagens/'.$id.'/fotologin/'.$foto_atual);
             endif;
 
             $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
@@ -150,20 +150,20 @@
             // Verifica se o upload foi enviado via POST
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
-                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/login" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$id)): // Verifica se o diretório "imagens/login" do novo usuário existe
+                    mkdir( 'sistema/imagens/'.$id); // Caso não exista cria o diretório
                 endif;
 
                 // Verifica se o diretório "imagens/login/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
+                if(!file_exists( 'sistema/imagens/'.$id.'/fotologin')): //
+                    mkdir( 'sistema/imagens/'.$id.'/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$id.'/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
@@ -193,7 +193,7 @@
         $stm->bindValue(':status', $status);
         $stm->bindValue(':sexo', $sexouser);
         $stm->bindValue(':nivel_acesso_id', $nivel_acesso_id);
-        $stm->bindValue(':usuarioalt', $usuariologin);
+        $stm->bindValue(':usuarioalt', $usuariocpf);
         $stm->bindValue(':id', $id);
         $retorno = $stm->execute();
 
@@ -251,8 +251,8 @@
         $stm->execute();
         $user = $stm->fetch(PDO::FETCH_OBJ);
 
-        if (!empty($user) && file_exists('imagens/'.$user->login.'/fotologin/'.$user->foto)):
-            unlink('imagens/'.$user->login.'/fotologin/'.$user->foto);
+        if (!empty($user) && file_exists('imagens/'.$user->id.'/fotologin/'.$user->foto)):
+            unlink('imagens/'.$user->id.'/fotologin/'.$user->foto);
         endif;
 
         // Exclui o registro do banco de dados

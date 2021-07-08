@@ -11,7 +11,7 @@ if (!empty($id) && is_numeric($id)):
 
 $conexao = conexao::getInstance();
 
-$sql = "SELECT id, foto, login, nome, sobrenome, nomesocial, datanascimento, cpf, email, nivel_acesso_id, telefone, celular, status, sexo, setor, usuariocad, acessotid, criado, usuarioalt, alterado, loginenvioemailsenha, chavesetsenha, datapedidochavesetsenha, datafeitonovasenha, dataenvioemailsenha, emailenviadosenha, resetsenha, dataresetsenha, date_alter_senha FROM usuarios WHERE id = :id";
+$sql = "SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, nivel_acesso_id, celular, status, sexo, setor, usuariocad, criado, usuarioalt, alterado, loginenvioemailsenha, chavesetsenha, datapedidochavesetsenha, datafeitonovasenha, dataenvioemailsenha, emailenviadosenha, resetsenha, dataresetsenha, date_alter_senha FROM usuarios WHERE id = :id";
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':id', $id);
 $stm->execute();
@@ -49,9 +49,9 @@ endif;
 
             <div class="row mb-3 text-center">
                 <div class="col-2 mb-1">
-                        <img height="105" width="105" src="<?php if (file_exists('sistema/imagens/'.$user->login.'/fotologin/'.$user->foto))
-                        {echo 'sistema/imagens/'.$user->login.'/fotologin/'.$user->foto;}
-                        else{ echo 'sistema/imagens/foto_exists.png';}?>" class="img">
+                        <img height="105" width="105" src="<?php if (file_exists('sistema/imagens/'.$user->id.'/fotologin/'.$user->foto))
+                        {echo 'sistema/imagens/'.$user->id.'/fotologin/'.$user->foto;}
+                        else{ echo 'sistema/imagens/padrao.jpg';}?>" class="img">
                 </div>
                 <div class="col-10 text-start">
                     <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">RGE JAÇANÃ/SUPORTE TI</p>

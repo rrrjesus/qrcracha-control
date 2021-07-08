@@ -39,7 +39,7 @@ if (empty($user)) {
     $_SESSION['usuarioSobreNome'] = $user->sobrenome;
     $_SESSION['usuarioNivelAcesso'] = $user->nivel_acesso_id;
     $_SESSION['usuarioStatus'] = $user->status;
-    $_SESSION['usuarioLogin'] = $user->cpf;
+    $_SESSION['usuarioCpf'] = $user->cpf;
     $_SESSION['usuarioSenha'] = $user->senha;
     $_SESSION['usuarioFoto'] = $user->foto;
     $_SESSION['hashenter'] = sha1(md5($user->login.date('dmYHis')));

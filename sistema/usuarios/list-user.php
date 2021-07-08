@@ -43,6 +43,14 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
                 "aaSorting": [0, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
                 "aoColumnDefs": [
+                    {"bVisible": false,"aTargets": [4]},
+                    {"bVisible": false,"aTargets": [5]},
+                    {"bVisible": false,"aTargets": [6]},
+                    {"bVisible": false,"aTargets": [7]},
+                    {"bVisible": false,"aTargets": [8]},
+                    {"bVisible": false,"aTargets": [9]},
+                    {"bVisible": false,"aTargets": [10]},
+                    {"bVisible": false,"aTargets": [11]},
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
@@ -136,17 +144,17 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
         <thead class="table-<?=$btncolor?>">
         <tr class="bg-light text-<?=$btncolor?> border-<?=$btncolor?>">
             <th class="text-center">ID <i class="fa fa-pencil"></i></th>
-            <th class="text-center"></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th class="text-center">FOTO</th>
+            <th class="text-center">QRCODE</th>
+            <th class="text-center">NOME</th>
+            <th class="text-center">NASCIMENTO</th>
+            <th class="text-center">CPF</th>
+            <th class="text-center">E-MAIL</th>
+            <th class="text-center">ACESSO</th>
+            <th class="text-center">TELEFONE</th>
+            <th class="text-center">STATUS</th>
+            <th class="text-center">SEXO</th>
+            <th class="text-center">SETOR</th>
             <?php if($get_lixeira === 0) :
                 echo '<th class="text-center">EXCLUIR</th>';
             else :
