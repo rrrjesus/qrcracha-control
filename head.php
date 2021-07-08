@@ -31,6 +31,8 @@ $icon = $systemfetch->icon;
 
 <title><?=$title?></title>
 
+<link rel="canonical" href=""> <!-- Endereço do nosso sistema -->
+
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap5/bootstrap.min.css" rel="stylesheet">
 

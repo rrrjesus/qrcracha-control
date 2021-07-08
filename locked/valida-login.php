@@ -16,7 +16,7 @@ if (mysqli_connect_errno()) {
 
 // Captura os dados do cliente solicitado
 $conexao = conexao::getInstance();
-$sql = 'SELECT id,foto, nome, sobrenome, nomesocial, datanascimento, cpf, email, telefone, celular, setor, login, senha, status, sexo, nivel_acesso_id, acessotid,usuariocad FROM usuarios WHERE email=:email && senha=:senha';
+$sql = 'SELECT id,foto, nome, sobrenome, datanascimento, cpf, email, telefone, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':email', $email);
 $stm->bindValue(':senha', $senhat);
@@ -37,12 +37,10 @@ if (empty($user)) {
     $_SESSION['usuarioId'] = $user->id;
     $_SESSION['usuarioNome'] = $user->nome;
     $_SESSION['usuarioSobreNome'] = $user->sobrenome;
-    $_SESSION['usuarioNomeSocial'] = $user->nomesocial;
     $_SESSION['usuarioNivelAcesso'] = $user->nivel_acesso_id;
     $_SESSION['usuarioStatus'] = $user->status;
-    $_SESSION['usuarioLogin'] = $user->login;
+    $_SESSION['usuarioLogin'] = $user->cpf;
     $_SESSION['usuarioSenha'] = $user->senha;
-    $_SESSION['usuarioTid'] = $user->acessotid;
     $_SESSION['usuarioFoto'] = $user->foto;
     $_SESSION['hashenter'] = sha1(md5($user->login.date('dmYHis')));
 

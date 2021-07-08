@@ -1,6 +1,6 @@
 <!-- Arquivo para exibir o footer-->
 
-<footer class="text-sm-start section mb-0 py-3 fs-sm-4 <?=$navfoofetch->footercolor.' '.$navfoofetch->footertext?>">
+<footer class="text-sm-start section mb-0 py-3 fs-sm-4 navbar-light" style="background-color: #26d9a6">
 
 <div class="row">
     <div class="col-12 col-lg-4 mb-lg-0"><p class="mb-0 text-center text-xl-left ms-3">Jaçanã Controle © 2021 - <?=$today = date('Y')?><span

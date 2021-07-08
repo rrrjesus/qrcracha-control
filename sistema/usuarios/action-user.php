@@ -19,19 +19,15 @@
     $foto_atual		  = (isset($_POST['foto_atual'])) ? $_POST['foto_atual'] : '';
     $nome             = (isset($_POST['nome'])) ? $_POST['nome'] : '';
     $sobrenome        = (isset($_POST['sobrenome'])) ? $_POST['sobrenome'] : '';
-    $nomesocial       = (isset($_POST['nomesocial'])) ? $_POST['nomesocial'] : '';
     $datanascimento   = (isset($_POST['datanascimento'])) ? $_POST['datanascimento'] : '';
     $cpf              = (isset($_POST['cpf'])) ? str_replace(array('.','-'), '', $_POST['cpf']): '';
     $email            = (isset($_POST['email'])) ? $_POST['email'] : '';
-    $telefone  		  = (isset($_POST['telefone'])) ? str_replace(array('(',')','-', ' '), '', $_POST['telefone']) : '';
     $celular   		  = (isset($_POST['celular'])) ? str_replace(array('(',')','-', ' '), '', $_POST['celular']) : '';
     $setor   	      = (isset($_POST['setor'])) ? $_POST['setor'] : '';
-    $login  		  = (isset($_POST['login'])) ? $_POST['login'] : '';
     $senha   		  = (isset($_POST['senha'])) ? $_POST['senha'] : '';
     $status    		  = (isset($_POST['status'])) ? $_POST['status'] : '';
     $sexouser  		  = (isset($_POST['sexouser'])) ? $_POST['sexouser'] : '';
     $nivel_acesso_id  = (isset($_POST['nivel_acesso_id'])) ? $_POST['nivel_acesso_id'] : '';
-    $acessotid        = (isset($_POST['acessotid'])) ? $_POST['acessotid'] : '';
     $edit             = (isset($_POST['edit'])) ? $_POST['edit'] : '';
 
     //criptografa a senha com sha1 e md5
@@ -76,20 +72,20 @@
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
 
-                if(!file_exists( 'sistema/imagens/'.$login)): // Verifica se o diretório "imagens/login" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$login); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/login" do novo usuário existe
+                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
                 endif;
 
                 // Verifica se o diretório "imagens/login/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$login.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$login.'/fotologin');
+                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
+                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$login.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
@@ -97,26 +93,22 @@
             endif;
         endif;
 
-        $sql = 'INSERT INTO usuarios (foto, nome, sobrenome, nomesocial, datanascimento, cpf, email, telefone, celular, setor, login, senha, status, sexo, nivel_acesso_id, acessotid,usuariocad)
-							   VALUES(:foto, :nome, :sobrenome, :nomesocial, :datanascimento, :cpf, :email, :telefone, :celular, :setor, :login, :senha, :status, :sexo, :nivel_acesso_id, :acessotid,:usuariocad)';
+        $sql = 'INSERT INTO usuarios (foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad)
+							   VALUES(:foto, :nome, :sobrenome, :datanascimento, :cpf, :email, :celular, :setor, :senha, :status, :sexo, :nivel_acesso_id, :usuariocad)';
 
         $stm = $conexao->prepare($sql);
         $stm->bindValue(':foto', $nome_foto);
         $stm->bindValue(':nome', $nome);
         $stm->bindValue(':sobrenome', $sobrenome);
-        $stm->bindValue(':nomesocial', $nomesocial);
         $stm->bindValue(':datanascimento', $data_ansi);
         $stm->bindValue(':cpf', $cpf);
         $stm->bindValue(':email', $email);
-        $stm->bindValue(':telefone', $telefone);
         $stm->bindValue(':celular', $celular);
         $stm->bindValue(':setor', $setor);
-        $stm->bindValue(':login', $login);
         $stm->bindValue(':senha', $cripto_senha);
         $stm->bindValue(':status', $status);
         $stm->bindValue(':sexo', $sexouser);
         $stm->bindValue(':nivel_acesso_id', $nivel_acesso_id);
-        $stm->bindValue(':acessotid', $acessotid);
         $stm->bindValue(':usuariocad', $usuariologin);
         $retorno = $stm->execute();
 
@@ -140,7 +132,7 @@
             // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
             if ($foto_atual <> 'sistema/imagens/foto_exists.png'):
                 //unlink("fotos/" . $foto_atual);
-                unlink('sistema/imagens/'.$login.'/fotologin/'.$foto_atual);
+                unlink('sistema/imagens/'.$cpf.'/fotologin/'.$foto_atual);
             endif;
 
             $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
@@ -158,20 +150,20 @@
             // Verifica se o upload foi enviado via POST
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
-                if(!file_exists( 'sistema/imagens/'.$login)): // Verifica se o diretório "imagens/login" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$login); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/login" do novo usuário existe
+                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
                 endif;
 
                 // Verifica se o diretório "imagens/login/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$login.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$login.'/fotologin');
+                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
+                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$login.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
@@ -185,27 +177,22 @@
         endif;
 
 
-        $sql = 'UPDATE usuarios SET foto=:foto, nome=:nome, sobrenome=:sobrenome, nomesocial=:nomesocial, datanascimento=:datanascimento, cpf=:cpf, email=:email,
-                telefone=:telefone, celular=:celular, setor=:setor, login=:login, status=:status, sexo=:sexo, nivel_acesso_id=:nivel_acesso_id, acessotid=:acessotid,
-                usuarioalt=:usuarioalt,alterado=NOW() ';
+        $sql = 'UPDATE usuarios SET foto=:foto, nome=:nome, sobrenome=:sobrenome, datanascimento=:datanascimento, cpf=:cpf, email=:email,
+                celular=:celular, setor=:setor, status=:status, sexo=:sexo, nivel_acesso_id=:nivel_acesso_id, usuarioalt=:usuarioalt,alterado=NOW() ';
         $sql .= 'WHERE id = :id';
 
         $stm = $conexao->prepare($sql);
         $stm->bindValue(':foto', $nome_foto);
         $stm->bindValue(':nome', $nome);
         $stm->bindValue(':sobrenome', $sobrenome);
-        $stm->bindValue(':nomesocial', $nomesocial);
         $stm->bindValue(':datanascimento', $data_ansi);
         $stm->bindValue(':cpf', $cpf);
         $stm->bindValue(':email', $email);
-        $stm->bindValue(':telefone', $telefone);
         $stm->bindValue(':celular', $celular);
         $stm->bindValue(':setor', $setor);
-        $stm->bindValue(':login', $login);
         $stm->bindValue(':status', $status);
         $stm->bindValue(':sexo', $sexouser);
         $stm->bindValue(':nivel_acesso_id', $nivel_acesso_id);
-        $stm->bindValue(':acessotid', $acessotid);
         $stm->bindValue(':usuarioalt', $usuariologin);
         $stm->bindValue(':id', $id);
         $retorno = $stm->execute();

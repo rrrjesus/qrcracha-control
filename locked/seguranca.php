@@ -20,7 +20,7 @@ if (($_SESSION['usuarioId'] == "") || ($_SESSION['usuarioNome'] == "") || ($_SES
     $_SESSION['loginErro'] = "Área restrita para usuários cadastrados";
 
     //Manda o usuário para a tela de index
-    //header("Location: http://10.47.171.110/sisdamweb-2/index.php");
+    header("Location: index.php");
 
 
 }

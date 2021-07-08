@@ -19,7 +19,7 @@ if (isset($_SESSION['usuarioId'])){$home = $pag_system;}else{$home = $index;}
 
 
 if($pags):
-    echo '<div class="row mt-4 pe-3 ps-3"> <!-- Início da Página de Título -->
+    echo '<div class="row mt-4 pe-3 ps-3 pt-3"> <!-- Início da Página de Título -->
                 <div class="col-md-12 ml-auto"> <!-- https://getbootstrap.com/docs/4.0/layout/grid/#mix-and-match -->
                     <nav style="--bs-breadcrumb-divider: \'\';" aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -43,7 +43,7 @@ if($pags):
             if(file_exists($pags->caminho)):
             echo '<div class="card shadow-lg"> <!-- Início do Card -->
                     <div class="card-header text-center fw-bold fs-6">
-                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icone-inicial-4.png">   SISTEMA JAÇANA CONTROLE - '.$pags->unidade.' - '.$today_year.'
+                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icons/favicon_jaca_control.ico">   SISTEMA JAÇANA CONTROLE - '.$pags->unidade.' - '.$today_year.'
                     </div>
                         <div class="card-body">';
 

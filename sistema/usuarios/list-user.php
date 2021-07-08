@@ -1,5 +1,7 @@
 <?php
-error_reporting(-1);
+error_reporting(0);
+
+include_once '../../locked/seguranca.php';
 
 /* Chamada de classe de formulário e classe de botões */
 $tabela = $tables->Table($get_year, $ano_atual, $get_pag, $nametabela);
@@ -39,18 +41,18 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 dom: "lBftipr",processing: true,serverside: true,
                 ajax: '<?=$listserver?>',
                 "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
-                "aaSorting": [0, 'desc'], /* 'desc' Carregar table decrescente e asc crescente*/
+                "aaSorting": [0, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
                 "aoColumnDefs": [
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a target="_blank" href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm rounded-circle text-center"><i class="fa fa-pencil"></i></a>';
+                            return '' + full[0] + '<a target="_blank" href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm rounded-circle text-center"><i class="fa fa-pencil"></i></a>';
                         }
                     },
                     {
                         "aTargets": [1], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="sistema/imagens/' + full[2] + '/fotologin/'+ full[1] + '" target="_blank"><img src="sistema/imagens/' + full[2] + '/fotologin/'+ full[1] + '" class="rounded-circle float-left" height="50" width="50"></a>';
+                            return '<a href="sistema/imagens/' + full[0] + '/fotologin/'+ full[1] + '" target="_blank"><img src="sistema/imagens/' + full[0] + '/fotologin/'+ full[1] + '" class="rounded-circle float-left" height="50" width="50"></a>';
                         }
                     },
                     {
@@ -60,10 +62,10 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                         }
                     },
                     {
-                        "aTargets": [15], // o numero 6 é o nº da coluna
+                        "aTargets": [12], // o numero 6 é o nº da coluna
                         "data": null,
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            var lixo = full[15];
+                            var lixo = full[12];
                             switch (lixo) {
                                 case '0' :
                                     lixo = '<button type="button" class="btn btn-outline-danger btn-sm btn-circle" data-toggle="modal" data-target="#myModalLixo"><i class="fa fa-trash" data-toggle="tooltip" title="DESCARTAR"></i></button>';
@@ -85,7 +87,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
             });
             $('#lista-usuario-cracha tbody').on('click', 'button', function() {
                 var data = table.row($(this).parents('tr')).data(); // getting target row data
-                var lixos = data[15];
+                var lixos = data[12];
 
                 if(lixos === '0') {
                     $('.textdel').html(
@@ -133,11 +135,8 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
     <table id="lista-usuario-cracha" class="table table-striped table-bordered flex-nowrap border-<?=$btncolor?> text-center" style="width:100%">
         <thead class="table-<?=$btncolor?>">
         <tr class="bg-light text-<?=$btncolor?> border-<?=$btncolor?>">
-            <th>ID</th>
-            <th class="text-center"><i class="fa fa-pencil"></i></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th class="text-center">ID <i class="fa fa-pencil"></i></th>
+            <th class="text-center"></th>
             <th></th>
             <th></th>
             <th></th>

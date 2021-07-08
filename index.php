@@ -33,12 +33,14 @@ session_unset();
     <style type="text/css">
         #index{
             width: auto;
-            height: 500px;
-            background-image: url('imagens/ccb_jacana.jpg');
+            height: auto;
+            /*background-image: url('imagens/ccb_jacana.jpg');*/
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover; /* Resize the background image to cover the entire container */
-            background-color: #cccccc;
+        }
+        body{
+            background-color: #c3c3c3;
         }
     </style>
 </head>
@@ -46,7 +48,7 @@ session_unset();
 <body>
 
 <header>
-    <?php require(__DIR__ . '/nav-bar.php'); ?>
+
 </header>
 
 <main class="form-signin" id="index">
@@ -55,6 +57,7 @@ session_unset();
     <?php require(__DIR__ . '/login.php'); ?>
 
 </main>
+
 
 <!-- FOOTER -->
 <?php require(__DIR__ . '/footer.php'); ?>

@@ -4,7 +4,7 @@ error_reporting(-1);
 session_start(); // inicia a sessão php
 
 // inclui a classe pdo de conexao instaciada com getinstance
-//include_once 'locked/seguranca.php';
+include_once 'locked/seguranca.php';
 include_once 'Conexao.php';
 include_once 'functions.php';
 include_once 'classes/Tables.php';
@@ -15,10 +15,10 @@ include_once 'classes/Modal.php';
 $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
 $_SESSION['url'] = $url;
 
+$usuariologin = isset($_SESSION['usuarioLogin']) ? $_SESSION['usuarioLogin'] : 'D000000';
 $usuarionome = isset($_SESSION['usuarioNome']) ? $_SESSION['usuarioNome'] : 'VISITANTE';
 $usuariosobrenome = isset($_SESSION['usuarioSobreNome']) ? $_SESSION['usuarioSobreNome'] : 'JAÇANÃ CONTROLE';
-$usuariosobrenome = isset($_SESSION['usuarioNomeSocial']) ? $_SESSION['usuarioNomeSocial'] : 'VIST';
-$usuariologin = isset($_SESSION['usuarioLogin']) ? $_SESSION['usuarioLogin'] : 'D000000';
+$usuariologin = isset($_SESSION['usuarioLogin']) ? $_SESSION['usuarioLogin'] : '00000000000';
 $usuariostatus = isset($_SESSION['usuarioStatus']) ? $_SESSION['usuarioStatus'] : 0;
 $usuariofoto = isset($_SESSION['usuarioFoto']) ? $_SESSION['usuarioFoto'] : 'imagens/padrao.jpg';
 
@@ -37,8 +37,10 @@ $hashprimary = hash('sha3-256', $hashsession.$haship);
 
 <body>
 
-<!-- Menu de Navegação -->
-<?php require(__DIR__ . '/nav-bar.php');?>
+<header>
+    <!-- Menu de Navegação -->
+    <?php require(__DIR__ . '/nav-bar.php');?>
+</header>
 
 <div class="container-fluid" role="main" xmlns="http://www.w3.org/1999/html">
     <main>

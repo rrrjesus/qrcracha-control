@@ -12,17 +12,17 @@
 ?>
 
 
-<nav class="navbar <?php if($usuarioid == 1) : echo 'navbar-dark bg-dark'; else : echo $navfoofetch->navtext.' '.$navfoofetch->navcolor; endif;?> navbar-expand-sm fixed-top" style="background-color: <?php if($usuarioid == 1) : echo '#000000'; else : echo $navfoofetch->stylenavbar; endif;?>">
+<nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: #26d9a6">
     <a class="navbar-brand ms-3" href="<?=PAGSYSTEM?>" data-toggle="tooltip" data-placement="right" title="JAÇANÃ CONTROLE"><img
-                src="imagens/icone-inicial-4.png" alt="Jaçanã Controle"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                src="imagens/icons/favicon_jaca_control.ico" alt="Jaçanã Controle"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarjacontrol" aria-controls="navbarjacontrol" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <li class="collapse navbar-collapse" id="navbarsExample03">
+    <li class="collapse navbar-collapse" id="navbarjacontrol">
         <?php
 
-        $sql_mpr = 'SELECT * FROM  menu_principal WHERE tipomenu = "System" ORDER BY nome ASC';
+        $sql_mpr = 'SELECT * FROM  menu_principal ORDER BY nome ASC';
         $stm_mpr = $conexao->prepare($sql_mpr);
         $stm_mpr->execute();
         $mprfetch = $stm_mpr->fetchAll(PDO::FETCH_OBJ);
@@ -33,7 +33,7 @@
                 $id = $mprfetchs->id;
                 /* Level one dropdown */
                 echo '<li class="nav-item dropdown">';
-                echo '<a href="'.$pag_system.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fal fa-'.$mprfetchs->icon.' me-1"></i>' . $mprfetchs->nome . '</a>';
+                echo '<a href="'.PAGSYSTEM.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fal fa-'.$mprfetchs->icon.' me-1"></i>' . $mprfetchs->nome . '</a>';
 
                 $sql_sub = 'SELECT * FROM menu_sub WHERE id_menu=? ORDER BY nome';
                 $stm_sub = $conexao->prepare($sql_sub);
@@ -59,7 +59,7 @@
                              foreach ($sub_sub_fetch as $sub_sub_fetchs):
                              /* Level three dropdown */
                                  echo '<li>';
-                                 if(empty($usuariologin)):
+                                 if(empty($usuarioid)):
                                      echo '<a href="'.$sub_sub_fetchs->pag.'&session=visitante" class="dropdown-item"><i class="fal fa-'.$sub_sub_fetchs->icon.' me-2"></i>' . $sub_sub_fetchs->nome . '</a>';
                                  elseif($mprfetchs->nome === 'Impressos'):
                                      echo '<a target="blank" href="'.$sub_sub_fetchs->pag.'" class="dropdown-item"><i class="fal fa-'.$sub_sub_fetchs->icon.' me-2"></i>' . $sub_sub_fetchs->nome . '</a>';
@@ -110,13 +110,13 @@
             </li> -->
 
             <li class="nav-item me-2">
-                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('sistema/imagens/'.$usuariologin.'/fotologin/'.$usuariofoto))
-                    {echo 'sistema/imagens/'.$usuariologin.'/fotologin/'.$usuariofoto;}
-                    else{ echo 'sistema/imagens/foto_exists.png';}?>">
+                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('sistema/imagens/'.$usuarioid.'/fotologin/'.$usuariofoto))
+                    {echo 'sistema/imagens/'.$usuarioid.'/fotologin/'.$usuariofoto;}
+                    else{ echo 'imagens/padrao.jpg';}?>">
             </li>
 
             <li class="nav-item dropdown me-2">
-                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm fw-bold nav-link dropdown-toggle" style="color:#fff;"><i class="far fa-lock-open-alt me-1"></i> <?=$usuariologin?></a>
+                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm fw-bold nav-link dropdown-toggle" style="color:#fff;"><i class="far fa-lock-open-alt me-1"></i> <?=$usuarionome?></a>
                     <ul class="dropdown-menu border-0 shadow">
                         <li>
                             <a class="dropdown-item" href="<?=$pag_system.'?pag=edit-perfil-user&hash='.isset($loghash)?>"><i class="fa fa-fw fa-user"></i> Perfil</a>

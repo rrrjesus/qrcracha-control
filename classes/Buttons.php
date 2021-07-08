@@ -92,38 +92,6 @@ class Buttons extends Tables {
         endif;
     }
 
-    public function BtnColorListSv2($get_lixeira, $get_year, $ano_atual, $get_livro) {
-        if ($get_lixeira == 1):
-            return 'secondary';
-        elseif($get_year < $ano_atual):
-            return 'danger';
-        elseif($get_year === $ano_atual && $get_livro === 'covid'):
-            return 'dark';
-        else:
-            return 'primary';
-        endif;
-    }
-
-    public function BtnColorSv2($get_sv2) {
-        if ($get_sv2 === 'suvis'):
-            return 'success';
-        elseif ($get_sv2 === 'outros'):
-            return 'danger';
-        elseif ($get_sv2 === 'covid'):
-            return 'dark';
-        elseif ($get_sv2 === 'covid-outros'):
-            return 'dark';
-        elseif ($get_sv2 === 'siva'):
-            return 'secondary';
-        elseif ($get_sv2 === 'siva-outros'):
-            return 'secondary';
-        elseif ($get_sv2 === 'surto'):
-            return 'primary';
-        else:
-            return 'success';
-        endif;
-    }
-
     public function BtnColorStyle($get_lixeira, $get_year, $ano_atual) {
         if ($get_lixeira == 1):
             return '#6c757d';
@@ -348,9 +316,9 @@ class Buttons extends Tables {
     }
 
     /*Função para verificar se o usuário esta cadastrado no sistema e após Ok, */
-    public function Hash($usuariologin) {
-        if (!empty($usuariologin)) {
-            return sha1(md5($usuariologin));
+    public function Hash($usuarioid) {
+        if (!empty($usuarioid)) {
+            return sha1(md5($usuarioid));
         }
     }
 

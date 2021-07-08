@@ -32,20 +32,17 @@ $primaryKey = 'id';
 $columns = array(
     array('db' => 'id', 'dt' => 0),
     array('db' => 'foto', 'dt' => 1),
-    array('db' => 'login', 'dt' => 2),
-    array('db' => 'nome', 'dt' => 3),
-    array('db' => 'sobrenome', 'dt' => 4),
-    array('db' => 'nomesocial', 'dt' => 5),
-    array('db' => 'datanascimento', 'dt' => 6),
-    array('db' => 'cpf', 'dt' => 7),
-    array('db' => 'email', 'dt' => 8),
-    array('db' => 'nivel_acesso_id', 'dt' => 9),
-    array('db' => 'telefone', 'dt' => 10),
-    array('db' => 'celular', 'dt' => 11),
-    array('db' => 'status', 'dt' => 12),
-    array('db' => 'sexo', 'dt' => 13),
-    array('db' => 'setor', 'dt' => 14),
-    array('db' => 'lixeira', 'dt' => 15)
+    array('db' => 'nome', 'dt' => 2),
+    array('db' => 'sobrenome', 'dt' => 3),
+    array('db' => 'datanascimento', 'dt' => 4),
+    array('db' => 'cpf', 'dt' => 5),
+    array('db' => 'email', 'dt' => 6),
+    array('db' => 'nivel_acesso_id', 'dt' => 7),
+    array('db' => 'celular', 'dt' => 8),
+    array('db' => 'status', 'dt' => 9),
+    array('db' => 'sexo', 'dt' => 10),
+    array('db' => 'setor', 'dt' => 11),
+    array('db' => 'lixeira', 'dt' => 12)
 );
 
 // SQL server connection information

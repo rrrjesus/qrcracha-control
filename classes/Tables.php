@@ -30,7 +30,7 @@ $retorno = $stm->execute();
 $pags = $stm->fetch(PDO::FETCH_OBJ);
 
 $nametabela = isset($pags->tabela) ? $pags->tabela : '';
-$nameform = isset($pags->name_form) ? $pags->name_form : 'SISDAMWEB';
+$nameform = isset($pags->name_form) ? $pags->name_form : 'JAÇANÃ-CONTROLE';
 
 $stm = null;
 
