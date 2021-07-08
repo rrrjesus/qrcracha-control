@@ -46,33 +46,9 @@
                          $idsub = $subfetchs->id;
 
                          /* Level two dropdown */
-                         echo '<li class="dropdown">';
-                         echo '<a href="'.$subfetchs->pag.'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item"><i class="fal fa-'.$subfetchs->icon.' me-2"></i>' . $subfetchs->nome . '</a>';
+                         echo '<li>';
+                         echo '<a href="'.$subfetchs->pag.'&session='.$hashprimary.'" class="dropdown-item"><i class="fal fa-'.$subfetchs->icon.' me-2"></i>' . $subfetchs->nome . '</a>';
 
-                         $sql_sub_sub = 'SELECT * FROM menu_sub_sub WHERE id_menu=? ORDER BY id';
-                         $stm_sub_sub = $conexao->prepare($sql_sub_sub);
-                         $stm_sub_sub->execute(array($idsub));
-                         $sub_sub_fetch = $stm_sub_sub->fetchAll(PDO::FETCH_OBJ);
-
-                         if ($stm_sub_sub->rowCount() >= 1):
-                             echo '<ul class="dropdown-menu border-0 shadow">';
-                             foreach ($sub_sub_fetch as $sub_sub_fetchs):
-                             /* Level three dropdown */
-                                 echo '<li>';
-                                 if(empty($usuarioid)):
-                                     echo '<a href="'.$sub_sub_fetchs->pag.'&session=visitante" class="dropdown-item"><i class="fal fa-'.$sub_sub_fetchs->icon.' me-2"></i>' . $sub_sub_fetchs->nome . '</a>';
-                                 elseif($mprfetchs->nome === 'Impressos'):
-                                     echo '<a target="blank" href="'.$sub_sub_fetchs->pag.'" class="dropdown-item"><i class="fal fa-'.$sub_sub_fetchs->icon.' me-2"></i>' . $sub_sub_fetchs->nome . '</a>';
-                                 else:
-                                    echo '<a href="'.$sub_sub_fetchs->pag.'&session='.$hashprimary.'" class="dropdown-item"><i class="fal fa-'.$sub_sub_fetchs->icon.' me-2"></i>' . $sub_sub_fetchs->nome . '</a>';
-                                 endif;
-                                 echo '</li>';
-                                 /* End Level three */
-                             endforeach;
-                             echo '</ul>';
-                         endif;
-                         echo '</li>';
-                         /* End Level two */
                      endforeach;
                      echo '</ul>';
                  endif;
