@@ -32,17 +32,55 @@ $primaryKey = 'id';
 $columns = array(
     array('db' => 'id', 'dt' => 0),
     array('db' => 'foto', 'dt' => 1),
-    array('db' => 'nome', 'dt' => 2),
-    array('db' => 'sobrenome', 'dt' => 3),
-    array('db' => 'datanascimento', 'dt' => 4),
-    array('db' => 'cpf', 'dt' => 5),
-    array('db' => 'email', 'dt' => 6),
-    array('db' => 'nivel_acesso_id', 'dt' => 7),
-    array('db' => 'celular', 'dt' => 8),
-    array('db' => 'status', 'dt' => 9),
-    array('db' => 'sexo', 'dt' => 10),
-    array('db' => 'setor', 'dt' => 11),
-    array('db' => 'lixeira', 'dt' => 12)
+    array('db' => 'id', 'dt' => 2),
+    array('db' => 'nome', 'dt' => 3),
+    array('db' => 'sobrenome', 'dt' => 4),
+    array(
+        'db' => 'datanascimento',
+        'dt' => 5,
+        'formatter' => function ($d, $row) {
+            return date('d/m/Y', strtotime($d));
+        }
+    ),
+    array('db' => 'cpf', 'dt' => 6),
+    array('db' => 'email', 'dt' => 7),
+    array(
+        'db' => 'nivel_acesso_id',
+        'dt' => 8,
+        'formatter' => function($d) {
+            if ($d == 0)
+                return 'VISITANTE';
+            elseif ($d == 1)
+                return 'ADMINISTRADOR';
+            elseif ($d == 2)
+                return 'AVANÇADO';
+            elseif ($d == 3)
+                return 'USUÁRIO';
+            elseif ($d == 4)
+                return 'VISITANTE';
+            else
+                return '';
+        }
+    ),
+    array('db' => 'celular', 'dt' => 9),
+    array('db' => 'status', 'dt' => 10,
+            'formatter' => function($d) {
+                if ($d == 0)
+                    return '<button type="button" class="btn disabled btn-outline-danger btn-sm fw-bold"><i class="fa fa-lock me-1"></i>INATIVO</button>';
+                else
+                    return '<button type="button" class="btn disabled btn-outline-success btn-sm fw-bold"><i class="fa fa-lock-open me-1"></i>ATIVO</button>';
+        }
+    ),
+    array('db' => 'sexo', 'dt' => 11,
+        'formatter' => function($d) {
+            if ($d == 0)
+                return '<button type="button" class="btn disabled btn-outline-danger btn-sm fw-bold" style="color: deeppink; border-color: deeppink"><i class="fa fa-venus me-1"></i>FEMI</button>';
+            else
+                return '<button type="button" class="btn disabled btn-outline-primary btn-sm fw-bold"><i class="fa fa-mars me-1"></i>MASC</button>';
+        }
+    ),
+    array('db' => 'setor', 'dt' => 12),
+    array('db' => 'lixeira', 'dt' => 13)
 );
 
 // SQL server connection information

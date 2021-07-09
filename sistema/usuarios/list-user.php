@@ -1,13 +1,17 @@
 <?php
 error_reporting(0);
 
+// Garantindo a autenticidade da session atual ou destruindo caso false
 include_once '../../locked/seguranca.php';
 
-/* Chamada de classe de formulário e classe de botões */
+// Chamada de classe de formulário e classe de botões
 $tabela = $tables->Table($get_year, $ano_atual, $get_pag, $nametabela);
+// Variável para instância de classe Tables de lista de usuários
 $listserver = $tables->ListServer($get_year, $nametabela, $get_pag, $tabela, $get_lixeira);
-$nu_registro = $tables->SemRegistro($tabela, $get_pag, $get_year, $ano_atual); // Criando variável da classe Tables para verificar se tabela está vazia
-$nu_lixeira = $tables->CountLixeira($tabela, $get_pag, $conexaotable); // Criando variável da class Tables para contar lixeira
+// Criando variável da classe Tables para verificar se tabela está vazia
+$nu_registro = $tables->SemRegistro($tabela, $get_pag, $get_year, $ano_atual);
+// Criando variável da class Tables para contar lixeira
+$nu_lixeira = $tables->CountLixeira($tabela, $get_pag, $conexaotable);
 
 
 $alertlixeira = $button->AlertLixeira($get_lixeira, $nu_lixeira);
@@ -37,24 +41,17 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                                 '</tr>';
                         }).join('');
                             return $('<table/>').append(data);}}},
-                <?=$button->language()?>,
+                <?=$button->language()?>, // Classe Button com carregamento de botões
                 dom: "lBftipr",processing: true,serverside: true,
                 ajax: '<?=$listserver?>',
-                "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
+                "lengthMenu": [[3, 6, 10, 25, 50, -1], [3, 6, 10, 25, 50, "Todos"]],
                 "aaSorting": [0, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
                 "aoColumnDefs": [
-                    {"bVisible": false,"aTargets": [4]},
-                    {"bVisible": false,"aTargets": [5]},
-                    {"bVisible": false,"aTargets": [6]},
-                    {"bVisible": false,"aTargets": [7]},
-                    {"bVisible": false,"aTargets": [8]},
-                    {"bVisible": false,"aTargets": [9]},
-                    {"bVisible": false,"aTargets": [10]},
-                    {"bVisible": false,"aTargets": [11]},
+
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '' + full[0] + '<a target="_blank" href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm rounded-circle text-center"><i class="fa fa-pencil"></i></a>';
+                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
                         }
                     },
                     {
@@ -139,14 +136,15 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
 
 <?php if(!empty($listserver)): ?>
 
-
-    <table id="lista-usuario-cracha" class="table table-striped table-bordered flex-nowrap border-<?=$btncolor?> text-center" style="width:100%">
+<div class="table-responsive">
+    <table id="lista-usuario-cracha" class="table table-sm table-striped table-bordered flex-nowrap border-<?=$btncolor?> text-center" style="width:100%">
         <thead class="table-<?=$btncolor?>">
         <tr class="bg-light text-<?=$btncolor?> border-<?=$btncolor?>">
             <th class="text-center">ID <i class="fa fa-pencil"></i></th>
             <th class="text-center">FOTO</th>
-            <th class="text-center">QRCODE</th>
+            <th class="text-center">CRACHA</th>
             <th class="text-center">NOME</th>
+            <th class="text-center">SOBRENOME</th>
             <th class="text-center">NASCIMENTO</th>
             <th class="text-center">CPF</th>
             <th class="text-center">E-MAIL</th>
@@ -167,6 +165,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
 
         </tbody>
     </table>
+</div>
 
     <!-- Modal Delete-->
     <div class="modal fade" id="myModalLixo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -174,22 +173,22 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
             <div class="modal-content fs-5 fw-bold">
                 <?php if($usuarioniveldeacesso > 0 && $usuarioniveldeacesso < 3) :
                     echo '<div class="modal-header text-white bg-secondary pt-2 pb-0">
-                                <div class="text-center">
-                                    <p><i class="fa fa-trash me-3"></i> Lixeira da Lista</p>
-                                </div>
-                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <div class="text-center">
+                                <p><i class="fa fa-trash me-3"></i> Lixeira da Lista</p>
                             </div>
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <div class="textdel"></div>
-                                </div>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                              <div class="text-center">
+                                 <div class="textdel"></div>
+                               </div>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <div class="buttondel"></div>
                             </div>';
-                else:
-                    echo '<div class="modal-header text-white bg-secondary">
-                                    <p><i class="fa fa-trash me-3"></i> Lixeira da Lista</p>
+                           else:
+                        echo '<div class="modal-header text-white bg-secondary">
+                                <p><i class="fa fa-trash me-3"></i> Lixeira da Lista</p>
                                 <button type="button" class="btn-close text-white" data-dismiss="modal" aria-label="Close"></button>
                                </div>
                                 <div class="modal-body">

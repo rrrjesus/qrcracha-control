@@ -41,9 +41,9 @@ if($pags):
         echo '</div>
         </div>';
             if(file_exists($pags->caminho)):
-            echo '<div class="card shadow-lg"> <!-- Início do Card -->
+            echo '<div class="card shadow-sm"> <!-- Início do Card -->
                     <div class="card-header text-center fw-bold fs-6">
-                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icons/favicon_jaca_control.ico">   SISTEMA JAÇANA CONTROLE - '.$pags->unidade.' - '.$today_year.'
+                        <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icons/favicon_jaca_control.ico">   SISTEMA JAÇANA CONTROLE - '.$today_year.'
                     </div>
                         <div class="card-body">';
 

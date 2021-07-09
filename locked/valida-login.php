@@ -16,7 +16,7 @@ if (mysqli_connect_errno()) {
 
 // Captura os dados do cliente solicitado
 $conexao = conexao::getInstance();
-$sql = 'SELECT id,foto, nome, sobrenome, datanascimento, cpf, email, telefone, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
+$sql = 'SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, telefone, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':email', $email);
 $stm->bindValue(':senha', $senhat);

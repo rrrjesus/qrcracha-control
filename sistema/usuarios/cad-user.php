@@ -136,7 +136,7 @@ endif;
         <div class="col-md-12">
             <input type="hidden" name="acao" value="incluir">
             <?=$button->BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso);?>
-            <?=$button->BtnListar($pag_system,$get_pag, $get_year, $get_sv2, $hashprimary);?>
+            <?=$button->BtnListar($pag_system,$get_pag, $get_year, $hashprimary);?>
             <?=$button->BtnSair($pag_system);?>
         </div>
     </div>

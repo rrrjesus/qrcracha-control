@@ -1,5 +1,7 @@
 <?php
+error_reporting(-1); // Tratando erros da classe
 
+// Verificações de usuários
 $usuarioniveldeacesso = isset($_SESSION['usuarioNivelAcesso']) ? $_SESSION['usuarioNivelAcesso'] : 4;
 $usuarioid = isset($_SESSION['usuarioId']) ? $_SESSION['usuarioId'] : 1;
 
@@ -8,17 +10,18 @@ class Buttons extends Tables {
     public $title;
     public $namelist;
 
-    /** variaveis utilizadas na classe
+    /** Variaveis Utilizadas na Classe
      * @param $get_lixeira // retorna o $_GET da seleção de lista da lixeira (&lixeira=1 listar lixeira
-     * @param $get_year
-     * @param $ano_atual
-     * @param $get_pag
-     * @param $pag_system
+     * @param $get_year // Retorna o ano recebido via $_GET
+     * @param $ano_atual // Retorna o ano atual
+     * @param $get_pag // Retorna a página
+     * @param $pag_system // Retorna a página principal do sistema
      * @param $get_lixeira // Se retornado no $_GET como 1 exibe a lista da lixeira
      * @param $nu_lixeira // Retorna a contagem da lixeira
      * @param $nu_registro // Retorna a contagem de registros da tabela
      */
 
+    /** Apenas traduções do datatable */
     public function language() {
             echo '"language": {
                 "sEmptyTable": "Nenhum registro encontrado",
@@ -28,6 +31,10 @@ class Buttons extends Tables {
                 "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"} }';
     }
 
+    /** Botões e icones do datatable
+     * @param $nameform // Busca o nome do formulário
+     * @param $system // Variável que exibe o nome do sistema
+     */
     public function ButtonDataTable($nameform, $get_year, $system) {
 
         $i_excel = '<i class="fal fa-file-excel"></i>';
@@ -41,6 +48,7 @@ class Buttons extends Tables {
                 {extend:'colvis',titleAttr: 'Select Colunas',className: 'btn btn-outline-primary',text:'$i_list'} ]";
     }
 
+    /** Função para alertas do sistema */
     public function AlertSession() {
 
         /** @var msgsuccess $_SESSION */
@@ -80,6 +88,7 @@ class Buttons extends Tables {
         endif;
     }
 
+    // Função para cores bootstrap 5 dos botões
     public function BtnColor($get_lixeira, $get_year, $ano_atual) {
         if ($get_lixeira == 1):
             return 'secondary';
@@ -92,6 +101,7 @@ class Buttons extends Tables {
         endif;
     }
 
+    /** Função css para algumas cores de botões */
     public function BtnColorStyle($get_lixeira, $get_year, $ano_atual) {
         if ($get_lixeira == 1):
             return '#6c757d';
@@ -104,6 +114,7 @@ class Buttons extends Tables {
         endif;
     }
 
+    // Função para icones do sistema
     public function FaList($get_lixeira, $get_year, $ano_atual) {
         if ($get_lixeira == 1):
             return 'trash-o';
@@ -114,24 +125,26 @@ class Buttons extends Tables {
         endif;
     }
 
+    // Função para botão de lista de títulos
     public function BtnTitleList($get_pag, $get_year, $nameform, $ano_atual, $get_lixeira) {
         if(!empty($get_pag)):
             if($get_year == $ano_atual && $get_lixeira == 1) :
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-secondary btn-lg btn-block fw-bold mb-1 pt-1 pb-1"><i class="fa fa-trash-o px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-secondary btn-block fw-bold mb-1 pt-1 pb-1"><i class="fa fa-trash-o px-2"></i>
                         LIXEIRA DE '.$nameform.' - '.$get_year.'</button>';
             elseif($get_year < $ano_atual && 1 == $get_lixeira) :
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-secondary btn-lg btn-block fw-bold mb-1 pt-1 pb-1"><i class="fa fa-trash-o px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-secondary btn-block fw-bold mb-1 pt-1 pb-1"><i class="fa fa-trash-o px-2"></i>
                         LIXEIRA DE ARQUIVO DE '.$nameform.' - '.$get_year.'</button>';
             elseif ($ano_atual == $get_year && $get_lixeira == 0) :
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-primary btn-lg btn-block fw-bold mb-1 pt-1 pb-1"><i class="fal fa-list px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-primary btn-block fw-bold mb-1 pt-1 pb-1"><i class="fal fa-list px-2"></i>
                        LISTA DE '.$nameform.' - '.$get_year.'</button>';
             else:
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-danger btn-lg btn-block fw-bold mb-1 pt-1 pb-1"><i class="fal fa-list px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-danger btn-block fw-bold mb-1 pt-1 pb-1"><i class="fal fa-list px-2"></i>
                        ARQUIVO DE LISTA DE '.$nameform.' - '.$get_year.'</button>';
             endif;
         endif;
     }
 
+    // Função do botão de cadastro na lista de usuários
     public function BtnCadlist($get_year, $ano_atual, $usuarioid, $pag_system, $get_pag, $hashprimary) {
 
         $cadastro = substr($get_pag, 6);
@@ -144,6 +157,7 @@ class Buttons extends Tables {
         endif;
     }
 
+    // Função para o botão gravar
     public function BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso){
             if ($usuarioid === 1):
             return '';
@@ -157,137 +171,13 @@ class Buttons extends Tables {
             endif;
     }
 
-    public function BtnSv2Suvis($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) && $get_sv2 !== 'suvis'):
-            return '<a class="btn btn-outline-warning btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=suvis&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="S"
-                      data-toggle="tooltip" title="SV2 SUVIS"><i class="far fa-plus-circle me-3"></i><u>S</u>UVIS<i class="ms-3"></i></a>';
-        elseif($get_sv2 !== 'suvis'):
-            return '<a class="btn btn-outline-warning btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=suvis&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="S"
-                      data-toggle="tooltip" title="SV2 SUVIS"><i class="far fa-plus-circle me-3"></i><u>S</u>UVIS<i class="ms-3"></i></a>';
-        else:
-            return '';
-        endif;
-    }
-
-    public function BtnSv2Covid($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) && $get_sv2 !== 'covid'):
-            return '<a class="btn btn-outline-dark btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=covid&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="S"
-                      data-toggle="tooltip" title="SV2 SUVIS"><i class="far fa-plus-circle me-3"></i><u>C</u>OVID<i class="ms-3"></i></a>';
-        elseif($get_sv2 !== 'covid'):
-            return '<a class="btn btn-outline-dark btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=covid&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="S"
-                       data-toggle="tooltip" title="SV2 SUVIS"><i class="far fa-plus-circle me-3"></i><u>C</u>OVID<i class="ms-3"></i></a>';
-        else:
-            return '';
-        endif;
-    }
-
-    public function BtnSv2Outros($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) && $get_sv2 !== 'outros'):
-            return '<a class="btn btn-outline-danger btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=outros&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="O"
-                        data-toggle="tooltip" title="SV2 OUTROS"><i class="far fa-plus-circle me-2"></i><u>O</u>UTROS<i class="ms-1"></i></a>';
-        elseif($get_sv2 !== 'outros'):
-            return '<a class="btn btn-outline-danger btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=outros&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="O"
-                        data-toggle="tooltip" title="SV2 OUTROS"><i class="far fa-plus-circle me-2"></i><u>O</u>UTROS<i class="ms-1"></i></a>';
-        else:
-            return '';
-        endif;
-    }
-
-    public function BtnSv2Siva($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) && $get_sv2 !== 'siva'):
-            return '<a class="btn btn-outline-secondary btn-sm fw-bold mb-2 me-2"  href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=siva&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="I"
-                        data-toggle="tooltip" title="SV2 SIVA"><i class="far fa-plus-circle me-3"></i>S<u>I</u>VA<i class="ms-3"></i></a>';
-        elseif($get_sv2 !== 'siva'):
-            return '<a class="btn btn-outline-secondary btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=siva&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="I"
-                        data-toggle="tooltip" title="SV2 SIVA"><i class="far fa-plus-circle me-3"></i>S<u>I</u>VA<i class="ms-3"></i></a>';
-        else:
-            return '';
-        endif;
-    }
-
-    public function BtnSv2SivaOutros($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) && $get_sv2 !== 'siva-outros'):
-            return '<a class="btn btn-outline-secondary btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=siva-outros&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="I"
-                        data-toggle="tooltip" title="SV2 SIVA OUTROS"><i class="far fa-plus-circle text-danger me-1"></i>  SI<u>V</u>A<i class="ms-1 text-danger">OUT</i></a>';
-        elseif($get_sv2 !== 'siva-outros'):
-            return '<a class="btn btn-outline-secondary btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=siva-outros&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="I"
-                        data-toggle="tooltip" title="SV2 SIVA OUTROS"><i class="far fa-plus-circle text-danger me-1"></i>  SI<u>V</u>A<i class="ms-1 text-danger">OUT</i></a>';
-        else:
-            return '';
-        endif;
-    }
-
-    public function BtnSv2Surto($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) &&$get_sv2 !== 'surto'):
-            return '<a class="btn btn-outline-primary btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=surto&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="U" value="surto" id="surto"
-                        data-toggle="tooltip" title="SV2 SURTO"><i class="far fa-plus-circle me-2"></i>S<u>U</u>RTO<i class="ms-2"></i></a>';
-        elseif($get_sv2 !== 'surto'):
-            return '<a class="btn btn-outline-primary btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=surto&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="U" value="surto" id="surto"
-                        data-toggle="tooltip" title="SV2 SURTO"><i class="far fa-plus-circle me-2"></i>S<u>U</u>RTO<i class="ms-2"></i></a>';
-        else:
-            return '';
-        endif;
-    }
-
-    public function BtnSv2CovidOutros($usuarioid, $usuariostatus, $usuarioniveldeacesso, $get_sv2, $get_year, $get_pag, $get_id, $hashprimary){
-        if ($usuarioid === 1):
-            return '';
-        elseif ($usuariostatus === 0):
-            return '';
-        elseif ($usuarioniveldeacesso === 4):
-            return '';
-        elseif (!empty($get_id) && $get_sv2 !== 'covid-outros'):
-            return '<a class="btn btn-outline-dark btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&id='.$get_id.'&sv2=covid-outros&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="I"
-                   data-toggle="tooltip" title="SV2 COVID OUTROS"><i class="far fa-plus-circle text-danger me-1"></i> COV<u>I</u>D<i class="ms-1 text-danger">OUT</i></a>';
-        elseif($get_sv2 !== 'covid-outros'):
-            return '<a class="btn btn-outline-dark btn-sm fw-bold mb-2 me-2" href="'.PAGSYSTEM.'?pag='.$get_pag.'&sv2=covid-outros&year='.$get_year.'&session='.$hashprimary.'" role="button" accesskey="I"
-                   data-toggle="tooltip" title="SV2 COVID OUTROS"><i class="far fa-plus-circle text-danger me-1"></i> COV<u>I</u>D<i class="ms-1 text-danger">OUT</i></a>';
-        else:
-            return '';
-        endif;
-    }
-
+    // Função para o botão sair
     public function BtnSair($pag_system) {
         return '<a href="'.$pag_system.'" role="button" data-toggle="tooltip" title="SAIR DO FORMULÁRIO" accesskey="S" class="btn btn-outline-danger btn-sm fw-bold mb-2 mr-sm-4"><i class="far fa-reply-all me-2"></i ><u>S</u>AIR</a>';
     }
 
-    public function BtnListar($pag_system,$get_pag, $get_year, $get_sv2, $hashprimary) {
+    // Função para o botão listar
+    public function BtnListar($pag_system,$get_pag, $get_year, $hashprimary) {
 
         if(substr($get_pag, 0,8) === 'cadastro'):
             $lista = substr($get_pag, 9);
@@ -295,16 +185,11 @@ class Buttons extends Tables {
             $lista = substr($get_pag, 7);
         endif;
 
-        if(substr($get_sv2, 0,5) === 'covid'):
-            return '<a href="'.$pag_system.'?pag=lista_'.$lista.'&livro=covid&year='.$get_year.'&session='.$hashprimary.'" role="button" data-toggle="tooltip" title="LISTAR REGISTROS"
-                    accesskey="L" class="btn btn-outline-info btn-sm fw-bold mb-2 me-2 mr-sm-4"><i class="fa fa-list-ol me-2"></i><u>L</u>ISTAR</a>';
-        else:
         return '<a href="'.$pag_system.'?pag=lista_'.$lista.'&year='.$get_year.'&session='.$hashprimary.'" role="button" data-toggle="tooltip" title="LISTAR REGISTROS"
                     accesskey="L" class="btn btn-outline-info btn-sm fw-bold mb-2 me-2 mr-sm-4"><i class="fa fa-list-ol me-2"></i><u>L</u>ISTAR</a>';
-        endif;
     }
 
-    /*Função para verificar se o usuário esta cadastrado no sistema e após Ok, */
+    // Função para verificar se o usuário esta cadastrado no sistema
     public function HashPag($get_hash, $hashprimary) {
         if (isset($hashprimary)) {
             if($hashprimary !== $get_hash):
@@ -315,13 +200,14 @@ class Buttons extends Tables {
         }
     }
 
-    /*Função para verificar se o usuário esta cadastrado no sistema e após Ok, */
+    // Função para hash
     public function Hash($usuarioid) {
         if (!empty($usuarioid)) {
             return sha1(md5($usuarioid));
         }
     }
 
+    // Função para modal de lixeira
     public function BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso) {
         if ($usuarioid === 1):
             return '';
@@ -335,6 +221,9 @@ class Buttons extends Tables {
         endif;
     }
 
+    /** Função para botão de lixeira em lista
+     * @param $usuarioniveldeacesso //
+     */
     public function Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeira, $pag_system, $hashprimary) {
         if ($usuarioniveldeacesso === '1'):
             if ($get_lixeira === 0):
@@ -346,30 +235,14 @@ class Buttons extends Tables {
         endif;
     }
 
-    public function BtnlistlixeiraAedes($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeiraedes, $pag_system, $hashprimary) {
-        if ($usuarioniveldeacesso == 1):
-            if ($get_lixeira == 0):
-                return '<a href="'.$pag_system .'?pag='.$get_pag.'&year='.$get_year.'&lixeira=1" role="button" class="btn btn-outline-secondary btn-sm fw-bold mb-3"
-                        data-toggle="tooltip" data-placement="bottom" title="LIXEIRA"><i class="fa fa-trash-o px-2"></i><u>L</u>IXO <span class="badge rounded-pill bg-danger">' . $nu_lixeiraedes . '</a>';
-            else:
-                return '<a href="' . $pag_system . '?pag='.$get_pag.'&year='.$get_year.'" accesskey="S" role="button" class="btn btn-outline-danger btn-sm fw-bold mb-3"><i class="fa fa-arrow-circle-o-left px-2"></i><u>S</u>AIR</a>';
-            endif;
-        endif;
-    }
-
-    /** Função para alertar quando não existem registros na lixeira */
+    /** Função para alertar quando não existem registros na lixeira
+     * @param $get_lixeira // Recebe o $_GET de lixeira
+     * @param $nu_lixeira // Faz o SQL COUNT da Lixeira
+     */
     public function AlertLixeira ($get_lixeira, $nu_lixeira) {
         if ('VAZIA' === $nu_lixeira && $get_lixeira == 1) :
             return '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-recycle"></i>
                 <strong>A LIXEIRA ESTÁ VAZIA !!!</strong></div>';
-        endif;
-    }
-
-    /** Função para alertar quando não existem registros na lixeira */
-    public function AlertLixeiraAedes ($get_lixeira, $nu_lixeiraedes) {
-        if ($nu_lixeiraedes === 'VAZIA' && 1 == $get_lixeira) :
-            return '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-recycle"></i>
-                <strong>A LIXEIRA ESTÁ VAZIA !!!</strong></div><br>';
         endif;
     }
 
