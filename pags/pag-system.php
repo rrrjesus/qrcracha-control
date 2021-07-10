@@ -24,7 +24,7 @@ if($pags):
                     <nav style="--bs-breadcrumb-divider: \'\';" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><i class="far fa-home-heart me-2 text-primary"></i> <a class="text-uppercase" href="'.$home.'"><strong>INÍCIO</strong></a> <i class="far fa-arrow-right ms-1 me-1"></i> </li>
-                            <li class="breadcrumb-item text-uppercase active"><strong>'.$pags->name_form.' - '.$get_year.'</strong></li>
+                            <li class="breadcrumb-item text-uppercase active"><strong>'.$pags->name_form.'</strong></li>
                         </ol>
                     </nav>
                 </div>
@@ -41,8 +41,8 @@ if($pags):
         echo '</div>
         </div>';
             if(file_exists($pags->caminho)):
-            echo '<div class="card shadow-sm"> <!-- Início do Card -->
-                    <div class="card-header text-center fw-bold fs-6">
+            echo '<div class="card"> <!-- Início do Card -->
+                    <div class="card-header text-center fw-bold fs-6 pt-1 pb-1">
                         <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icons/favicon_jaca_control.ico">   SISTEMA JAÇANA CONTROLE - '.$today_year.'
                     </div>
                         <div class="card-body">';

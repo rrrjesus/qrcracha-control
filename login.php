@@ -1,5 +1,6 @@
 <?php
-
+// Recebe os dados enviados pela submissão
+$emailget = (isset($_GET['email'])) ? $_GET['email'] : '';
 ?>
 
 <form class="needs-validation p-2" novalidate id="head-login" method="POST" action="locked/valida-login.php">
@@ -11,9 +12,13 @@
 
     <div class="row mb-2 row justify-content-center">
         <div class="col-10 col-md-4">
-            <input type="email" class="form-control" id="email" name="email" data-toggle="tooltip" data-placement="top" required
-                title="Digite seu e-mail !!!" placeholder="email@email.com" autofocus>
-
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo $emailget ?>"
+                <?php
+                    if (isset($_GET['erro']) && $_GET['erro'] == "true"): echo '';
+                    else: echo 'autofocus';
+                    endif;
+                ?>
+               data-toggle="tooltip" data-placement="top" required title="Digite seu e-mail !!!" placeholder="email@email.com">
         </div>
     </div>
 
@@ -23,10 +28,16 @@
 
     <div class="row mb-3 row mb-4 justify-content-center">
         <div class="col-10 col-md-4">
-            <input type="password" id="senha" name="senha" data-toggle="tooltip" data-placement="top" required
-                   title="Sua senha deve ter pelo menos 6 caracteres e conter pelo menos um número e um caractere"
-                   placeholder="*****" maxlength="12" class="form-control">
+            <?php
+                if (isset($_GET['erro']) && $_GET['erro'] == "true"):
+                    echo '<div class="text-center"><label class="col-form-label col-form-label-sm text-danger"><strong> Senha Inválida !!!</strong></label></div>';
+                endif;
+            ?>
+                <input type="password" id="senha" name="senha" data-toggle="tooltip" data-placement="top" required
+                       <?php if (isset($_GET['erro']) && $_GET['erro'] == "true"): echo 'autofocus title="Senha incorreta !!!, mínimo de 6 caracteres contendo um número e um caractere"';
+                                else: echo 'title="Sua senha deve ter mínimo de 6 caracteres contendo um número e um caractere"'; endif;?>
 
+                   placeholder="*****" maxlength="12" class="form-control">
         </div>
     </div>
 

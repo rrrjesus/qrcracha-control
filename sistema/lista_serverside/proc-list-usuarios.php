@@ -38,7 +38,7 @@ $columns = array(
     array(
         'db' => 'datanascimento',
         'dt' => 5,
-        'formatter' => function ($d, $row) {
+        'formatter' => function ($d) {
             return date('d/m/Y', strtotime($d));
         }
     ),

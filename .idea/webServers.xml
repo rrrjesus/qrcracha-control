@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="c2b4cf38-0a53-4931-ba1c-d8b7699b0a1a" name="10.47.171.69" url="http://192.168.15.122/jacana-control">
+      <webServer id="c2b4cf38-0a53-4931-ba1c-d8b7699b0a1a" name="192.168.15.122" url="http://192.168.15.122/jacana-control">
         <fileTransfer mountedRoot="C:\xampp\htdocs\jacana-control" accessType="MOUNT" port="0" />
       </webServer>
     </option>

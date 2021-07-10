@@ -15,9 +15,7 @@
  * @conexao Classe conexao. */
 
 error_reporting(-1); // Inserindo melhorias e exibindo erros
-
 include_once 'conexao.php';
-
 ?>
 
 <?php
@@ -47,9 +45,7 @@ session_unset();
 
 <body>
 
-<header>
-
-</header>
+<header></header>
 
 <main class="form-signin" id="index">
 
@@ -57,7 +53,6 @@ session_unset();
     <?php require(__DIR__ . '/login.php'); ?>
 
 </main>
-
 
 <!-- FOOTER -->
 <?php require(__DIR__ . '/footer.php'); ?>

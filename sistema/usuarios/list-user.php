@@ -4,6 +4,12 @@ error_reporting(0);
 // Garantindo a autenticidade da session atual ou destruindo caso false
 include_once '../../locked/seguranca.php';
 
+$get_session = $_GET['session'] ?? '';
+
+if($get_session !== $hashprimary):
+    header("Location: $pag_system");
+endif;
+
 // Chamada de classe de formulário e classe de botões
 $tabela = $tables->Table($get_year, $ano_atual, $get_pag, $nametabela);
 // Variável para instância de classe Tables de lista de usuários
@@ -57,7 +63,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [1], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="sistema/imagens/' + full[0] + '/fotologin/'+ full[1] + '" target="_blank"><img src="sistema/imagens/' + full[0] + '/fotologin/'+ full[1] + '" class="rounded-circle float-left" height="50" width="50"></a>';
+                            return '<a href="sistema/imagens/' + full[6] + '/fotologin/'+ full[1] + '" target="_blank"><img src="sistema/imagens/' + full[6] + '/fotologin/'+ full[1] + '" class="rounded-circle float-left" height="50" width="50"></a>';
                         }
                     },
                     {
@@ -67,10 +73,10 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                         }
                     },
                     {
-                        "aTargets": [12], // o numero 6 é o nº da coluna
+                        "aTargets": [13], // o numero 6 é o nº da coluna
                         "data": null,
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            var lixo = full[12];
+                            var lixo = full[13];
                             switch (lixo) {
                                 case '0' :
                                     lixo = '<button type="button" class="btn btn-outline-danger btn-sm btn-circle" data-toggle="modal" data-target="#myModalLixo"><i class="fa fa-trash" data-toggle="tooltip" title="DESCARTAR"></i></button>';

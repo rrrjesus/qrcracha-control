@@ -12,7 +12,7 @@
 ?>
 
 
-<nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: #26d9a6">
+<nav class="navbar navbar-dark bg-success navbar-expand-sm fixed-top">
     <a class="navbar-brand ms-3" href="<?=PAGSYSTEM?>" data-toggle="tooltip" data-placement="right" title="JAÇANÃ CONTROLE"><img
                 src="imagens/icons/favicon_jaca_control.ico" alt="Jaçanã Controle"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarjacontrol" aria-controls="navbarjacontrol" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
                 $id = $mprfetchs->id;
                 /* Level one dropdown */
                 echo '<li class="nav-item dropdown">';
-                echo '<a href="'.PAGSYSTEM.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fal fa-'.$mprfetchs->icon.' me-1"></i>' . $mprfetchs->nome . '</a>';
+                echo '<a href="'.PAGSYSTEM.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle fs-5"><i class="fal fa-'.$mprfetchs->icon.' me-1"></i>' . $mprfetchs->nome . '</a>';
 
                 $sql_sub = 'SELECT * FROM menu_sub WHERE id_menu=? ORDER BY nome';
                 $stm_sub = $conexao->prepare($sql_sub);
@@ -47,7 +47,7 @@
 
                          /* Level two dropdown */
                          echo '<li>';
-                         echo '<a href="'.$subfetchs->pag.'&session='.$hashprimary.'" class="dropdown-item"><i class="fal fa-'.$subfetchs->icon.' me-2"></i>' . $subfetchs->nome . '</a>';
+                         echo '<a href="'.$subfetchs->pag.'&session='.$hashprimary.'" class="dropdown-item fs-5"><i class="fal fa-'.$subfetchs->icon.' me-2"></i>' . $subfetchs->nome . '</a>';
 
                      endforeach;
                      echo '</ul>';
@@ -57,7 +57,7 @@
             endforeach;
             ?>
         <li class="nav-item">
-            <a type="button" href="<?=$pag_system?>" id="getting-started" class="nav-link active me-3 ms-3 text-danger disabled" style="<?php if (session_status() !== PHP_SESSION_ACTIVE) {
+            <a role="button" href="<?=$pag_system?>" id="getting-started" class="nav-link active me-3 ms-3 disabled fw-bold fs-5" style="color: #68f112; <?php if (session_status() !== PHP_SESSION_ACTIVE) {
                 echo 'display: none;';
             } ?>" ></a>
             <script type="text/javascript">
@@ -85,27 +85,22 @@
             <!-- <li class="nav-item dropdown px-3"><label class="theme-switch" for="checkbox"><input type="checkbox" id="checkbox" /><div class="slider round"></div></label>
             </li> -->
 
-            <li class="nav-item me-2">
-                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('sistema/imagens/'.$usuarioid.'/fotologin/'.$usuariofoto))
-                    {echo 'sistema/imagens/'.$usuarioid.'/fotologin/'.$usuariofoto;}
+            <li class="nav-item me-2 mb-1">
+                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('sistema/imagens/'.$usuariocpf.'/fotologin/'.$usuariofoto))
+                    {echo 'sistema/imagens/'.$usuariocpf.'/fotologin/'.$usuariofoto;}
                     else{ echo 'imagens/padrao.jpg';}?>">
             </li>
 
-            <li class="nav-item dropdown me-2">
-                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm fw-bold nav-link dropdown-toggle" style="color:#fff;"><i class="far fa-lock-open-alt me-1"></i> <?=$usuarionome?></a>
+            <li class="nav-item dropdown mb-1">
+                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm fw-bold nav-link dropdown-toggle me-2 ms-2 fs-6" style="color:#fff;"><i class="far fa-lock-open-alt me-1"></i> <?=$usuarionome?></a>
                     <ul class="dropdown-menu border-0 shadow">
                         <li>
-                            <a class="dropdown-item" href="<?=$pag_system.'?pag=edit-perfil-user&hash='.isset($loghash)?>"><i class="fa fa-fw fa-user"></i> Perfil</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" style="<?php if ($_SESSION['usuarioNivelAcesso'] <> 1) {
-                                    echo 'display: none;';
-                                } ?>" href="painel/index.php?hash=<?=isset($loghash)?>"><i class="fa fa-fw fa-dashboard"></i> Painel de Controle</a>
+                            <a class="dropdown-item fs-5" href="<?=$pag_system.'?pag=edicao_perfil&cpf='.$usuariocpf.'&session='.$hashprimary?>"><i class="fa fa-fw fa-user"></i> Perfil</a>
                         </li>
                     </ul>
             </li>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger btn-sm fw-bold" data-toggle="modal" data-target="#sairModal"><i class="far fa-reply-all me-1" data-toggle="tooltip" title="SAIR DO SISTEMA"></i> Sair</button>
+            <button type="button" class="btn btn-danger btn-sm fw-bold pt-2 pb-2 ms-2 me-2 fs-6" data-toggle="modal" data-target="#sairModal"><i class="far fa-reply-all me-1" data-toggle="tooltip" title="SAIR DO SISTEMA"></i> SAIR</button>
         </ul>
 
 </nav>

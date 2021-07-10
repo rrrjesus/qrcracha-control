@@ -151,7 +151,7 @@ class Buttons extends Tables {
 
         if(!empty($get_pag)):
             if ($get_year === $ano_atual && $usuarioid > 1) :
-                return '<a href = "'.$pag_system.'?pag=cadastro_'.$cadastro.'&year='.$ano_atual.'&session='.$hashprimary.'" type = "button" class="btn btn-outline-success btn-sm fw-bold mb-3 me-3"
+                return '<a href = "'.$pag_system.'?pag=cadastro_'.$cadastro.'&year='.$ano_atual.'&session='.$hashprimary.'" role="button" class="btn btn-outline-success btn-sm fw-bold mb-3 me-3"
                 accesskey="N" data-toggle="tooltip" data-placement="bottom" title="CADASTRAR"><i class="far fa-plus-circle px-2"></i><u>N</u>OVO</a>';
             endif;
         endif;

@@ -11,7 +11,6 @@ include_once 'classes/Tables.php';
 include_once 'classes/Buttons.php';
 include_once 'classes/Modal.php';
 
-
 $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
 $_SESSION['url'] = $url;
 

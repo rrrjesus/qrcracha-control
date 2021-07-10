@@ -8,7 +8,7 @@ include_once 'Conexao.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sisdamweb 404</title>
-    <link rel="shortcut icon" href="imagens/sv2ico.ico  " type="image/x-icon"/>
+    <link rel="shortcut icon" href="imagens/icons/favicon_jaca_control.ico  " type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
     <link href="assets/css/404.css" media="screen" rel="stylesheet" type="text/css" />
     <!-- Google Fonts -->
@@ -17,7 +17,7 @@ include_once 'Conexao.php';
 <body>
 <div class="fade">
     <div class="logo">
-        <img src="imagens/icone-inicial.png">
+        <img src="imagens/logo/jacana_controle_qrcode.png">
     </div>
     <div class="mensagem">
         <h1>Ufa,<br/>encontramos você!</h1>

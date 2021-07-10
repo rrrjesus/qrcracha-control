@@ -1,5 +1,4 @@
     <?php
-
     error_reporting(-1);
 
     $get_session = $_GET['session'] ?? '';
@@ -31,7 +30,7 @@
     $edit             = (isset($_POST['edit'])) ? $_POST['edit'] : '';
 
     //criptografa a senha com sha1 e md5
-    $cripto_senha = (sha1(md5($senha)));
+    $cripto_senha = password_hash($senha."jacana_control", PASSWORD_DEFAULT);
 
     // Valida os dados recebidos
     $mensagem = '';
@@ -72,20 +71,20 @@
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
 
-                if(!file_exists( 'sistema/imagens/'.$id)): // Verifica se o diretório "imagens/id" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$id); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/id" do novo usuário existe
+                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
                 endif;
 
                 // Verifica se o diretório "imagens/id/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$id.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$id.'/fotologin');
+                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
+                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$id.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
@@ -132,7 +131,7 @@
             // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
             if ($foto_atual <> 'sistema/imagens/padrao.jpg'):
                 //unlink("fotos/" . $foto_atual);
-                unlink('sistema/imagens/'.$id.'/fotologin/'.$foto_atual);
+                unlink('sistema/imagens/'.$cpf.'/fotologin/'.$foto_atual);
             endif;
 
             $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
@@ -150,20 +149,20 @@
             // Verifica se o upload foi enviado via POST
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
-                if(!file_exists( 'sistema/imagens/'.$id)): // Verifica se o diretório "imagens/login" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$id); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/login" do novo usuário existe
+                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
                 endif;
 
                 // Verifica se o diretório "imagens/login/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$id.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$id.'/fotologin');
+                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
+                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$id.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 

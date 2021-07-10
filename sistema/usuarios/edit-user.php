@@ -60,11 +60,11 @@ endif;
 
             <div class="row mb-1">
                 <div class="col-md-1 mb-1">
-                    <a href="<?php if (file_exists('sistema/imagens/'.$user->id.'/fotologin/'.$user->foto))
-                    {echo 'sistema/imagens/'.$user->id.'/fotologin/'.$user->foto;}
+                    <a href="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
+                    {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
                     else{ echo '"sistema/imagens/padrao.jpg"';}?>">
-                        <img  height="90" width="90" src="<?php if (file_exists('sistema/imagens/'.$user->id.'/fotologin/'.$user->foto))
-                        {echo 'sistema/imagens/'.$user->id.'/fotologin/'.$user->foto;}
+                        <img  height="90" width="90" src="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
+                        {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
                         else{ echo '"sistema/imagens/padrao.jpg"';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
                     </a>
                 </div>
@@ -125,7 +125,8 @@ endif;
                 <div class="col-md-4 mb-1">
                     <label class="col-form-label col-form-label-sm" for="inputEmail"><strong><i class="fa fa-envelope-o fa-muted ms-3 me-3"></i> E-mail</strong></label>
                     <input type="text" data-toggle="tooltip" title="rods@gmail.com"
-                           class="form-control form-control-sm" name="email" value="<?=$user->email?>" placeholder="exemplo@exemplo.com.br">
+                       class="form-control form-control-sm"
+                        name="email" value="<?=$user->email?>" placeholder="exemplo@exemplo.com.br">
                 </div>
             </div>
 
@@ -144,7 +145,8 @@ endif;
 
                 <div class="col-md-4 mb-1">
                     <label class="col-form-label col-form-label-sm" for="inputStatus"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Status</strong></label>
-                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ATIVO/INATIVO" name="status" id="status">
+                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ATIVO/INATIVO"
+                        name="status" id="status">
                         <option class="bg-danger" value="0"<?php if ($user->status == 0) {echo 'selected';}?>>INATIVO</option>
                         <option class="bg-success" value="1"<?php if ($user->status == 1) {echo 'selected';}?>>ATIVO</option>
                     </select>
