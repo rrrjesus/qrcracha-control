@@ -8,6 +8,6 @@ unset($_SESSION['usuarioId'],
     $_SESSION['usuarioNivelAcesso'],
     $_SESSION['usuarioSenha']);
 
-//redirecionar o usuário para a página de admin
+//redirecionar o usuário para a página de user
 header("Location: index.php");
 ?>

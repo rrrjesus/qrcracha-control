@@ -3,7 +3,7 @@
 
     $get_session = $_GET['session'] ?? '';
 
-    if($get_session <> $hashprimary):
+    if($get_session !== $hashprimary):
         $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
@@ -29,8 +29,13 @@
     $nivel_acesso_id  = (isset($_POST['nivel_acesso_id'])) ? $_POST['nivel_acesso_id'] : '';
     $edit             = (isset($_POST['edit'])) ? $_POST['edit'] : '';
 
-    //criptografa a senha com sha1 e md5
-    $cripto_senha = password_hash($senha."jacana_control", PASSWORD_DEFAULT);
+    //criptografa a senha com sha3-256 + sal
+    $hashcad = hash('sha3-256', 'jesusobompastor'.$email);
+    $cripto_senha = hash('sha3-256', $hashcad.$senha);
+
+    //criptografa o cracha com sha3-256 + sal
+    $hashcracha = hash('sha3-256', 'servobomeprudente'.$cpf);
+    $cripto_cracha = hash('sha3-256', $hashcad.$email);
 
     // Valida os dados recebidos
     $mensagem = '';
@@ -71,7 +76,7 @@
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
 
-                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/id" do novo usuário existe
+                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/cpf" do novo usuário existe
                     mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
                 endif;
 
@@ -89,11 +94,13 @@
                     Se o erro persistir contate o administrador.</strong></div>';
 
                 endif;
+
+                $nome_foto = 'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto;
             endif;
         endif;
 
-        $sql = 'INSERT INTO usuarios (foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad)
-							   VALUES(:foto, :nome, :sobrenome, :datanascimento, :cpf, :email, :celular, :setor, :senha, :status, :sexo, :nivel_acesso_id, :usuariocad)';
+        $sql = 'INSERT INTO usuarios (foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, hash_cracha, senha, status, sexo, nivel_acesso_id, usuariocad)
+							   VALUES(:foto, :nome, :sobrenome, :datanascimento, :cpf, :email, :celular, :setor, :hash_cracha, :senha, :status, :sexo, :nivel_acesso_id, :usuariocad)';
 
         $stm = $conexao->prepare($sql);
         $stm->bindValue(':foto', $nome_foto);
@@ -104,6 +111,7 @@
         $stm->bindValue(':email', $email);
         $stm->bindValue(':celular', $celular);
         $stm->bindValue(':setor', $setor);
+        $stm->bindValue(':hash_cracha', $cripto_cracha);
         $stm->bindValue(':senha', $cripto_senha);
         $stm->bindValue(':status', $status);
         $stm->bindValue(':sexo', $sexouser);
@@ -114,7 +122,7 @@
         if ($retorno):
             $_SESSION['msgsuccess'] = '<div class="alert alert-success text-center" role="alert">
                 <strong>USUÁRIO: </strong>'.$nome.' <strong> - CADASTRADO COM SUCESSO !!!</strong></div>';
-            header("Location: menu-principal.php?pag=cadastro_usuarios&year=$get_year&session=$hashprimary");
+            header("Location: $pag_system?pag=cadastro_usuarios&year=$get_year&session=$hashprimary");
         else:
             $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
                 <strong>Erro ao cadastrar usuário '.$nome.' !!!</strong></div>';
@@ -168,6 +176,8 @@
 
                 endif;
 
+                $nome_foto = 'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto;
+
             endif;
         else:
 
@@ -199,15 +209,15 @@
         if ($retorno && $edit == 'edit_user'):
             $_SESSION['msgedit'] = '<div class="alert alert-success text-center" role="alert">
                 <strong>USUÁRIO: </strong>'.$nome.' <strong> - EDITADO COM SUCESSO !!!</strong></div>';
-                header("Location: menu-principal.php?pag=lista_usuarios&id=$id&session=$hashprimary");
+                header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
         elseif ($retorno && $edit == 'edit_user_perfil'):
             $_SESSION['msgedit'] = '<div class="alert alert-success text-center" role="alert">
             <strong>USUÁRIO: </strong>'.$nome.' <strong> - EDITADO COM SUCESSO !!!</strong></div>';
-            header("Location: menu-principal.php?pag=edit-perfil-user");
+            header("Location: $pag_system?pag=edit-perfil-user");
         elseif ($retorno && $edit == ''):
             $_SESSION['msgedit'] = '<div class="alert alert-success text-center" role="alert">
             <strong>USUÁRIO: </strong>'.$nome.' <strong> - EDITADO COM SUCESSO !!!</strong></div>';
-            header("Location: menu-principal.php?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+            header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         else:
             $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
                 <strong>ERRO AO EDITAR USUÁRIO '.$nome.' !!!</strong></div>';
@@ -219,23 +229,26 @@
     // Verifica se foi solicitada a edição de dados
     if ($acao == 'editar_senha'):
 
+        //criptografa a senha com sha3-256 + sal
+        $hasheditsenha = hash('sha3-256', 'jesusobompastor'.$usuarioemail);
+        $cripto_senha_edit_senha = hash('sha3-256', $hasheditsenha.$senha);
+
         $sql = 'UPDATE usuarios SET senha=:senha, date_alter_senha=NOW() ';
         $sql .= 'WHERE id = :id';
 
         $stm = $conexao->prepare($sql);
-        $stm->bindValue(':senha', $cripto_senha);
+        $stm->bindValue(':senha', $cripto_senha_edit_senha);
         $stm->bindValue(':id', $id);
         $retorno = $stm->execute();
 
         if ($retorno):
-            $_SESSION['msgedit'] = '<div class="alert alert-success" role="alert">
+            $_SESSION['msgsuccess'] = '<div class="alert alert-success text-center" role="alert">
                 <strong>SENHA ALTERADA COM SUCESSO !!!</strong></div>';
-            header("Location: index.php?pag=edit-perfil-user");
+            header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
         else:
             $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
                 <strong>ERRO AO ALTERAR SENHA !!!</strong></div>';
-
-
+            header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         endif;
     endif;
 

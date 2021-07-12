@@ -17,7 +17,13 @@ endif;
 
 <?=$button->AlertSession()?>
 
-<form class="needs-validation" novalidate action="menu-principal.php?pag=acao_usuarios&session=<?=$hashprimary?>" method="post" id='user' enctype='multipart/form-data'>
+<fieldset
+    <?php if ($usuarioid < 1) :  echo 'disabled';
+        elseif ($usuariostatus == 0) : echo 'disabled';
+            else: echo '';
+                endif; ?>>
+
+<form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='user' enctype='multipart/form-data'>
 
     <div class="row mb-1">
         <div class="col-md-1 mb-1">
@@ -131,7 +137,7 @@ endif;
         </div>
 
     </div>
-
+</fieldset>
     <div class="row text-center mt-3">
         <div class="col-md-12">
             <input type="hidden" name="acao" value="incluir">

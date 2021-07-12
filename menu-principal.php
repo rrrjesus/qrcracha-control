@@ -17,7 +17,9 @@ $_SESSION['url'] = $url;
 $usuarionome = isset($_SESSION['usuarioNome']) ? $_SESSION['usuarioNome'] : 'VISITANTE';
 $usuariosobrenome = isset($_SESSION['usuarioSobreNome']) ? $_SESSION['usuarioSobreNome'] : 'JAÇANÃ CONTROLE';
 $usuariocpf = isset($_SESSION['usuarioCpf']) ? $_SESSION['usuarioCpf'] : '12345678910';
+$usuarioemail = isset($_SESSION['usuarioEmail']) ? $_SESSION['usuarioEmail'] : 'visitantequevisita@gmail.com';
 $usuariostatus = isset($_SESSION['usuarioStatus']) ? $_SESSION['usuarioStatus'] : 0;
+$usuarionivelacesso = isset($_SESSION['usuarioNivelAcesso']) ? $_SESSION['usuarioNivelAcesso'] : 0;
 $usuariofoto = isset($_SESSION['usuarioFoto']) ? $_SESSION['usuarioFoto'] : 'imagens/padrao.jpg';
 
 $hashsession = isset($_SESSION['hashenter']) ? $_SESSION['hashenter'] : '';

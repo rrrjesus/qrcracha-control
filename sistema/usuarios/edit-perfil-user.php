@@ -28,20 +28,20 @@ if (!empty($id_user) && is_numeric($id_user)): // Valida se existe um id e se el
 
     if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
         $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
-                    <strong>PARA EDITAR O '.$id_user.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&lixeira=1");
+                    <strong>USUÁRIO DESATIVADO !!! PARA EDITAR O '.$id_user.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
+        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
     endif;
 
     if ($get_session <> $hashprimary) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
         $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
     endif;
 
     if ($stm->rowCount() < 1) : // If caso o usuário não seja encontrado !!!
         $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
     endif;
 
     if(!empty($user)): // If caso encontre o id do usuário solicitado
@@ -52,19 +52,23 @@ if (!empty($id_user) && is_numeric($id_user)): // Valida se existe um id e se el
 else : // Caso não encontre o usuário !!!
     $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id_user.' - NÃO ENCONTRADO !!!</strong></div>';
-    header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
 endif;
 ?>
-<fieldset <?php if ($usuarioid < 1) :  echo 'disabled'; endif; ?>>
+<fieldset
+    <?php if ($usuarioid < 1) :  echo 'disabled';
+            elseif ($usuariostatus == 0) : echo 'disabled';
+                else: echo '';
+                    endif; ?>>
 
-    <form class="needs-validation" novalidate action="menu-principal.php?pag=acao_usuarios&session=<?=$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
+    <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
         <div class="row mb-1">
             <div class="col-md-1 mb-1">
-                <a href="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
-                {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
+                <a href="<?php if (file_exists($user->foto))
+                {echo $user->foto;}
                 else{ echo '"sistema/imagens/padrao.jpg"';}?>">
-                    <img  height="90" width="90" src="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
-                    {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
+                    <img  height="90" width="90" src="<?php if (file_exists($user->foto))
+                    {echo $user->foto;}
                     else{ echo '"sistema/imagens/padrao.jpg"';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
                 </a>
             </div>
@@ -129,8 +133,7 @@ endif;
                        name="email" value="<?=$user->email?>" placeholder="exemplo@exemplo.com.br">
             </div>
         </div>
-</fieldset>
-
+</>
 <div class="row text-center mt-3">
     <div class="col-md-12">
         <input type="hidden" name="acao" value="editar">

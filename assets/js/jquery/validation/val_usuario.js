@@ -107,22 +107,16 @@ $(function() {
                     maxDateE: true
                 },
                 cpf: {
-                    required: true
+                    required: true,
+                    remote: "remote/user/val-cpf-cad.php"
                 },
                 email: {
                     required: true,
-                    remote: "remote/admin/val-email-cad.php"
-                },
-                login: {
-                    required: true,
-                    remote: "remote/admin/val-login-cad.php"
+                    remote: "remote/user/val-email-cad.php"
                 },
                 senha: {
                     required: true,
                     strongPassword: true
-                },
-                telefone: {
-                    required:true
                 },
                 celular: {
                     required:true
@@ -147,22 +141,16 @@ $(function() {
                     maxDateE: "Digite a data até hoje"
                 },
                 cpf: {
-                    required: "Digite o CPF válido"
+                    required: "Digite o CPF válido",
+                    remote: "Esse cpf já esta cadastrado em outro usuário !!!"
                 },
                 email: {
                     required: "Digite um email !!!",
                     remote: "Esse email já esta cadastrado em outro usuário !!!"
                 },
-                login: {
-                    required: "Digite um usuario !!!",
-                    remote: "Esse login já esta cadastrado em outro usuário !!!"
-                },
                 senha: {
                     required: "Digite uma senha !!!",
                     strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere"
-                },
-                telefone: {
-                    required: "Digite um telefone"
                 },
                 celular: {
                     required: "Digite um telefone"
@@ -195,16 +183,6 @@ $(function() {
                 email: {
                     required: true
                 },
-                login: {
-                    required: true
-                },
-                senha: {
-                    required: true,
-                    strongPassword: true
-                },
-                telefone: {
-                    required:true
-                },
                 celular: {
                     required:true
                 },
@@ -233,16 +211,6 @@ $(function() {
                 email: {
                     required: "Digite um email !!!"
                 },
-                login: {
-                    required: "Digite um usuario !!!"
-                },
-                senha: {
-                    required: "Digite uma senha !!!",
-                    strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere"
-                },
-                telefone: {
-                    required: "Digite um telefone"
-                },
                 celular: {
                     required: "Digite um telefone"
                 },
@@ -253,24 +221,24 @@ $(function() {
             }
         });
 
-        $("#edicao_senhas").validate({
+        $("#edicao_senha").validate({
             rules: {
-                senhas: {
+                senha: {
                     required: true,
                     strongPassword: true
                 },
-                novasenhas: {
+                novasenha: {
                     required: true,
                     strongPassword: true,
-                    equalTo: "#senhas"
+                    equalTo: "#senha"
                 }
             },
             messages: {
-                senhas: {
+                senha: {
                     required: "Digite uma Nova Senha",
                     strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere"
                 },
-                novasenhas: {
+                novasenha: {
                     required: "Repita a Nova Senha",
                     strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere",
                     equalTo: "As senhas não Conferem !!!"
@@ -283,7 +251,7 @@ $(function() {
             rules: {
                 email: {
                     required: true,
-                    remote: "remote/admin/val-email-index.php"
+                    remote: "remote/user/val-email-index.php"
                 },
                 senha: {
                     required: true,

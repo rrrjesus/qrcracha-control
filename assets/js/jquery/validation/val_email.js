@@ -54,7 +54,7 @@ $(function() {
         rules: {
             email: {
                 required: true,
-                remote: "remote/admin/val-email-index.php"
+                remote: "remote/user/val-email-index.php"
             }
         },
         messages: {

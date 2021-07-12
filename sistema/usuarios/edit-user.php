@@ -54,18 +54,23 @@ endif;
 
 <?=$button->AlertSession()?>
 
-    <fieldset <?php if ($usuarioid == 1) :  echo 'disabled'; endif; ?>>
+<fieldset
+    <?php if ($usuarioid < 1) :  echo 'disabled';
+        elseif ($usuarionivelacesso < 1 && $usuariostatus == 0) : echo 'disabled';
+            elseif ($usuarionivelacesso > 2 && $usuariostatus == 0) : echo 'disabled';
+                else: echo '';
+                    endif; ?>>
 
-        <form class="needs-validation" novalidate action="menu-principal.php?pag=acao_usuarios&session=<?=$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
+        <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
 
             <div class="row mb-1">
                 <div class="col-md-1 mb-1">
-                    <a href="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
-                    {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
-                    else{ echo '"sistema/imagens/padrao.jpg"';}?>">
-                        <img  height="90" width="90" src="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
-                        {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
-                        else{ echo '"sistema/imagens/padrao.jpg"';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
+                    <a href="<?php if (file_exists($user->foto))
+                    {echo $user->foto;}
+                    else{echo 'sistema/imagens/padrao.jpg';}?>">
+                        <img  height="90" width="90" src="<?php if (file_exists($user->foto))
+                        {echo $user->foto;}
+                        else{echo '"sistema/imagens/padrao.jpg"';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
                     </a>
                 </div>
                 <div class="col-md-4 mb-1">
@@ -163,7 +168,6 @@ endif;
                     </select>
                 </div>
             </div>
-    </fieldset>
 
             <div class="row text-center mt-3">
                 <div class="col-md-12">
@@ -177,3 +181,4 @@ endif;
                 </div>
             </div>
         </form>
+</fieldset>

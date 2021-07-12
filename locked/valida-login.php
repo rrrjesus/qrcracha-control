@@ -7,9 +7,14 @@ include_once '../Conexao.php';
 // Recupera o login
 $email = isset($_POST['email']) ? addslashes(trim($_POST['email'])) : FALSE;
 // Recupera a senha, a criptografando em MD5
-$senha = isset($_POST['senha']) ? sha1(md5(trim($_POST['senha']))) : FALSE;
+$senha = isset($_POST['senha']) ? $_POST['senha'] : FALSE;
 
-$loghash  = sha1(md5(strtoupper($email)));
+$hashipcad = hash('sha3-256', 'jesusobompastor'.$email);
+$cripto_senha_login = hash('sha3-256', $hashipcad.$senha);
+
+$hashprimary = hash('sha3-256', $hashsession.$haship);
+
+
 
 // Check connection
 if (mysqli_connect_errno()) :
@@ -17,7 +22,7 @@ if (mysqli_connect_errno()) :
 endif;
 
 // Usuário não forneceu a senha ou o login
-if(!$email || !$senha) :
+if(!$email || !$cripto_senha_login) :
     echo "Você deve digitar seu email e senha !!!";
     exit;
 endif;
@@ -27,7 +32,7 @@ $conexao = conexao::getInstance();
 $sql = 'SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, telefone, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':email', $email);
-$stm->bindValue(':senha', $senha);
+$stm->bindValue(':senha', $cripto_senha_login);
 $stm->execute();
 $user = $stm->fetch(PDO::FETCH_OBJ);
 
@@ -38,7 +43,7 @@ if (empty($user)):
     header("Location: ../index.php?erro=true&email=$email");
     exit;
 else:
-    if(!strcmp($senha, $user->senha)): // Agora verifica a senha
+    if(!strcmp($cripto_senha_login, $user->senha)): // Agora verifica a senha
 
         session_start(); // Inicia a session
         //Define os valores atribuidos na sessao do usuario
@@ -48,6 +53,7 @@ else:
         $_SESSION['usuarioNivelAcesso'] = $user->nivel_acesso_id;
         $_SESSION['usuarioStatus'] = $user->status;
         $_SESSION['usuarioCpf'] = $user->cpf;
+        $_SESSION['usuarioEmail'] = $user->email;
         $_SESSION['usuarioSenha'] = $user->senha;
         $_SESSION['usuarioFoto'] = $user->foto;
         $_SESSION['hashenter'] = sha1(md5($user->login.date('dmYHis')));

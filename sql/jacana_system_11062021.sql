@@ -254,9 +254,9 @@ CREATE TABLE `pag_system` (
 --
 
 INSERT INTO `pag_system` (`id`, `name_pag`, `name_form`, `caminho`, `tabela`, `unidade`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
-(1, 'cadastro_usuarios', 'CADASTRAR USUARIOS', 'sistema/usuarios/cad-user.php', 'usuarios', 'JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
-(2, 'edicao_usuarios', 'EDITAR USUARIOS', 'sistema/usuarios/edit-user.php', 'usuarios', 'JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
-(3, 'lista_usuarios', 'USUARIOS', 'sistema/usuarios/list-user.php', 'usuarios', 'JAÇANÃ', 'admin', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
+(1, 'cadastro_usuarios', 'CADASTRAR USUARIOS', 'sistema/usuarios/cad-user.php', 'usuarios', 'JAÇANÃ', 'user', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
+(2, 'edicao_usuarios', 'EDITAR USUARIOS', 'sistema/usuarios/edit-user.php', 'usuarios', 'JAÇANÃ', 'user', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
+(3, 'lista_usuarios', 'USUARIOS', 'sistema/usuarios/list-user.php', 'usuarios', 'JAÇANÃ', 'user', '2021-06-11 10:15:37', 'D788796', '2021-03-08 08:13:39'),
 (4, 'acao_usuarios', 'EDIÇÃO DE USUÁRIOS', 'sistema/usuarios/action-user.php', 'usuarios', 'JAÇANÃ', 'D788796', '2021-06-11 10:15:37', NULL, NULL);
 
 -- --------------------------------------------------------
