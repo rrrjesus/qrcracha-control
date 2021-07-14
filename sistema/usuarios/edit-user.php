@@ -61,7 +61,7 @@ endif;
                 else: echo '';
                     endif; ?>>
 
-        <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
+            <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
 
             <div class="row mb-1">
                 <div class="col-md-1 mb-1">
@@ -152,8 +152,8 @@ endif;
                     <label class="col-form-label col-form-label-sm" for="inputStatus"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Status</strong></label>
                     <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ATIVO/INATIVO"
                         name="status" id="status">
-                        <option class="bg-danger" value="0"<?php if ($user->status == 0) {echo 'selected';}?>>INATIVO</option>
-                        <option class="bg-success" value="1"<?php if ($user->status == 1) {echo 'selected';}?>>ATIVO</option>
+                        <option value="0"<?php if ($user->status == 0) {echo 'selected';}?>>INATIVO</option>
+                        <option value="1"<?php if ($user->status == 1) {echo 'selected';}?>>ATIVO</option>
                     </select>
                 </div>
 
@@ -161,7 +161,7 @@ endif;
                     <label class="col-form-label col-form-label-sm" for="inputNivelAcesso"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Nível Acesso</strong></label>
                     <select class="form-control form-control-sm" data-toggle="tooltip" data-placement="top" title="Ex: USUÁRIO"
                             name="nivel_acesso_id" id="nivel_acesso_id">
-                        <option value="0"<?php if ($user->nivel_acesso_id == 0) {echo 'selected';}?>>INATIVO</option>
+                        <option value="0"<?php if ($user->nivel_acesso_id == 0) {echo 'selected';}?>>VISITANTE</option>
                         <option value="1"<?php if ($user->nivel_acesso_id == 1) {echo 'selected';}?>>ADMINISTRADOR</option>
                         <option value="2"<?php if ($user->nivel_acesso_id == 2) {echo 'selected';}?>>AVANÇADO</option>
                         <option value="3"<?php if ($user->nivel_acesso_id == 3) {echo 'selected';}?>>USUÁRIO</option>

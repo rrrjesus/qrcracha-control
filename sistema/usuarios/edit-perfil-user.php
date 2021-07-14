@@ -132,8 +132,12 @@ endif;
                        class="form-control form-control-sm"
                        name="email" value="<?=$user->email?>" placeholder="exemplo@exemplo.com.br">
             </div>
+
+            <input type="hidden" name="setor" value="<?=$user->setor?>">
+            <input type="hidden" name="status" value="<?=$user->status?>">
+            <input type="hidden" name="nivel_acesso_id" value="<?=$user->nivel_acesso_id?>">
         </div>
-</>
+
 <div class="row text-center mt-3">
     <div class="col-md-12">
         <input type="hidden" name="acao" value="editar">

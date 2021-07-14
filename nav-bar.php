@@ -86,9 +86,9 @@
             </li> -->
 
             <li class="nav-item me-2 mb-1">
-                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists('sistema/imagens/'.$usuariocpf.'/fotologin/'.$usuariofoto))
-                    {echo 'sistema/imagens/'.$usuariocpf.'/fotologin/'.$usuariofoto;}
-                    else{ echo 'imagens/padrao.jpg';}?>">
+                    <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists($usuariofoto))
+                    {echo $usuariofoto;}
+                    else{ echo 'sistema/imagens/padrao.jpg';}?>">
             </li>
 
             <li class="nav-item dropdown mb-1">

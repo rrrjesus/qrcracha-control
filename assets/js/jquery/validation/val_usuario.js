@@ -178,7 +178,8 @@ $(function() {
                     maxDateE: true
                 },
                 cpf: {
-                    required: true
+                    required: true,
+                    remote: "remote/user/val-cpf-edit.php"
                 },
                 email: {
                     required: true
@@ -206,7 +207,8 @@ $(function() {
                     maxDateE: "Digite a data até hoje"
                 },
                 cpf: {
-                    required: "Digite o CPF válido"
+                    required: "Digite o CPF válido",
+                    remote: "Esse cpf já esta cadastrado em outro usuário !!!"
                 },
                 email: {
                     required: "Digite um email !!!"

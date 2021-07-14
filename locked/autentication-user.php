@@ -59,19 +59,25 @@ if($stm->rowCount() < 1): ?>
 
     <div class="container-fluid">
 
-        <div class="row mb-1">
-            <div class="col-12 mb-1 text-center">
+        <div class="row align-items-center mb-1">
+            <div class="col-sm-6 col-md-4 text-center">
+                <a class="btn btn-secondary" href="<?=PAGSYSTEM.'?pag=print_cracha&id='.$id.'&session='.$hashprimary?>" role="button"><i class="fa fa-print me-2"></i>IMPRIMIR</a>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-1">
+            <div class="col-sm-6 col-md-4 text-center">
                 <h1 class="display-1 text-dark fw-bold">CCB</h1>
             </div>
         </div>
 
-        <div class="row mb-2 text-center">
-            <div class="col-3 mb-1">
-                <img height="105" width="105" src="<?php if (file_exists('sistema/imagens/'.$user->id.'/fotologin/'.$user->foto))
-                {echo 'sistema/imagens/'.$user->id.'/fotologin/'.$user->foto;}
+        <div class="row mb-2 align-items-center text-center">
+            <div class="col-sm-3 col-md-1 mb-1">
+                <img height="105" width="105" src="<?php if (file_exists($user->foto))
+                {echo $user->foto;}
                 else{ echo 'sistema/imagens/padrao.jpg';}?>" class="img">
             </div>
-            <div class="col-9">
+            <div class="col-sm-9 col-md-3 mb-1">
                 <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2 ps-5">RGE JAÇANÃ/SUPORTE TI</p>
                 <h1 class="display-6 text-dark ms-3 mt-0 mb-0"><?=$user->nome?></h1>
                 <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">INFORMÁTICA</p>
@@ -80,46 +86,46 @@ if($stm->rowCount() < 1): ?>
 
         </div>
 
-        <div class="row mb-1 mt-1">
-            <div class="col-12 mb-0 text-center">
+        <div class="row align-items-center mb-1 mt-1">
+            <div class="col-sm-6 col-md-4 text-center">
                 <p class="text-dark fw-bold" style="font-size: 0.60rem">"Atividade de caráter voluntário não gerando vínculo de qualquer espécie"</p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 mb-0 text-center">
+        <div class="row align-items-center">
+            <div class="col-sm-6 col-md-4 text-center">
                 <p class="h6 text-dark fw-bold ms-4">Congregação Cristã no Brasil</p>
             </div>
         </div>
-        <div class="row mb-0 mt-0 text-center">
-            <div class="col-12 text-center">
+        <div class="row align-items-center mb-0 mt-0 text-center">
+            <div class="col-sm-6 col-md-4 text-center">
                 <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido de 7 de Setembro de 2021 a 14 de Setembro de 2021"</p>
             </div>
         </div>
-        <div class="row" style="font-size: 0.80rem">
+        <div class="row align-items-center" style="font-size: 0.80rem">
             <div class="col-12 text-start fw-bold">
                 <p class="text-dark mt-0 mb-0"><?=$user->nome.' '.$user->sobrenome?></p>
+            </div>
+        </div>
+
+        <div class="row align-items-center" style="font-size: 0.80rem">
+            <div class="col-12 text-start fw-bold">
                 <p class="text-dark mt-0 mb-0">BR-21-0868 - Jaçanã - SÃO PAULO </p>
             </div>
         </div>
-        <div class="row" style="font-size: 0.80rem">
-            <div class="col-3 text-start fw-bold">
-                <p class="text-dark mt-0 mb-0">Adm.: SETOR JAÇANÃ</p>
-            </div>
-            <div class="col-2 text-start fw-bold">
-                <p class="text-dark mt-0 mb-0">0297713</p>
+
+        <div class="row align-items-center" style="font-size: 0.80rem">
+            <div class="col-12 text-start fw-bold">
+                <p class="text-dark mt-0 mb-0">Adm.: SETOR JAÇANÃ&nbsp;&nbsp;&nbsp;&nbsp;0297713</p>
             </div>
         </div>
-        <div class="row" style="font-size: 0.80rem">
-            <div class="col-3 text-start fw-bold">
-                <p class="text-dark mt-0 mb-0">RGA.: SÃO PAULO </p>
-            </div>
-            <div class="col-2 text-start fw-bold">
-                <p class="text-dark mt-0 mb-0">A0011406533</p>
+        <div class="row align-items-center" style="font-size: 0.80rem">
+            <div class="col-12 text-start fw-bold">
+                <p class="text-dark mt-0 mb-0">RGE.: SÃO PAULO&nbsp;&nbsp;&nbsp;&nbsp;A0011406533</p>
             </div>
         </div>
-        <div class="row mt-2">
-            <div class="col-12 text-center fw-bold">
+        <div class="row align-items-center mt-2">
+            <div class="col-sm-6 col-md-4 text-center fw-bold">
                 <?php
                 $qr = new QRCode();
 

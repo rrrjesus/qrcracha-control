@@ -6,8 +6,13 @@ if(isset($_SESSION['usuarioId'])){$id_user = $usuarioid;}
 }
 
 $get_session = $_GET['session'] ?? ''; // Recebendo a hash da session via GET mesmo
+$get_id = $_GET['id'] ?? ''; // Recebendo a hash da session via GET mesmo
 
 if($get_session !== $hashprimary):
+    header("Location: $pag_system");
+endif;
+
+if($get_id !== $usuarioid):
     header("Location: $pag_system");
 endif;
 
@@ -29,11 +34,11 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
     <div class="col-sm-4">
         <div class="card shadow-lg mb-3">
             <div class="card-body text-center mb-3">
-                <a href="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
-                {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
+                <a href="<?php if (file_exists($usuariofoto))
+                {echo $usuariofoto;}
                 else{ echo 'sistema/imagens/foto_exists.png';}?>">
-                <img class="img-thumbnail rounded-circle mb-3" height="100" width="100" src="<?php if (file_exists('sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto))
-                {echo 'sistema/imagens/'.$user->cpf.'/fotologin/'.$user->foto;}
+                <img class="img-thumbnail rounded-circle mb-3" height="100" width="100" src="<?php if (file_exists($user->foto))
+                {echo $user->foto;}
                 else{ echo 'sistema/imagens/padrao.jpg';}?>" alt="Card image cap">
                 </a>
                 <h5 class="card-title mb-3"><?=$user->nome.' '.$user->sobrenome?></h5>

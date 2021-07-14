@@ -9,12 +9,9 @@ $email = isset($_POST['email']) ? addslashes(trim($_POST['email'])) : FALSE;
 // Recupera a senha, a criptografando em MD5
 $senha = isset($_POST['senha']) ? $_POST['senha'] : FALSE;
 
-$hashipcad = hash('sha3-256', 'jesusobompastor'.$email);
-$cripto_senha_login = hash('sha3-256', $hashipcad.$senha);
-
-$hashprimary = hash('sha3-256', $hashsession.$haship);
-
-
+//criptografa a senha com sha3-256 + sal
+$hashcad = hash('sha3-256', 'jesusobompastor'.$email);
+$cripto_senha_login = hash('sha3-256', $hashcad.$senha);
 
 // Check connection
 if (mysqli_connect_errno()) :
@@ -29,7 +26,7 @@ endif;
 
 // Captura os dados do cliente solicitado
 $conexao = conexao::getInstance();
-$sql = 'SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, telefone, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
+$sql = 'SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':email', $email);
 $stm->bindValue(':senha', $cripto_senha_login);

@@ -39,18 +39,16 @@ else :
 endif;
 ?>
 
+<script type="text/javascript">
+    window.print();
+</script>
+
     <fieldset <?php if ($usuarioid == 1) :  echo 'disabled'; endif; ?>>
 
         <div class="container-fluid">
 
-            <div class="row align-items-center mb-1">
-                <div class="col-sm-6 col-md-6 text-center">
-                    <a class="btn btn-secondary" href="<?=PAGSYSTEM.'?pag=print_cracha&id='.$id.'&session='.$hashprimary?>" role="button"><i class="fa fa-print me-2"></i>IMPRIMIR</a>
-                </div>
-            </div>
-
             <div class="row mb-1">
-                <div class="col-6 mb-1 text-center">
+                <div class="col-7 mb-1 text-center">
                     <h1 class="display-1 text-dark fw-bold">CCB</h1>
                 </div>
             </div>
@@ -108,7 +106,7 @@ endif;
                     <p class="text-dark mt-0 mb-0">A0011406533</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-7 text-center fw-bold">
                     <?php
                     $qr = new QRCode();

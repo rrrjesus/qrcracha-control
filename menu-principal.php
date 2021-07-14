@@ -14,6 +14,7 @@ include_once 'classes/Modal.php';
 $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
 $_SESSION['url'] = $url;
 
+$usuarioid = isset($_SESSION['usuarioId']) ? $_SESSION['usuarioId'] : '';
 $usuarionome = isset($_SESSION['usuarioNome']) ? $_SESSION['usuarioNome'] : 'VISITANTE';
 $usuariosobrenome = isset($_SESSION['usuarioSobreNome']) ? $_SESSION['usuarioSobreNome'] : 'JAÇANÃ CONTROLE';
 $usuariocpf = isset($_SESSION['usuarioCpf']) ? $_SESSION['usuarioCpf'] : '12345678910';
