@@ -103,11 +103,11 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 if(lixos === '0') {
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja apagar o usuário id: <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[0] + '</span> ?</div>'
+                        '<div class="modal-title text-center">Deseja apagar o usuário id: <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[0] + '</span> - ' + data[3] + ' ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[2] + '&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                 }else{
                     $('.textdel').html(

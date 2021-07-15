@@ -29,6 +29,12 @@
     $nivel_acesso_id  = (isset($_POST['nivel_acesso_id'])) ? $_POST['nivel_acesso_id'] : '';
     $edit             = (isset($_POST['edit'])) ? $_POST['edit'] : '';
 
+    // $GET_ para exclusão de formularios
+    $action =        $_GET['action'] ?? '';
+    $idaction =      $_GET['idaction'] ?? '';
+    $useraction =  $_GET['useraction'] ?? '';
+    $get_year = isset($_GET['year']) ? $_GET['year'] : $ano_atual;
+
     //criptografa a senha com sha3-256 + sal
     $hashcad = hash('sha3-256', 'jesusobompastor'.$email);
     $cripto_senha = hash('sha3-256', $hashcad.$senha);
@@ -252,34 +258,81 @@
         endif;
     endif;
 
-
     // Verifica se foi solicitada a exclusão dos dados
-    if ($acao == 'excluir'):
+    if ($action === 'lixeira'):
 
-        // Captura o nome da foto para excluir da pasta
-        $sql = "SELECT foto FROM usuarios WHERE id = :id AND foto <> 'padrao.jpg'";
-        $stm = $this->conexao->prepare($sql);
-        $stm->bindValue(':id', $id);
-        $stm->execute();
-        $user = $stm->fetch(PDO::FETCH_OBJ);
-
-        if (!empty($user) && file_exists('imagens/'.$user->id.'/fotologin/'.$user->foto)):
-            unlink('imagens/'.$user->id.'/fotologin/'.$user->foto);
+        // Valida se existe um id e se ele é numérico
+        if (!empty($idaction) && is_numeric($idaction)):
+            if ($usuarioniveldeacesso <> 1):
+                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                        <strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE EXCLUIR CRACHÁ ID : '.$idaction.' - '.$useraction.' !!!</strong></div>';
+                header("Location: $pag_system?pag=lista_usuarios&lixeira=1&year=$get_year&session=$hashprimary");
+            else :
+                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                        <strong>ERRO AO EXCLUIR: ID : '.$idaction.' - NOME: '.$useraction.' - NÃO ENCONTRADO !!!</strong></div>';
+                header("Location: $pag_system?pag=lista_usuarios&lixeira=1&year=$get_year&session=$hashprimary");
+            endif;
         endif;
 
         // Exclui o registro do banco de dados
-        $sql = 'DELETE FROM usuarios WHERE id = :id';
-        $stm = $this->conexao->prepare($sql);
-        $stm->bindValue(':id', $id);
+        $sql = "UPDATE usuarios SET lixeira=1,usuarioalt=:usuarioalt,alterado=NOW() WHERE id = :id";
+        $stm = $conexao->prepare($sql);
+        $stm->bindValue(':id', $idaction);
+        $stm->bindValue(':usuarioalt', $usuariocpf);
         $retorno = $stm->execute();
 
-        if ($retorno):
-            $_SESSION['msgdel'] = '<div class="alert alert-success" role="alert">
-                <strong>USUÁRIO: </strong>'.$nome.' <strong> - EXCLUIDO COM SUCESSO !!!</strong></div>';
-            header("Location: index.php");
-        else:
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
-                <strong>ERRO AO EXCLUIR USUÁRIO '.$nome.' !!!</strong></div>';
+        if($retorno) :
+            $_SESSION['msgsuccess'] = '<div class="alert alert-secondary text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
+                    <strong>SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' - EXCLUIDO COM SUCESSO !!!</strong></div>';
+            $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
+        else :
+            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
+                <strong>ERRO AO EXCLUIR SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' !!!</strong></div>';
+            $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
         endif;
     endif;
-    ?>
+
+    // Verifica se foi solicitada a exclusão dos dados
+    if ($action === 'reativacao'):
+
+        // Valida se existe um id e se ele é numérico
+        if (!empty($idaction) && is_numeric($idaction)):
+            if ($year === $ano && $usuarioniveldeacesso <> 1):
+                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                        <strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE REATIVAR SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' !!!</strong></div>';
+                $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
+            elseif ($year < $ano && $usuarioniveldeacesso <> 1):
+                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                        <strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE REATIVAR SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' !!!</strong></div>';
+                $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
+            elseif($year === $ano) :
+                $table = 'sv2';
+            elseif($year < $ano):
+                $table = "sv2_$year";
+            else :
+                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                        <strong>ERRO AO REATIVAR: SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' - NÃO ENCONTRADO !!!</strong></div>';
+                $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
+            endif;
+        endif;
+
+        // Exclui o registro do banco de dados
+        $sql = "UPDATE $table SET lixeira=0,usuarioalt=:usuarioalt,alterado=NOW() WHERE id = :id";
+        $stm = $conexaotable->prepare($sql);
+        $stm->bindValue(':id', $idaction);
+        $stm->bindValue(':usuarioalt', $usuariocpf);
+        $retorno = $stm->execute();
+
+        if($retorno) :
+            $_SESSION['msgsuccess'] = '<div class="alert alert-warning text-center text-uppercase" role="alert"><i class="fa fa-arrow-circle-o-up me-1"></i>
+                    <strong>SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' - REATIVADO COM SUCESSO !!!</strong></div>';
+            $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
+        else :
+            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-arrow-circle-o-up me-1"></i>
+                <strong>ERRO AO REATIVAR SV2 : '.$idaction.' - '.$agravoaction.' DE '.$year.' !!!</strong></div>';
+            $sv2s->HeaderListCracha($pag_system, $get_lixeira, $hashprimary);
+        endif;
+    endif;
+
+
+?>
