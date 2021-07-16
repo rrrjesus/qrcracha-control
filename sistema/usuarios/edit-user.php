@@ -18,6 +18,7 @@ $stm->bindValue(':id', $id);
 $stm->execute();
 $user = $stm->fetch(PDO::FETCH_OBJ);
 
+
     if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
         $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                     <strong>PARA EDITAR O '.$id.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
@@ -138,13 +139,22 @@ endif;
             <div class="row">
                 <div class="col-md-4 mb-1">
                     <label class="col-form-label col-form-label-sm" for="inputSetor"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Setor</strong></label>
-                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: AMBIENTAL"
+                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ADMINISTRATIVO"
                             name="setor" id="setor">
-                        <option value="0"<?php if ($user->setor == 0) {echo 'selected';}?>>ADMINISTRATIVO</option>
-                        <option value="1"<?php if ($user->setor == 1) {echo 'selected';}?>>MANUTENÇÃO</option>
-                        <option value="2"<?php if ($user->setor == 2) {echo 'selected';}?>>INFORMÁTICA</option>
-                        <option value="3"<?php if ($user->setor == 3) {echo 'selected';}?>>PORTARIA</option>
-                        <option value="4"<?php if ($user->setor == 4) {echo 'selected';}?>>VISITANTE</option>
+                        <?php
+                        $sql = "SELECT id, nome_setor FROM setor";
+                        $stm = $conexao->prepare($sql);
+                        $stm->execute();
+                        $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+
+                        //Encerra a conexão
+                        $stm = null;
+                            foreach ($setor as $id_setor):
+                        ?>
+                        <option value="<?=$id_setor->id?>"><?=strtoupper($id_setor->nome_setor)?></option>
+                        <?php
+                            endforeach;
+                        ?>
                     </select>
                 </div>
 

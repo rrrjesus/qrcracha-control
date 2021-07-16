@@ -42,7 +42,19 @@ $columns = array(
             return date('d/m/Y', strtotime($d));
         }
     ),
-    array('db' => 'cpf', 'dt' => 6),
+    array('db' => 'cpf', 'dt' => 6,
+        'formatter' => function($d) {
+        if(strlen($d) < 12):
+            $cpf_1 = substr($d, 0, 3);  // retorna "123"
+            $cpf_2 = substr($d, 3, 3);  // retorna "123"
+            $cpf_3 = substr($d, 6, 3);  // retorna "123"
+            $cpf_4 = substr($d, 9, 2);  // retorna "123"
+        return $cpf_1.'.'.$cpf_2.'.'.$cpf_3.'-'.$cpf_4;
+        else:
+            return '';
+        endif;
+}
+    ),
     array('db' => 'email', 'dt' => 7),
     array(
         'db' => 'nivel_acesso_id',
@@ -62,7 +74,18 @@ $columns = array(
                 return '';
         }
     ),
-    array('db' => 'celular', 'dt' => 9),
+    array('db' => 'celular', 'dt' => 9,
+        'formatter' => function($d) {
+            if (strlen($d) < 12):
+                $cll_1 = substr($d, 0, 2);  // retorna "123"
+                $cll_2 = substr($d, 2,5 );  // retorna "123"
+                $cll_3 = substr($d, 7,9 );  // retorna "123"
+                return '('.$cll_1.')'.$cll_2.'-'.$cll_3;
+            else:
+                return '';
+            endif;
+        }
+        ),
     array('db' => 'status', 'dt' => 10,
             'formatter' => function($d) {
                 if ($d == 0)
@@ -79,7 +102,24 @@ $columns = array(
                 return '<button type="button" class="btn disabled btn-outline-primary btn-sm fw-bold"><i class="fa fa-mars me-1"></i>MASC</button>';
         }
     ),
-    array('db' => 'setor', 'dt' => 12),
+    array('db' => 'setor', 'dt' => 12,
+        'formatter' => function($d) {
+            $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
+            $sql = "SELECT id, nome_setor FROM setor";
+            $stm = $conexao->prepare($sql);
+            $stm->execute();
+            $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+            $stm = null; //Encerra a conexão
+
+            foreach ($setor as $setor_for):
+                if($d == $setor_for->id):
+                    return strtoupper($setor_for->nome_setor);
+                else:
+                    return 'OUTROS';
+                endif;
+                endforeach;
+        }
+        ),
     array('db' => 'lixeira', 'dt' => 13)
 );
 

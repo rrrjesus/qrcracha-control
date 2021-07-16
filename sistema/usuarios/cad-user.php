@@ -107,11 +107,21 @@ endif;
             <label class="col-form-label col-form-label-sm" for="inputSetor"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Setor</strong></label>
             <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: INFORMÁTICA"
                     name="setor" id="setor">
-                <option value="0">ADMINISTRATIVO</option>
-                <option value="1">MANUTENCAO</option>
-                <option value="2">INFORMATICA</option>
-                <option value="3">PORTARIA</option>
-                <option value="4">VISITANTE</option>
+                <?php
+                    $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
+                    $sql = "SELECT id, nome_setor FROM setor";
+                    $stm = $conexao->prepare($sql);
+                    $stm->execute();
+                    $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+
+                    $stm = null; //Encerra a conexão
+
+                    foreach ($setor as $setor_for):
+                ?>
+                <option value="<?=$setor_for->id?>>"><?=strtoupper($setor_for->nome_setor)?></option>
+                <?php
+                    endforeach;
+                ?>
             </select>
         </div>
 

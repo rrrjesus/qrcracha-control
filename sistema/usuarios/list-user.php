@@ -53,7 +53,8 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 "lengthMenu": [[3, 6, 10, 25, 50, -1], [3, 6, 10, 25, 50, "Todos"]],
                 "aaSorting": [0, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
                 "aoColumnDefs": [
-
+                    {"bVisible": false,"aTargets": [8]},
+                    {"bVisible": false,"aTargets": [11]},
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
@@ -98,7 +99,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
             });
             $('#lista-usuario-cracha tbody').on('click', 'button', function() {
                 var data = table.row($(this).parents('tr')).data(); // getting target row data
-                var lixos = data[12];
+                var lixos = data[13];
 
                 if(lixos === '0') {
                     $('.textdel').html(
@@ -107,7 +108,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&session=<?=$hashprimary?>&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                 }else{
                     $('.textdel').html(
@@ -116,7 +117,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[5] + '&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&session=<?=$hashprimary?>&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                     $('#myModalLixo').modal('show'); // calling the bootstrap modal
                 }
