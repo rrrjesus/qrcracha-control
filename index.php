@@ -29,6 +29,9 @@ session_unset();
     <?php require(__DIR__ . '/head.php'); ?>
 
     <style type="text/css">
+        body{
+            padding-top: 0rem;
+        }
         #index{
             width: auto;
             height: auto;

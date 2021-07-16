@@ -2,16 +2,20 @@
 // Recebe os dados enviados pela submissão
 $emailget = (isset($_GET['email'])) ? $_GET['email'] : '';
 ?>
+<div class="row">
+    <div class="col-md-6">
+        <img src="imagens/index/img_login.jpeg" class="img-fluid">
+    </div>
 
+<div class="col-md-6">
 <form class="needs-validation p-2" novalidate id="head-login" method="POST" action="locked/valida-login.php">
 
         <div class="text-center pt-3">
-            <img class="mb-3 pt-2" src="imagens/logo/jacana_controle_qrcode.png">
             <p class="h6 mb-3 fw-bold text-black"><i class="far fa-lock-alt me-2"></i>E-mail</p>
         </div>
 
     <div class="row mb-2 row justify-content-center">
-        <div class="col-10 col-md-4">
+        <div class="col-10 col-md-6">
             <input type="email" class="form-control" id="email" name="email" value="<?php echo $emailget ?>"
                 <?php
                     if (isset($_GET['erro']) && $_GET['erro'] == "true"): echo '';
@@ -27,7 +31,7 @@ $emailget = (isset($_GET['email'])) ? $_GET['email'] : '';
     </div>
 
     <div class="row mb-3 row mb-4 justify-content-center">
-        <div class="col-10 col-md-4">
+        <div class="col-10 col-md-6">
             <?php
                 if (isset($_GET['erro']) && $_GET['erro'] == "true"):
                     echo '<div class="text-center"><label class="col-form-label col-form-label-sm text-danger"><strong> Senha Inválida !!!</strong></label></div>';
@@ -42,9 +46,10 @@ $emailget = (isset($_GET['email'])) ? $_GET['email'] : '';
     </div>
 
     <div class="row pt-3 justify-content-center text-center">
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-6">
             <button type="submit" class="btn btn-success text-center mb-3" data-toggle="tooltip" data-placement="right" title="Clique para validar seu login"><i class="fa fa-unlock px-2"></i> Acessar Sistema</button>
             <a class="btn btn-danger text-center mb-3" href="<?=$pag_system?>?pag=esqueci-senha" role="button" data-toggle="tooltip" data-placement="right" title="Caso tenha esquecido sua senha clique no botão"><i class="fa fa-question-circle px-2"></i> Esqueceu Senha?</a>
         </div>
     </div>
 </form>
+</div>
