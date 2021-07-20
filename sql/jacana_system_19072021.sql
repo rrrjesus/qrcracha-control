@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Jul-2021 às 07:38
+-- Tempo de geração: 20-Jul-2021 às 02:15
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 8.0.7
 
@@ -215,7 +215,29 @@ INSERT INTO `pag_system` (`id`, `name_pag`, `name_form`, `caminho`, `tabela`, `u
 (6, 'edicao_perfil', 'EDIÇÃO DE PERFIL', 'sistema/usuarios/edit-perfil.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', '22068876817', '2021-07-10 01:43:40', NULL, '2021-07-10 06:41:30'),
 (7, 'alteracao_senha', 'ALTERAR SENHA', 'sistema/usuarios/alt-senha.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', '22068876817', '2021-07-10 02:15:27', NULL, '2021-07-10 07:14:17'),
 (8, 'edicao_perfil_usuario', 'EDIÇÃO PERFIL DE USUÁRIO', 'sistema/usuarios/edit-perfil-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', '22068876817', '2021-07-10 02:29:59', NULL, '2021-07-10 07:28:30'),
-(9, 'autenticacao_cracha', 'AUTENTICAÇÃO CRACHA', 'locked/autentication-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', '22068876817', '2021-07-11 23:12:34', NULL, '2021-07-12 04:11:00');
+(9, 'autenticacao_cracha', 'AUTENTICAÇÃO CRACHA', 'locked/autentication-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', '22068876817', '2021-07-11 23:12:34', NULL, '2021-07-12 04:11:00'),
+(10, 'print_cracha', 'IMPRESSAO CRACHA', 'sistema/usuarios/print-ident-user.php', 'usuarios', 'SÃO PAULO - SETOR JAÇANÃ', '22068876817', '2021-07-14 01:22:13', NULL, '2021-07-14 06:20:47');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `setor`
+--
+
+CREATE TABLE `setor` (
+  `id` int(11) NOT NULL,
+  `nome_setor` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `setor`
+--
+
+INSERT INTO `setor` (`id`, `nome_setor`) VALUES
+(1, 'administrativo'),
+(2, 'manutencao'),
+(3, 'informatica'),
+(4, 'portaria');
 
 -- --------------------------------------------------------
 
@@ -233,7 +255,6 @@ CREATE TABLE `usuarios` (
   `email` varchar(57) DEFAULT NULL,
   `senha` varchar(200) DEFAULT NULL,
   `nivel_acesso_id` int(1) DEFAULT NULL,
-  `telefone` varchar(15) DEFAULT '(11)22413700',
   `celular` varchar(15) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `sexo` int(1) NOT NULL DEFAULT 2,
@@ -259,10 +280,9 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `foto`, `nome`, `sobrenome`, `datanascimento`, `cpf`, `email`, `senha`, `nivel_acesso_id`, `telefone`, `celular`, `status`, `sexo`, `setor`, `hash_cracha`, `usuariocad`, `criado`, `usuarioalt`, `alterado`, `loginenvioemailsenha`, `chavesetsenha`, `datapedidochavesetsenha`, `datafeitonovasenha`, `dataenvioemailsenha`, `emailenviadosenha`, `resetsenha`, `dataresetsenha`, `date_alter_senha`, `lixeira`) VALUES
-(1, 'sistema/imagens/12345678910/fotologin/11072021_padrao.jpg', 'VISITANTE', 'DO SISTEMA', '1981-02-07', '12345678910', 'visitante.visitante@gmail.com', 'dbd2e38bf683deabc9bfc74ba667db408d269f6f', 0, '1122413700', '11991091365', 0, 2, 0, '', 'D788796', '0000-00-00 00:00:00', '22068876817', '2021-07-11 20:51:31', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'NAO', 'NAO', NULL, '2021-06-11 20:58:58', 0),
-(2, 'sistema/imagens/22068876817/fotologin/11072021_11062021_rodolfo.jpg', 'RODOLFO', 'ROMAIOLI RIBEIRO DE JESUS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'd7c1e9ddb8586f297280695a8c61662ed044156d67e212ec022f244118fecdc0', 1, '(11)22413700', '11991091365', 1, 1, 0, '', '54646546646', '2021-07-12 00:11:22', '22068876817', '2021-07-11 23:07:09', NULL, NULL, NULL, NULL, '2021-07-12 00:11:22', 'NAO', 'NAO', NULL, '2021-07-12 00:46:54', 0),
-(3, 'sistema/imagens/padrao.jpg', 'EZEQUIEL', 'GRIMA ROMAIOLI RIBEIRO DE JESUS', '2008-12-21', '18233564654', 'ezequiel.romaioli@gmail.com', 'cde7ee70d15c9cecbc95da5cf9b8f509a64384ed29938561c2a76e2c76b95240', 2, '(11)22413700', '11955545646', 0, 1, 0, '120e871758b552f450366b802c4c474052ba62d73eaac1a6e017c793da7767ad', '22068876817', '2021-07-12 02:10:22', NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-12 02:10:22', 'NAO', 'NAO', NULL, '2021-07-12 02:10:22', 0);
+INSERT INTO `usuarios` (`id`, `foto`, `nome`, `sobrenome`, `datanascimento`, `cpf`, `email`, `senha`, `nivel_acesso_id`, `celular`, `status`, `sexo`, `setor`, `hash_cracha`, `usuariocad`, `criado`, `usuarioalt`, `alterado`, `loginenvioemailsenha`, `chavesetsenha`, `datapedidochavesetsenha`, `datafeitonovasenha`, `dataenvioemailsenha`, `emailenviadosenha`, `resetsenha`, `dataresetsenha`, `date_alter_senha`, `lixeira`) VALUES
+(1, 'sistema/imagens/padrao.jpg', 'EZEQUIEL', 'GRIMA ROMAIOLI RIBEIRO DE JESUS', '2008-12-21', '18233564654', 'ezequiel.romaioli@gmail.com', 'cde7ee70d15c9cecbc95da5cf9b8f509a64384ed29938561c2a76e2c76b95240', 3, '11955545646', 0, 1, 1, '120e871758b552f450366b802c4c474052ba62d73eaac1a6e017c793da7767ad', '22068876817', '2021-07-12 02:10:22', '22068876817', '2021-07-19 09:57:40', NULL, NULL, NULL, NULL, '2021-07-12 02:10:22', 'NAO', 'NAO', NULL, '2021-07-12 02:10:22', 0),
+(2, 'sistema/imagens/22068876817/fotologin/13072021_gato_macho_neve.jpeg', 'RODOLFO', 'ROMAIOLI RIBEIRO DE JESUS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'd7c1e9ddb8586f297280695a8c61662ed044156d67e212ec022f244118fecdc0', 1, '11991091365', 1, 1, 0, '380423c936ba6cc37de255f8771a259f8917a6e712ab5985d95b58f7664a75b4', '18233564654', '2021-07-14 02:26:23', '22068876817', '2021-07-13 23:28:16', NULL, NULL, NULL, NULL, '2021-07-14 02:26:23', 'NAO', 'NAO', NULL, '2021-07-14 02:26:23', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -302,6 +322,12 @@ ALTER TABLE `menu_sub_sub`
 -- Índices para tabela `pag_system`
 --
 ALTER TABLE `pag_system`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `setor`
+--
+ALTER TABLE `setor`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -348,13 +374,19 @@ ALTER TABLE `menu_sub_sub`
 -- AUTO_INCREMENT de tabela `pag_system`
 --
 ALTER TABLE `pag_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `setor`
+--
+ALTER TABLE `setor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
