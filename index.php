@@ -31,16 +31,6 @@ session_unset();
     <style type="text/css">
         body{
             padding-top: 0rem;
-        }
-        #index{
-            width: auto;
-            height: auto;
-            /*background-image: url('imagens/ccb_jacana.jpg');*/
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-size: cover; /* Resize the background image to cover the entire container */
-        }
-        body{
             background-color: #c3c3c3;
         }
     </style>
@@ -48,9 +38,7 @@ session_unset();
 
 <body>
 
-<header></header>
-
-<main class="form-signin" id="index">
+<main class="form-signin">
 
     <!-- Login Celular -->
     <?php require(__DIR__ . '/login.php'); ?>

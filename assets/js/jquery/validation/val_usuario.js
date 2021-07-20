@@ -253,6 +253,7 @@ $(function() {
             rules: {
                 email: {
                     required: true,
+                    email: true,
                     remote: "remote/user/val-email-index.php"
                 },
                 senha: {
@@ -263,6 +264,7 @@ $(function() {
             messages: {
                 email: {
                     required: "Digite seu e-mail",
+                    email: "Por favor insira um endereço de e-mail válido",
                     remote: "E-mail não encontrado"
                 },
                 senha: {

@@ -5,6 +5,11 @@ $imagemjumbo = '/imagens/sistemsisdam.jpg';
 ?>
 
 <style>
+    #jumbo {
+        background-image: url("imagens/index/img_login_menu.jpg");
+        background-size: cover;
+        text-shadow: 0.1em 0.1em 0.1em #8e0615;
+    }
     .bd-placeholder-img {
         font-size: 1rem;
         text-anchor: middle;
@@ -66,10 +71,10 @@ $imagemjumbo = '/imagens/sistemsisdam.jpg';
     }
 </style>
 
-    <div class="p-4 p-md-5 mb-4 mt-5 text-white rounded bg-success">
+    <div class="p-4 p-md-5 mb-4 mt-5 text-white rounded bg-success" id="jumbo">
         <div class="col-md-12 px-0">
-            <h1 class="display-4 fst-italic justify-content-center">Bem Vindo !!!</h1>
-            <p class="lead my-3">Somos gratos a Deus por tudo, o sistema de controle tem por finalidade controlar o acesso interno dos
+            <h1 class="display-4 fst-italic justify-content-center fw-bold">Bem Vindo !!!</h1>
+            <p class="lead my-3 fw-bold">Somos gratos a Deus por tudo, o sistema de controle tem por finalidade controlar o acesso interno dos
                 colaboradores da <strong>RGE 2021</strong> na <strong>Congregração Cristã no Brasil - Administração Jaçanã</strong>.</p>
         </div>
     </div>

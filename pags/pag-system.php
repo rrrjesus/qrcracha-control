@@ -1,5 +1,6 @@
 <?php
 error_reporting(-1);
+include_once 'classes/User.php';
 
 // Recebe o id da pag do painel via GET
 $pag = isset($_GET['pag']) ? $_GET['pag'] : '';
@@ -32,6 +33,8 @@ if($pags):
 
         <div class="row mb-0">
             <div class="col-md-12 text-center">';
+
+                /*$user->ModalUser();*/
 
                 if ($usuarioid == 1) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong><i class="far fa-user-lock me-2"></i> APENAS VISUALIZAÇÃO DISPONÍVEL - FAÇA <i class="fa fa-hand-o-up"></i> LOGIN !!! </strong></div>';
                 elseif ($usuariostatus == 0) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong> PARA ACESSAR É NECESSARIO ATIVAR SEU USUÁRIO !!! </strong></div>';

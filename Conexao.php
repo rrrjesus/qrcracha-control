@@ -9,7 +9,7 @@
 
 /** Constantes de parâmetros para configuração da conexão */
 
-const HOST = '172.16.78.227';
+const HOST = '192.168.10.19';
 const DBNAME = 'jacana_system';
 const USER = 'jacana_system';
 const PASSWORD = 'ZisYeMsoTJkbEhth';
