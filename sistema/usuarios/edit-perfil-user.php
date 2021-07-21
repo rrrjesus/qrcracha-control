@@ -27,19 +27,19 @@ if (!empty($id_user) && is_numeric($id_user)): // Valida se existe um id e se el
     $user = $stm->fetch(PDO::FETCH_OBJ);
 
     if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>USUÁRIO DESATIVADO !!! PARA EDITAR O '.$id_user.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
         header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
     endif;
 
     if ($get_session <> $hashprimary) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
         header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
     endif;
 
     if ($stm->rowCount() < 1) : // If caso o usuário não seja encontrado !!!
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
         header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
     endif;
@@ -50,7 +50,7 @@ if (!empty($id_user) && is_numeric($id_user)): // Valida se existe um id e se el
     endif;
 
 else : // Caso não encontre o usuário !!!
-    $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id_user.' - NÃO ENCONTRADO !!!</strong></div>';
     header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
 endif;
@@ -141,7 +141,7 @@ endif;
 <div class="row text-center mt-3">
     <div class="col-md-12">
         <input type="hidden" name="acao" value="editar">
-        <input type="hidden" name="edit" value="edit_user">
+        <input type="hidden" name="edit" value="edit_perfil_user">
         <input type="hidden" name="id" value="<?=$user->id?>">
         <input type="hidden" name="foto_atual" value="<?=$user->foto?>">
         <?=$button->BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso);?>

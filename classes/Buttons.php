@@ -241,7 +241,7 @@ class Buttons extends Tables {
      */
     public function AlertLixeira ($get_lixeira, $nu_lixeira) {
         if ('VAZIA' === $nu_lixeira && $get_lixeira == 1) :
-            return '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-recycle"></i>
+            return '<div class="alert alert-danger pt-1 pb-1 text-center text-uppercase" role="alert"><i class="fa fa-recycle"></i>
                 <strong>A LIXEIRA ESTÁ VAZIA !!!</strong></div>';
         endif;
     }
@@ -251,7 +251,7 @@ class Buttons extends Tables {
      */
     public function AlertSemRegistros($nu_registro) {
         if($nu_registro == 0) :
-            return '<div class="alert alert-danger text-center text-uppercase mt-3" role="alert">
+            return '<div class="alert alert-danger text-center pt-1 pb-1 text-uppercase mt-3" role="alert">
                 <strong>NÃO EXISTEM DOCUMENTOS CADASTRADOS !!!</strong></div>';
         endif;
 

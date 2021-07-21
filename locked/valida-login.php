@@ -53,6 +53,7 @@ else:
         $_SESSION['usuarioEmail'] = $user->email;
         $_SESSION['usuarioSenha'] = $user->senha;
         $_SESSION['usuarioFoto'] = $user->foto;
+        $_SESSION['usuarioLixeira'] = $user->lixeira;
         $_SESSION['hashenter'] = sha1(md5($user->login.date('dmYHis')));
 
             // Script para encamninhar para a página anterior ou para principal

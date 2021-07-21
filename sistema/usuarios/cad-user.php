@@ -18,10 +18,11 @@ endif;
 <?=$button->AlertSession()?>
 
 <fieldset
-    <?php if ($usuarioid < 1) :  echo 'disabled';
+    <?php if ($usuarioniveldeacesso > 2) :  echo 'disabled';
         elseif ($usuariostatus == 0) : echo 'disabled';
-            else: echo '';
-                endif; ?>>
+            elseif ($usuariolixeira == 1) : echo 'disabled';
+                else: echo '';
+                    endif; ?>>
 
 <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='user' enctype='multipart/form-data'>
 
@@ -138,11 +139,9 @@ endif;
             <label class="col-form-label col-form-label-sm" for="inputNivelAcesso"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Nível Acesso</strong></label>
             <select class="form-control form-control-sm" data-toggle="tooltip" data-placement="top" title="Ex: USUÁRIO"
                     name="nivel_acesso_id" id="nivel_acesso_id">
-                <option value="0">VISITANTE</option>
                 <option value="1">ADMINISTRADOR</option>
                 <option value="2">AVANÇADO</option>
                 <option value="3">USUÁRIO</option>
-                <option value="4">VISITANTE</option>
             </select>
         </div>
 

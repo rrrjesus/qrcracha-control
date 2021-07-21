@@ -53,6 +53,9 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 "lengthMenu": [[3, 6, 10, 25, 50, -1], [3, 6, 10, 25, 50, "Todos"]],
                 "aaSorting": [0, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
                 "aoColumnDefs": [
+                    {"bVisible": false,"aTargets": [4]},
+                    {"bVisible": false,"aTargets": [5]},
+                    {"bVisible": false,"aTargets": [7]},
                     {"bVisible": false,"aTargets": [8]},
                     {"bVisible": false,"aTargets": [11]},
                     {

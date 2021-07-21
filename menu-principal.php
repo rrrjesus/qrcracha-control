@@ -22,6 +22,7 @@ $usuarioemail = isset($_SESSION['usuarioEmail']) ? $_SESSION['usuarioEmail'] : '
 $usuariostatus = isset($_SESSION['usuarioStatus']) ? $_SESSION['usuarioStatus'] : 0;
 $usuarionivelacesso = isset($_SESSION['usuarioNivelAcesso']) ? $_SESSION['usuarioNivelAcesso'] : 0;
 $usuariofoto = isset($_SESSION['usuarioFoto']) ? $_SESSION['usuarioFoto'] : 'imagens/padrao.jpg';
+$usuariolixeira = isset($_SESSION['usuarioLixeira']) ? $_SESSION['usuarioLixeira'] : 0;
 
 $hashsession = isset($_SESSION['hashenter']) ? $_SESSION['hashenter'] : '';
 

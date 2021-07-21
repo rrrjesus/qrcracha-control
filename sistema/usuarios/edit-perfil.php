@@ -30,10 +30,10 @@ $array_data     = explode('-', $user->datanascimento);
 $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
 ?>
 <?=$button->AlertSession()?>
-<div class="container-fluid row px-5 p-2">
+<div class="container-fluid row p-2 ms-0">
     <div class="col-sm-4">
         <div class="card shadow-lg mb-3">
-            <div class="card-body text-center mb-3">
+            <div class="card-body text-center mb-1">
                 <a href="<?php if (file_exists($usuariofoto))
                 {echo $usuariofoto;}
                 else{ echo 'sistema/imagens/foto_exists.png';}?>">
@@ -41,16 +41,16 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 {echo $user->foto;}
                 else{ echo 'sistema/imagens/padrao.jpg';}?>" alt="Card image cap">
                 </a>
-                <h5 class="card-title mb-3"><?=$user->nome.' '.$user->sobrenome?></h5>
-                <p <?php if($user->datanascimento == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-3"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
-                elseif($user->datanascimento == 0000-00-00) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-3"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
-                else: echo 'class="card-text mb-3"><strong><i class="fa fa-calendar-day fa-muted me-2"></i>DATA DE NASCIMENTO : '.$data_formatada.'</strong></p>'; endif;?>
-                <p <?php if($user->email == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-3"><strong><i class="fa fa-envelope-o fa-muted me-2"></i> EMAIL : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
-                else: echo 'class="card-text mb-3"><strong><i class="fa fa-envelope-o fa-muted me-2"></i>EMAIL : '.$user->email.'</strong></p>'; endif;?>
-                <p <?php if($user->cpf == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-3"><strong><i class="fa fa-files-o fa-muted me-2"></i> CPF : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
-                else: echo 'class="card-text mb-3"><strong><i class="fa fa-files-o fa-muted me-2"></i>CPF : '.$user->cpf.'</strong></p>'; endif;?>
-                <p <?php if($user->celular == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-3"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i> CELULAR : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
-                else: echo 'class="card-text mb-3"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i>CELULAR : '.$user->celular.'</strong></p>'; endif;?>
+                <h5 class="card-title fs-5 mb-1"><?=$user->nome.' '.$user->sobrenome?></h5>
+                <p <?php if($user->datanascimento == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                elseif($user->datanascimento == 0000-00-00) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                else: echo 'class="card-text mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i>DATA DE NASCIMENTO : '.$data_formatada.'</strong></p>'; endif;?>
+                <p <?php if($user->email == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-envelope-o fa-muted me-2"></i> EMAIL : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                else: echo 'class="card-text mb-1"><strong><i class="fa fa-envelope-o fa-muted me-2"></i>EMAIL : '.$user->email.'</strong></p>'; endif;?>
+                <p <?php if($user->cpf == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-files-o fa-muted me-2"></i> CPF : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                else: echo 'class="card-text mb-1"><strong><i class="fa fa-files-o fa-muted me-2"></i>CPF : '.$user->cpf.'</strong></p>'; endif;?>
+                <p <?php if($user->celular == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i> CELULAR : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                else: echo 'class="card-text mb-1"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i>CELULAR : '.$user->celular.'</strong></p>'; endif;?>
             </div>
         </div>
     </div>

@@ -20,19 +20,19 @@ $user = $stm->fetch(PDO::FETCH_OBJ);
 
 
     if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>PARA EDITAR O '.$id.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year&lixeira=1");
     endif;
 
     if ($get_session <> $hashprimary) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
     endif;
 
     if ($stm->rowCount() < 1) : // If caso o usuário não seja encontrado !!!
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
     endif;
@@ -43,7 +43,7 @@ $user = $stm->fetch(PDO::FETCH_OBJ);
     endif;
 
 else : // Caso não encontre o usuário !!!
-    $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id.' - NÃO ENCONTRADO !!!</strong></div>';
     header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
 endif;
@@ -171,7 +171,6 @@ endif;
                     <label class="col-form-label col-form-label-sm" for="inputNivelAcesso"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Nível Acesso</strong></label>
                     <select class="form-control form-control-sm" data-toggle="tooltip" data-placement="top" title="Ex: USUÁRIO"
                             name="nivel_acesso_id" id="nivel_acesso_id">
-                        <option value="0"<?php if ($user->nivel_acesso_id == 0) {echo 'selected';}?>>VISITANTE</option>
                         <option value="1"<?php if ($user->nivel_acesso_id == 1) {echo 'selected';}?>>ADMINISTRADOR</option>
                         <option value="2"<?php if ($user->nivel_acesso_id == 2) {echo 'selected';}?>>AVANÇADO</option>
                         <option value="3"<?php if ($user->nivel_acesso_id == 3) {echo 'selected';}?>>USUÁRIO</option>

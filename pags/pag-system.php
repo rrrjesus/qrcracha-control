@@ -36,9 +36,9 @@ if($pags):
 
                 /*$user->ModalUser();*/
 
-                if ($usuarioid == 1) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong><i class="far fa-user-lock me-2"></i> APENAS VISUALIZAÇÃO DISPONÍVEL - FAÇA <i class="fa fa-hand-o-up"></i> LOGIN !!! </strong></div>';
-                elseif ($usuariostatus == 0) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong> PARA ACESSAR É NECESSARIO ATIVAR SEU USUÁRIO !!! </strong></div>';
-                elseif ($usuarioniveldeacesso > 3) : echo '<div class="alert alert-danger text-center" id="usuariook" role="alert"><strong> SEU NÍVEL DE USUÁRIO NÃO PERMITE CADASTRAR !!! </strong></div>';
+                if ($usuarioid == 1) : echo '<div class="alert alert-danger pt-1 pb-1 text-center" id="usuariook" role="alert"><strong><i class="far fa-user-lock me-2"></i> APENAS VISUALIZAÇÃO DISPONÍVEL - FAÇA <i class="fa fa-hand-o-up"></i> LOGIN !!! </strong></div>';
+                elseif ($usuariostatus == 0) : echo '<div class="alert alert-danger pt-1 pb-1 text-center" id="usuariook" role="alert"><strong> PARA ACESSAR É NECESSARIO ATIVAR SEU USUÁRIO !!! </strong></div>';
+                elseif ($usuarioniveldeacesso > 3) : echo '<div class="alert alert-danger pt-1 pb-1 text-center" id="usuariook" role="alert"><strong> SEU NÍVEL DE USUÁRIO NÃO PERMITE CADASTRAR !!! </strong></div>';
                 else : '';
                 endif;
         echo '</div>

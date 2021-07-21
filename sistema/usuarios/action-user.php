@@ -4,7 +4,7 @@
     $get_session = $_GET['session'] ?? '';
 
     if($get_session !== $hashprimary):
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
         header("Location: $pag_system");
     endif;
@@ -72,7 +72,7 @@
 
             // Validamos se a extensão do arquivo é aceita
             if (array_search($extensao, $extensoes_aceitas) === false):
-                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Extensão de foto inválida! <br>
+                $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Extensão de foto inválida! <br>
                     Extenções de foto aceitas : .bmp , .png, .svg, .jpeg e .jpg</strong></div>';
                 echo "<script>javascript:history.go(-1)</script>";
                 exit;
@@ -96,7 +96,7 @@
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
                 if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
-                    $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
+                    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
                 endif;
@@ -126,11 +126,11 @@
         $retorno = $stm->execute();
 
         if ($retorno):
-            $_SESSION['msgsuccess'] = '<div class="alert alert-success text-center" role="alert">
-                <strong>USUÁRIO: </strong>'.$nome.' <strong> - CADASTRADO COM SUCESSO !!!</strong></div>';
+            $_SESSION['msgsuccess'] = '<div class="alert alert-success pb-1 pt-1 text-center" role="alert">
+                <strong>USUÁRIO: '.$nome.' - CADASTRADO COM SUCESSO !!!</strong></div>';
             header("Location: $pag_system?pag=cadastro_usuarios&year=$get_year&session=$hashprimary");
         else:
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert">
                 <strong>Erro ao cadastrar usuário '.$nome.' !!!</strong></div>';
             echo "<script>javascript:history.go(-1)</script>";
         endif;
@@ -154,7 +154,7 @@
 
             // Validamos se a extensão do arquivo é aceita
             if (array_search($extensao, $extensoes_aceitas) === false):
-                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Extensão de foto inválida! <br>
+                $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Extensão de foto inválida! <br>
                     Extenções de foto aceitas : .bmp , .png, .svg, .jpeg e .jpg</strong></div>';
                 echo "<script>javascript:history.go(-1)</script>";
                 exit;
@@ -177,7 +177,7 @@
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
                 if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
-                    $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
+                    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
                 endif;
@@ -213,19 +213,19 @@
         $retorno = $stm->execute();
 
         if ($retorno && $edit == 'edit_user'):
-            $_SESSION['msgedit'] = '<div class="alert alert-success text-center" role="alert">
-                <strong>USUÁRIO: </strong>'.$nome.' <strong> - EDITADO COM SUCESSO !!!</strong></div>';
-                header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
-        elseif ($retorno && $edit == 'edit_user_perfil'):
-            $_SESSION['msgedit'] = '<div class="alert alert-success text-center" role="alert">
-            <strong>USUÁRIO: </strong>'.$nome.' <strong> - EDITADO COM SUCESSO !!!</strong></div>';
-            header("Location: $pag_system?pag=edit-perfil-user");
+            $_SESSION['msgedit'] = '<div class="alert alert-success pt-1 pb-1 text-center" role="alert">
+                <strong>USUÁRIO: '.$nome.' - EDITADO COM SUCESSO !!!</strong></div>';
+                header("Location: $pag_system?pag=lista_usuarios&year=$year&session=$hashprimary");
+        elseif ($retorno && $edit == 'edit_perfil_user'):
+            $_SESSION['msgedit'] = '<div class="alert alert-success pt-1 pb-1 text-center" role="alert">
+            <strong><i class="fa fa-user me-2"></i>'.$usuarionome.' , SEU PERFIL FOI EDITADO COM SUCESSO !!!</strong></div>';
+            header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
         elseif ($retorno && $edit == ''):
-            $_SESSION['msgedit'] = '<div class="alert alert-success text-center" role="alert">
+            $_SESSION['msgedit'] = '<div class="alert alert-success pt-1 pb-1 text-center" role="alert">
             <strong>USUÁRIO: </strong>'.$nome.' <strong> - EDITADO COM SUCESSO !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         else:
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pt-1 pb-1 text-center" role="alert">
                 <strong>ERRO AO EDITAR USUÁRIO '.$nome.' !!!</strong></div>';
 
 
@@ -248,11 +248,11 @@
         $retorno = $stm->execute();
 
         if ($retorno):
-            $_SESSION['msgsuccess'] = '<div class="alert alert-success text-center" role="alert">
+            $_SESSION['msgsuccess'] = '<div class="alert alert-success pb-1 pt-1 text-center" role="alert">
                 <strong>SENHA ALTERADA COM SUCESSO !!!</strong></div>';
             header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
         else:
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center" role="alert">
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert">
                 <strong>ERRO AO ALTERAR SENHA !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         endif;
@@ -264,12 +264,12 @@
         // Valida se existe um id e se ele é numérico
         if (!empty($idaction) && is_numeric($idaction)):
             if ($usuarioniveldeacesso <> 1):
-                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                         <strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE EXCLUIR CRACHÁ ID : '.$idaction.' - '.$useraction.' !!!</strong></div>';
                 header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
             endif;
         else :
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EXCLUIR: ID : '.$idaction.' - NOME: '.$useraction.' - NÃO ENCONTRADO !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         endif;
@@ -282,11 +282,11 @@
         $retorno = $stm->execute();
 
         if($retorno) :
-            $_SESSION['msgsuccess'] = '<div class="alert alert-secondary text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
+            $_SESSION['msgsuccess'] = '<div class="alert alert-secondary pt-1 pb-1 text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
                     <strong>CRACHÁ ID : '.$idaction.' - '.$useraction.' EM '.$year.' - EXCLUIDO COM SUCESSO !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         else :
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pt-1 pb-1 text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
                 <strong>ERRO AO EXCLUIR CRACHÁ ID : '.$idaction.' - '.$useraction.' DE '.$year.' !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         endif;
@@ -298,12 +298,12 @@
         // Valida se existe um id e se ele é numérico
         if (!empty($idaction) && is_numeric($idaction)):
             if ($usuarioniveldeacesso <> 1):
-                $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+                $_SESSION['msgerro'] = '<div class="alert alert-danger pt-1 pb-1 text-center text-uppercase" role="alert">
                         <strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE REATIVAR CRACHÁ ID : '.$idaction.' - '.$useraction.' !!!</strong></div>';
                 header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
             endif;
         else :
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pt-1 pb-1 text-center text-uppercase" role="alert">
                         <strong>ERRO AO REATIVAR: ID : '.$idaction.' - NOME: '.$useraction.' - NÃO ENCONTRADO !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         endif;
@@ -316,11 +316,11 @@
         $retorno = $stm->execute();
 
         if($retorno) :
-            $_SESSION['msgsuccess'] = '<div class="alert alert-secondary text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
+            $_SESSION['msgsuccess'] = '<div class="alert alert-secondary pt-1 pb-1 text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
                     <strong>CRACHÁ ID : '.$idaction.' - '.$useraction.' EM '.$year.' - REATIVADO COM SUCESSO !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         else :
-            $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pt-1 pb-1 text-center text-uppercase" role="alert"><i class="fa fa-trash me-1"></i>
                 <strong>ERRO AO REATIVAR CRACHÁ ID : '.$idaction.' - '.$useraction.' DE '.$year.' !!!</strong></div>';
             header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
         endif;

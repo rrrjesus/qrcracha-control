@@ -21,19 +21,19 @@ $user = $stm->fetch(PDO::FETCH_OBJ);
 
     // Caso o id tenha sido enviado a lixeira
     if ($get_session <> $hashprimary) :
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
     endif;
 
     if ($stm->rowCount() < 1):
-        $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
     endif;
 
 else :
-    $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
+    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id.' - NÃO ENCONTRADO !!!</strong></div>';
     header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
 endif;

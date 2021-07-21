@@ -92,15 +92,15 @@
             </li>
 
             <li class="nav-item dropdown mb-1">
-                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm fw-bold nav-link dropdown-toggle me-2 ms-2 fs-6" style="color:#fff;"><i class="far fa-lock-open-alt me-1"></i> <?=$usuarionome?></a>
+                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm fw-bold nav-link dropdown-toggle me-2 ms-2" style="color:#fff;"><i class="far fa-lock-open-alt me-1"></i> <?=$usuarionome?></a>
                     <ul class="dropdown-menu border-0 shadow">
                         <li>
-                            <a class="dropdown-item fs-6" href="<?=$pag_system.'?pag=edicao_perfil&id='.$usuarioid.'&session='.$hashprimary?>"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                            <a class="dropdown-item" href="<?=$pag_system.'?pag=edicao_perfil&id='.$usuarioid.'&session='.$hashprimary?>"><i class="fa fa-fw fa-user"></i> Perfil</a>
                         </li>
                     </ul>
             </li>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger btn-sm fw-bold pt-2 pb-2 ms-2 me-2 fs-6" data-toggle="modal" data-target="#sairModal"><i class="far fa-reply-all me-1" data-toggle="tooltip" title="SAIR DO SISTEMA"></i> SAIR</button>
+            <button type="button" class="btn btn-danger btn-sm fw-bold pt-2 pb-2 ms-2 me-2" data-toggle="modal" data-target="#sairModal"><i class="far fa-reply-all me-1" data-toggle="tooltip" title="SAIR DO SISTEMA"></i> SAIR</button>
         </ul>
 
 </nav>
