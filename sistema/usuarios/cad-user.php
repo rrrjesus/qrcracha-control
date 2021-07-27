@@ -13,7 +13,7 @@ endif;
 
 ?>
 
-<div class="d-grid mb-1"><button disabled type="button" class="btn btn-outline-success btn-block fw-bold pt-1 pb-1"><i class="far fa-file-invoice px-2"></i> CADASTRAR USUÁRIO - <?=$get_year?></button></div>
+<div class="d-grid mb-1"><button disabled type="button" class="btn btn-success btn-block fw-bold pt-1 pb-1 border-dark"><i class="far fa-file-invoice px-2"></i> CADASTRAR USUÁRIO - <?=$get_year?></button></div>
 
 <?=$button->AlertSession()?>
 

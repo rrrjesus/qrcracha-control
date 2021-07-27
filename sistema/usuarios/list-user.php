@@ -146,7 +146,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
 
 <?php if(!empty($listserver)): ?>
 
-<div class="table-responsive">
+<div class="table-responsive pt-1 ps-1">
     <table id="lista-usuario-cracha" class="table table-sm table-striped table-bordered flex-nowrap border-<?=$btncolor?> text-center" style="width:100%">
         <thead class="table-<?=$btncolor?>">
         <tr class="bg-light text-<?=$btncolor?> border-<?=$btncolor?>">

@@ -15,7 +15,7 @@
  * @conexao Classe conexao. */
 
 error_reporting(-1); // Inserindo melhorias e exibindo erros
-include_once 'conexao.php';
+include_once 'Conexao.php';
 ?>
 
 <?php

@@ -50,7 +50,7 @@ endif;
 
 ?>
 
-<div class="d-grid mb-2"><button disabled type="button" class="btn btn-outline-warning fw-bold btn-block pt-1 pb-1"><i
+<div class="d-grid mb-2"><button disabled type="button" class="btn btn-warning fw-bold btn-block pt-1 pb-1 border-dark"><i
             class="far fa-file-edit px-2"></i> EDITAR USUÁRIO </button></div>
 
 <?=$button->AlertSession()?>

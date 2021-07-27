@@ -26,7 +26,8 @@ endif;
 
 // Captura os dados do cliente solicitado
 $conexao = conexao::getInstance();
-$sql = 'SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, senha, status, sexo, nivel_acesso_id, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
+$sql = 'SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, senha, status, sexo, 
+       nivel_acesso_id, lixeira, usuariocad FROM usuarios WHERE email=:email && senha=:senha';
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':email', $email);
 $stm->bindValue(':senha', $cripto_senha_login);
@@ -54,7 +55,7 @@ else:
         $_SESSION['usuarioSenha'] = $user->senha;
         $_SESSION['usuarioFoto'] = $user->foto;
         $_SESSION['usuarioLixeira'] = $user->lixeira;
-        $_SESSION['hashenter'] = sha1(md5($user->login.date('dmYHis')));
+        $_SESSION['hashenter'] = sha1(md5($user->cpf.date('dmYHis')));
 
             // Script para encamninhar para a página anterior ou para principal
             if(isset($_SESSION['url']) && $_SESSION['url'] != ""):

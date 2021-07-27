@@ -61,7 +61,7 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 <h5 class="card-title mb-3"> SENHA</h5>
                 <img class="img-fluid mb-3" height="100" width="100" src="sistema/imagens/chave-icon.png" alt="Card image cap">
                 <p class="card-text h6 mb-3">Torne sua senha mais forte ou altere-a se alguém mais a souber.</p>
-                <a href="<?=$pag_system.'?pag=alteracao_senha&id='.$usuarioid.'&session='.$hashprimary?>" class="card-link mb-3"><strong>ALTERAR SENHA ></strong></a>
+                <a href="<?=$pag_system.'?pag=alteracao_senha&id='.$usuarioid.'&session='.$hashprimary?>" class="card-link mb-3"><strong>ALTERAR SENHA </strong></a>
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 <h5 class="card-title mb-3">INFORMAÇÕES</h5>
                 <img class="img-fluid mb-3" height="100" width="100" src="sistema/imagens/icon-edit-user.jpg" alt="Card image cap">
                 <p class="card-text h6 mb-3">Mantenha suas informações atualizados no <?=$systemfetch->title?>.</p>
-                <a href="<?=$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary?>" class="card-link mb-3"><strong>ATUALIZAR INFORMAÇÕES ></strong></a>
+                <a href="<?=$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary?>" class="card-link mb-3"><strong>ATUALIZAR INFORMAÇÕES </strong></a>
             </div>
         </div>
     </div>

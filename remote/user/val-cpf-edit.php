@@ -10,7 +10,7 @@
 error_reporting(0);
 
 //Inclui a conexao ;
-include_once '../../conexao.php';
+include_once '../../Conexao.php';
 
 $cpf = $_GET['cpf'];
 // Inicia a conexao

@@ -4,6 +4,7 @@ include_once 'classes/User.php';
 
 // Recebe o id da pag do painel via GET
 $pag = isset($_GET['pag']) ? $_GET['pag'] : '';
+$lixeira = isset($_GET['lixeira']) ? $_GET['lixeira'] : 0; // Recebe o termo de pesquisar se existir
 $pagyear = isset($_GET['year']) ? $_GET['year'] : '';
 $pagano = date('Y');
 
@@ -48,7 +49,14 @@ if($pags):
                     <div class="card-header text-center fw-bold fs-6 pt-1 pb-1">
                         <img class="img-fluid rounded-circle me-2" height="20" width="20" src="imagens/icons/favicon_jaca_control.ico">   SISTEMA JAÇANA CONTROLE - '.$today_year.'
                     </div>
-                        <div class="card-body">';
+                        <div class="card-body" ';
+                            if($pag == 'cadastro_usuarios'): echo 'style="background-color: #caeadb;"';
+                                elseif($pag == 'edicao_usuarios'): echo 'style="background-color: #f5e7bc;"';
+                                    elseif ($lixeira == 1): echo 'style="background-color: #d8dfe6;"';
+                                        elseif ($pag == 'lista_usuarios'): echo 'style="background-color: #e7f0f3;"';
+                                            else: echo '';
+                            endif;
+                        echo '>';
 
                             if(!empty(is_numeric($pagyear)) && $pagyear > 2015 && $pagyear <= $pagano):
                                     include $pags->caminho;  //inclui o arquivo
@@ -65,3 +73,4 @@ if($pags):
         endif;
 
 ?>
+</div>

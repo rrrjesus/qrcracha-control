@@ -129,16 +129,16 @@ class Buttons extends Tables {
     public function BtnTitleList($get_pag, $get_year, $nameform, $ano_atual, $get_lixeira) {
         if(!empty($get_pag)):
             if($get_year == $ano_atual && $get_lixeira == 1) :
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-secondary btn-block fw-bold mb-1 pt-1 pb-1"><i class="fa fa-trash-o px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-secondary btn-block fw-bold mb-1 pt-1 pb-1 border-dark"><i class="fa fa-trash-o px-2"></i>
                         LIXEIRA DE '.$nameform.' - '.$get_year.'</button>';
             elseif($get_year < $ano_atual && 1 == $get_lixeira) :
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-secondary btn-block fw-bold mb-1 pt-1 pb-1"><i class="fa fa-trash-o px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-secondary btn-block fw-bold mb-1 pt-1 pb-1 border-dark"><i class="fa fa-trash-o px-2"></i>
                         LIXEIRA DE ARQUIVO DE '.$nameform.' - '.$get_year.'</button>';
             elseif ($ano_atual == $get_year && $get_lixeira == 0) :
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-primary btn-block fw-bold mb-1 pt-1 pb-1"><i class="fal fa-list px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-primary btn-block fw-bold mb-1 pt-1 pb-1 border-dark"><i class="fal fa-list px-2"></i>
                        LISTA DE '.$nameform.' - '.$get_year.'</button>';
             else:
-                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-outline-danger btn-block fw-bold mb-1 pt-1 pb-1"><i class="fal fa-list px-2"></i>
+                echo '<div class="d-grid gap-2 mb-3"><button disabled type="button" class="btn btn-danger btn-block fw-bold mb-1 pt-1 pb-1 border-dark"><i class="fal fa-list px-2"></i>
                        ARQUIVO DE LISTA DE '.$nameform.' - '.$get_year.'</button>';
             endif;
         endif;

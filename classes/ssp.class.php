@@ -1,7 +1,7 @@
 <?php
 
 // SQL server connection information
-include_once '../../conexao.php';
+include_once '../../Conexao.php';
 
 /*
 * Funções auxiliares para a construção de uma consulta SQL de processamento do lado do servidor DataTables
