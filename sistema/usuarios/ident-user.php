@@ -87,25 +87,9 @@ endif;
                 </div>
             </div>
             <div class="row" style="font-size: 0.80rem">
-                <div class="col-5 text-start fw-bold">
+                <div class="col-6 text-start fw-bold">
                     <p class="text-dark mt-0 mb-0"><?=$user->nome.' '.$user->sobrenome?></p>
-                    <p class="text-dark mt-0 mb-0">BR-21-0868 - Jaçanã - SÃO PAULO </p>
-                </div>
-            </div>
-            <div class="row" style="font-size: 0.80rem">
-                <div class="col-3 text-start fw-bold">
-                    <p class="text-dark mt-0 mb-0">Adm.: SETOR JAÇANÃ</p>
-                </div>
-                <div class="col-2 text-start fw-bold">
-                    <p class="text-dark mt-0 mb-0">0297713</p>
-                </div>
-            </div>
-            <div class="row" style="font-size: 0.80rem">
-                <div class="col-3 text-start fw-bold">
-                    <p class="text-dark mt-0 mb-0">RGA.: SÃO PAULO </p>
-                </div>
-                <div class="col-2 text-start fw-bold">
-                    <p class="text-dark mt-0 mb-0">A0011406533</p>
+                    <p class="text-dark mt-0 mb-0">ADMINISTRAÇÃO - SETOR JAÇANÃ - SÃO PAULO </p>
                 </div>
             </div>
             <div class="row">
