@@ -102,7 +102,7 @@ endif;
                     $qr->setTypeNumber(8); // Defina o número do modelo (tamanho grande) 1-40
 
                     // Defina os dados (string de caracteres *)
-                    $qr->addData('http://'.HOST.'/'.SYSTEM.'/'.PAGSYSTEM.'?pag=autenticacao_cracha&id='.$user->id.'&crypto='.$user->hash_cracha);
+                    $qr->addData('http://'.HOST.'/'.SYSTEM.'/authentic/search.php?id='.$user->id.'&crypto='.$user->hash_cracha);
                     $qr->make(); // Crie um código QR
                     $qr->printSVG(); // saída HTML
                     ?>

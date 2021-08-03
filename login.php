@@ -4,7 +4,6 @@ $emailget = (isset($_GET['email'])) ? $_GET['email'] : '';
 ?>
 
 <div class="container-fluid">
-    <div class="container">
 <div class="row justify-content-center pb-5 pt-5">
 
     <div class="card col-sm-6 shadow-lg mb-5 mt-5 bg-body rounded pe-0 ps-0">
@@ -61,7 +60,6 @@ $emailget = (isset($_GET['email'])) ? $_GET['email'] : '';
         </form>
     </div>
         <div class="card-footer pb-5"></div>
-</div>
 </div>
 </div>
 </div>

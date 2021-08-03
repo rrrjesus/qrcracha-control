@@ -57,6 +57,56 @@ $systemfetch = $stmsystem->fetch(PDO::FETCH_OBJ);
 </head>
 <body>
 
+<?php
+
+// Recebe o id do usuario solicitado via GET
+$id = $_GET['id'] ?? ''; // Recebendo o id do usuario solicitado via GET
+$get_hash_cracha = $_GET['crypto'] ?? ''; // Recebendo a hash do cracha via GET mesmo
+
+// Valida se existe um id e se ele é numérico
+if (!empty($id) && is_numeric($id)):
+
+$sql = "SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, nivel_acesso_id, celular, status, sexo,
+        setor, hash_cracha, lixeira FROM usuarios WHERE id = :id";
+$stm = $conexao->prepare($sql);
+$stm->bindValue(':id', $id);
+$stm->execute();
+$user = $stm->fetch(PDO::FETCH_OBJ);
+
+//Encerra a conexão
+$smt = null;
+
+    if(!empty($user)): // If caso encontre o id do usuário solicitado
+        if ($user->lixeira == 1) : // If caso o id tenha sido enviado a lixeira
+            $_SESSION['msgerr'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
+                    <i class="fa fa-qrcode me-2"></i><strong>O '.$user->nome.' ESTÁ DESATIVADO !!!</strong></div>';
+        endif;
+
+        if ($stm->rowCount() < 1) : // If caso o usuário não seja encontrado !!!
+            $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
+                <i class="fa fa-qrcode me-2"></i><strong> QRCODE DE CRACHÁ NÃO ENCONTRADO !!!</strong></div>';
+        endif;
+    endif;
+
+else :
+    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
+    <i class="fa fa-qrcode me-2"></i> <strong> QRCODE DE CRACHÁ NÃO ENCONTRADO !!!</strong></div>';
+endif;
+
+if($stm->rowCount() < 1):
+    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
+        <i class="fa fa-qrcode me-2"></i><strong> QRCODE ID: '.$id.' - CRACHÁ NÃO AUTENTICADO !!!</strong></div>';
+elseif ($get_hash_cracha !== $user->hash_cracha) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
+    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
+                <i class="fa fa-qrcode me-2"></i> <strong>ERRO NO HASH DO CRACHÁ !!!</strong></div>';
+else:
+$_SESSION['msgsuccess'] = '<div class="alert alert-success pb-1 pt-1 text-center text-uppercase" role="alert">
+    <i class="fa fa-qrcode me-2"></i><strong> QRCODE DE CRACHÁ AUTENTICADO !!!</strong></div>';
+
+endif;
+?>
+
+
 <div class="container py-3">
     <header>
         <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
@@ -80,6 +130,11 @@ $systemfetch = $stmsystem->fetch(PDO::FETCH_OBJ);
                 <h4 class="my-0 fw-normal"><i class="fa fa-address-card-o me-2"></i> AUTENTICAÇÃO DE CRACHÁ </h4>
             </div>
             <div class="card-body">
+                <?php /** @var msgerro $_SESSION */
+                    if (isset($_SESSION['msgerro'])) : echo $_SESSION['msgerro']; unset($_SESSION['msgerro']); endif;
+                    if (isset($_SESSION['msgerr'])) : echo $_SESSION['msgerr']; unset($_SESSION['msgerr']); endif;
+                    if (isset($_SESSION['msgsuccess'])) : echo $_SESSION['msgsuccess']; unset($_SESSION['msgsuccess']); endif;
+                ?>
 
                 <div class="container justify-content-center">
                 <div class="row mb-2 align-items-center text-center">
@@ -87,6 +142,19 @@ $systemfetch = $stmsystem->fetch(PDO::FETCH_OBJ);
                         <div class="col-sm-9 col-md-12 text-center">
                             <h1 class="display-1 text-dark fw-bold">CCB</h1>
                         </div>
+                    </div>
+
+                <?php if(!empty($user)): // If caso encontre o id do usuário solicitado?>
+                    <div class="col-sm-3 col-md-2 mb-1">
+                        <img height="105" width="105" src="<?php if (file_exists('../'.$user->foto))
+                        {echo '../'.$user->foto;}
+                        else{ echo '../sistema/imagens/padrao.jpg';}?>" class="img">
+                    </div>
+                    <div class="col-sm-8 col-md-7 mb-1">
+                        <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2 ps-5">RGE JAÇANÃ/SUPORTE TI</p>
+                        <h1 class="display-6 text-dark ms-3 mt-0 mb-0"><?=$user->nome?></h1>
+                        <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">INFORMÁTICA</p>
+                        <p class="h2 text-secondary fw-bold ms-2">RGE 2021</p>
                     </div>
                 </div>
 
@@ -106,6 +174,16 @@ $systemfetch = $stmsystem->fetch(PDO::FETCH_OBJ);
                             <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido de 7 de Setembro de 2021 a 14 de Setembro de 2021"</p>
                         </div>
                     </div>
+                    <div class="row align-items-center" style="font-size: 0.80rem">
+                        <div class="col-12 text-start fw-bold">
+                            <p class="text-dark mt-0 mb-0"><?=$user->nome.' '.$user->sobrenome?></p>
+                            <p class="text-dark mt-0 mb-0">ADMINISTRAÇÃO - SETOR JAÇANÃ - SÃO PAULO </p>
+                        </div>
+                    </div>
+                <?php else:
+                    echo '';
+                endif;
+                ?>
 
                 </div>
 <!-- Aqui o cracha-->
