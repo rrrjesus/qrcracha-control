@@ -187,6 +187,9 @@ endif;
                     <?=$button->BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso);?>
                     <?=$button->BtnListar($pag_system,$get_pag, $get_year, $hashprimary);?>
                     <?=$button->BtnSair($pag_system);?>
+                    <?=$button->BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso)?>
+                    <!-- Modal Delete-->
+                    <?=$modal->ModalLixeiraEdit($usuarioniveldeacesso,$user,$get_year,$hashprimary)?>
                 </div>
             </div>
         </form>

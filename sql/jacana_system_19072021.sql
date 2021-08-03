@@ -1,3 +1,5 @@
+-- drop TABLE albuns, config_system, menu_principal, menu_sub, menu_sub_sub, navfootercolor, pag_system, setor, usuarios;
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/

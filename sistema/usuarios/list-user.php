@@ -61,7 +61,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
+                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>&lixeira=' + full[13] + '" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
                         }
                     },
                     {
