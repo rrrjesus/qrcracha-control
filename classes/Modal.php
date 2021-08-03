@@ -58,6 +58,7 @@ class Modal {
                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+                                        <div class="text-center"><div class="modal-title text-center">Deseja apagar o usuário id: <span class="badge rounded-pill bg-danger pt-2 pb-2">'.$user->id.'</span> - '.$user->nome.' ?</div></div>
                                     </div>
                                     <div class="modal-footer justify-content-center">
                                         <a type="button" href="'.PAGSYSTEM.'?pag=acao_usuarios&idaction='.$user->id.'&useraction='.$user->nome.'&year='.$get_year.'&session='.$hashprimary.'&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>
