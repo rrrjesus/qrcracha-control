@@ -137,6 +137,57 @@ class Tables {
         return $ipaddress;
     }
 
+    function setor_user($conexao, $st) {
+
+        $sql = "SELECT id, nome_setor FROM setor";
+        $stm = $conexao->prepare($sql);
+        $stm->execute();
+        $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+        $stm = null; //Encerra a conexão
+
+        foreach ($setor as $setor_for):
+            if($st == $setor_for->id):
+                return strtoupper($setor_for->nome_setor);
+            else:
+                return 'OUTROS';
+            endif;
+        endforeach;
+}
+
+    function set_user($conexao, $set) {
+
+        $sql = "SELECT id, nome_setor FROM setor";
+        $stm = $conexao->prepare($sql);
+        $stm->execute();
+        $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+        $stm = null; //Encerra a conexão
+
+        foreach ($setor as $setor_for):
+            if($set == $setor_for->id):
+                return strtoupper($setor_for->nome_setor);
+            else:
+                return 'NAO CADASTRADO';
+            endif;
+        endforeach;
+    }
+
+    function adm_user($conexao, $adm) {
+
+        $sql = "SELECT id, nome_adm FROM adm";
+        $stm = $conexao->prepare($sql);
+        $stm->execute();
+        $admn = $stm->fetchAll(PDO::FETCH_OBJ);
+        $stm = null; //Encerra a conexão
+
+        foreach ($admn as $adm_for):
+            if($adm == $adm_for->id):
+                return strtoupper($adm_for->nome_adm);
+            else:
+                return 'NAO CADASTRADA';
+            endif;
+        endforeach;
+    }
+
 }
 
 // Variável para chamar classe Tables

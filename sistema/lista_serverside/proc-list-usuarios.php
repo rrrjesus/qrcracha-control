@@ -12,12 +12,11 @@
  * Variáveis ​​de conjunto fáceis
 */
 
-$tabela = isset($_GET['tabela']) ? ($_GET['tabela']) : 'usuarios';
 $getlixeira = isset($_GET['getlixeira']) ? $_GET['getlixeira'] : 0; // Recebe o termo de pesquisar se existir
 
 // tabela DB para usar
 $table = <<<EOT
- (SELECT * FROM $tabela WHERE lixeira=$getlixeira)temp
+ (SELECT * FROM usuarios WHERE lixeira=$getlixeira)temp
 EOT;
 
 // chave primária da tabela
@@ -112,7 +111,7 @@ $columns = array(
             $stm = null; //Encerra a conexão
 
             foreach ($setor as $setor_for):
-                if($d == $setor_for->id):
+                if($setor_for->id == $d):
                     return strtoupper($setor_for->nome_setor);
                 else:
                     return 'OUTROS';

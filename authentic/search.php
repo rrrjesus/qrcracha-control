@@ -7,54 +7,16 @@ $sqlsystem = 'SELECT id, description, author, title, icon, sistema, versao, dire
 $stmsystem = $conexao->prepare($sqlsystem);
 $stmsystem->execute();
 $systemfetch = $stmsystem->fetch(PDO::FETCH_OBJ);
+
+$stmsystem = null; //
+
 ?>
 
 <!doctype html>
-<html lang="en">
-<head>
-    <!--<head>-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="<?=$systemfetch->description?>">
-    <meta name="author" content="<?=$systemfetch->author?>">
-    <link rel="icon" href="<?='../'.$systemfetch->icon?>">
+<html lang="pt-BR">
 
-    <title><?=$systemfetch->title?></title>
+<?php require(__DIR__ . '/head_auth.php'); ?>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/pricing/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="../assets/css/bootstrap5/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS para Fontes Customizadas Fontawesome https://fontawesome.com/ -->
-    <link href="../assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/brands.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/fontawesome.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/light.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/regular.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/solid.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/svg-with-js.css" rel="stylesheet"> <!--load all styles -->
-    <link href="../assets/fontawesome/css/v4-shims.css" rel="stylesheet"> <!--load all styles -->
-
-    <meta name="theme-color" content="#7952b3">
-
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-
-</head>
 <body>
 
 <?php
@@ -108,19 +70,8 @@ endif;
 
 
 <div class="container py-3">
-    <header>
-        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                <img class="img-fluid rounded-circle me-2" height="70" width="70" src="../imagens/inf_menu.png">
-                <span class="fs-4">JAÇANA CONTROLE</span>
-            </a>
 
-            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="https://informaticast11.com.br/controle-rge-st11/">Sistema</a>
-                <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="https://informaticast11.com.br/">Site</a>
-            </nav>
-        </div>
-    </header>
+    <?php require(__DIR__ . '/header_auth.php'); ?>
 
     <main>
             <div class="container">
