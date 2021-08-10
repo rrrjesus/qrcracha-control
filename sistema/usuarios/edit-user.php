@@ -43,8 +43,10 @@ $user = $stm->fetch(PDO::FETCH_OBJ);
     endif;
 
     if(!empty($user)): // If caso encontre o id do usuário solicitado
+        if($user->datanascimento !== ''):
         $array_data     = explode('-', $user->datanascimento); // Formata a data no formato nacional
         $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
+        endif;
     endif;
 
 else : // Caso não encontre o usuário !!!
@@ -147,7 +149,7 @@ endif;
                     <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ADMINISTRATIVO"
                             name="setor" id="setor">
                         <?php
-                        $sql = "SELECT id, nome_setor FROM setor";
+                        $sql = "SELECT DISTINCT id, nome_setor FROM setor";
                         $stm = $conexao->prepare($sql);
                         $stm->execute();
                         $setor = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -156,11 +158,11 @@ endif;
                         $stm = null;
                             foreach ($setor as $id_setor):
                         ?>
-                        <option value="<?=$user->id_setor?>" selected><?=strtoupper($user->setor)?></option>
                         <option value="<?=$id_setor->id?>"><?=strtoupper($id_setor->nome_setor)?></option>
                         <?php
                             endforeach;
                         ?>
+                        <option value="<?=$user->id_setor?>" selected><?=strtoupper($user->setor)?></option>
                     </select>
                 </div>
 
@@ -192,8 +194,9 @@ endif;
                     <input type="hidden" name="foto_atual" value="<?=$user->foto?>">
                     <?=$button->BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso);?>
                     <?=$button->BtnListar($pag_system,$get_pag, $get_year, $hashprimary);?>
-                    <?=$button->BtnSair($pag_system);?>
+                    <?=$button->BtnImprimirCracha($usuarioid, $usuariostatus, $usuarioniveldeacesso, $id, $hashprimary);?>
                     <?=$button->BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso)?>
+                    <?=$button->BtnSair($pag_system);?>
                     <!-- Modal Delete-->
                     <?=$modal->ModalLixeiraEdit($usuarioniveldeacesso,$user,$get_year,$hashprimary)?>
                 </div>

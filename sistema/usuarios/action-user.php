@@ -53,9 +53,11 @@
     // Se for ação diferente de excluir valida os dados obrigatórios
     if ($acao != 'excluir'):
 
+        if(!empty($datanascimento)):
         // Constrói a data no formato ANSI yyyy/mm/dd
         $data_temp = explode('/', $datanascimento);
         $data_ansi = $data_temp[2] . '-' . $data_temp[1] . '-' . $data_temp[0];
+        endif;
     endif;
 
 
@@ -193,7 +195,7 @@
 
 
         $sql = 'UPDATE usuarios SET foto=:foto, nome=:nome, sobrenome=:sobrenome, datanascimento=:datanascimento, cpf=:cpf, email=:email,
-                celular=:celular, setor=:setor, status=:status, sexo=:sexo, nivel_acesso_id=:nivel_acesso_id, usuarioalt=:usuarioalt,alterado=NOW() ';
+                celular=:celular, setor=:setor, hash_cracha=:hash_cracha, status=:status, sexo=:sexo, nivel_acesso_id=:nivel_acesso_id, usuarioalt=:usuarioalt,alterado=NOW() ';
         $sql .= 'WHERE id = :id';
 
         $stm = $conexao->prepare($sql);
@@ -205,6 +207,7 @@
         $stm->bindValue(':email', $email);
         $stm->bindValue(':celular', $celular);
         $stm->bindValue(':setor', $setor);
+        $stm->bindValue(':hash_cracha', $cripto_cracha);
         $stm->bindValue(':status', $status);
         $stm->bindValue(':sexo', $sexouser);
         $stm->bindValue(':nivel_acesso_id', $nivel_acesso_id);

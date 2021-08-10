@@ -94,33 +94,20 @@ $(function() {
         $("#user").validate({
             rules: {
                 nome: {
-                    required: true,
-                    ascento: true
+                    required: true
                 },
                 sobrenome: {
+                    required: true
+                },
+                //datanascimento: { required: true, dateBR: true, maxDateE: true },
+                // cpf: {required: true,remote: "remote/user/val-cpf-cad.php" },
+                // email: { required: true, remote: "remote/user/val-email-cad.php" },
+                setor: {
                     required: true,
-                    ascento: true
+                    remote: "remote/user/val-setor.php"
                 },
-                datanascimento: {
-                    required: true,
-                    dateBR: true,
-                    maxDateE: true
-                },
-                cpf: {
-                    required: true,
-                    remote: "remote/user/val-cpf-cad.php"
-                },
-                email: {
-                    required: true,
-                    remote: "remote/user/val-email-cad.php"
-                },
-                senha: {
-                    required: true,
-                    strongPassword: true
-                },
-                celular: {
-                    required:true
-                },
+                // senha: { required: true, strongPassword: true },
+                // celular: { required:true },
                 sexouser: {
                     required: true
                 }
@@ -128,65 +115,38 @@ $(function() {
             },
             messages: {
                 nome: {
-                    required:"Digite um Nome !!!",
-                    ascento: "Retire ascentos, ç e caracteres"
+                    required:"Digite um Nome !!!"
                 },
                 sobrenome: {
-                    required:"Digite um SobreNome !!!",
-                    ascento: "Retire ascentos, ç e caracteres"
+                    required:"Digite um SobreNome !!!"
                 },
-                datanascimento: {
-                    required:"Digite uma data válida",
-                    dateBR: "Informe uma data válida",
-                    maxDateE: "Digite a data até hoje"
+                // datanascimento: { required:"Digite uma data válida", dateBR: "Informe uma data válida", maxDateE: "Digite a data até hoje" },
+                // cpf: { required: "Digite o CPF válido", remote: "Esse cpf já esta cadastrado em outro usuário !!!" },
+                // email: { required: "Digite um email !!!", remote: "Esse email já esta cadastrado em outro usuário !!!" },
+                setor: {
+                    required: "Digite o setor válido",
+                    remote: "Não encontrado, cadastre o setor e retorne para editar !!!"
                 },
-                cpf: {
-                    required: "Digite o CPF válido",
-                    remote: "Esse cpf já esta cadastrado em outro usuário !!!"
-                },
-                email: {
-                    required: "Digite um email !!!",
-                    remote: "Esse email já esta cadastrado em outro usuário !!!"
-                },
-                senha: {
-                    required: "Digite uma senha !!!",
-                    strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere"
-                },
-                celular: {
-                    required: "Digite um telefone"
-                },
+                // senha: { required: "Digite uma senha !!!", strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere" },
+                // celular: { required: "Digite um telefone" },
                 sexouser: {
                     required: "Digite o sexo"
                 }
-
             }
         });
 
         $("#edit_user").validate({
             rules: {
                 nome: {
-                    required: true,
-                    ascento: true
-                },
-                sobrenome: {
-                    required: true,
-                    ascento: true
-                },
-                datanascimento: {
-                    required: true,
-                    dateBR: true,
-                    maxDateE: true
-                },
-                cpf: {
-                    required: true,
-                    remote: "remote/user/val-cpf-edit.php"
-                },
-                email: {
                     required: true
                 },
-                celular: {
-                    required:true
+                sobrenome: {
+                    required: true
                 },
+                //datanascimento: { required: true, dateBR: true, maxDateE: true },
+                // cpf: {required: true,remote: "remote/user/val-cpf-edit.php" },
+                // email: { required: true },
+                // celular: { required: "Digite um telefone" },
                 sexouser: {
                     required: true
                 }
@@ -194,28 +154,15 @@ $(function() {
             },
             messages: {
                 nome: {
-                    required:"Digite um Nome !!!",
-                    ascento: "Retire ascentos, ç e caracteres"
+                    required:"Digite um Nome !!!"
                 },
                 sobrenome: {
-                    required:"Digite um SobreNome !!!",
-                    ascento: "Retire ascentos, ç e caracteres"
+                    required:"Digite um SobreNome !!!"
                 },
-                datanascimento: {
-                    required:"Digite uma data válida",
-                    dateBR: "Informe uma data válida",
-                    maxDateE: "Digite a data até hoje"
-                },
-                cpf: {
-                    required: "Digite o CPF válido",
-                    remote: "Esse cpf já esta cadastrado em outro usuário !!!"
-                },
-                email: {
-                    required: "Digite um email !!!"
-                },
-                celular: {
-                    required: "Digite um telefone"
-                },
+                // datanascimento: { required:"Digite uma data válida", dateBR: "Informe uma data válida", maxDateE: "Digite a data até hoje" },
+                // cpf: { required: "Digite o CPF válido", remote: "Esse cpf já esta cadastrado em outro usuário !!!" },
+                // email: { required: "Digite um email !!!" },
+                // celular: { required: "Digite um telefone" },
                 sexouser: {
                     required: "Digite o sexo"
                 }

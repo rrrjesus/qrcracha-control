@@ -216,8 +216,21 @@ class Buttons extends Tables {
         elseif ($usuarioniveldeacesso === 4):
             return '';
         else:
-            return '<button type="button" title="APAGAR" class="btn btn-outline-danger btn-sm btn-circle mb-2 me-2 mr-sm-4" data-toggle="modal" data-target="#modalLixeira">
+            return '<button type="button" title="APAGAR" class="btn btn-outline-danger btn-sm btn-circle mb-2 me-2 ms-2 mr-sm-4" data-toggle="modal" data-target="#modalLixeira">
                         <i class="fa fa-trash-o" data-toggle="tooltip" title="LIXEIRA"></i></button>';
+        endif;
+    }
+
+    // Função para modal de lixeira
+    public function BtnImprimirCracha($usuarioid, $usuariostatus, $usuarioniveldeacesso, $id, $hashprimary) {
+        if ($usuarioid === 1):
+            return '';
+        elseif ($usuariostatus === 0):
+            return '';
+        elseif ($usuarioniveldeacesso === 4):
+            return '';
+        else:
+            return '<a href="'.PAGSYSTEM.'?pag=print_cracha&id='.$id.'&session='.$hashprimary.'" data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm btn-circle mb-2 me-1 ms-1 mr-sm-4"><i class="fa fa-print"></i></a>';
         endif;
     }
 

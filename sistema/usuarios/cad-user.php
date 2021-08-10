@@ -77,8 +77,7 @@ endif;
             <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: FEMININO"
                     id="sexouser" name="sexouser">
                 <option value="0">F</option>
-                <option value="1">M</option>
-                <option value="2">I</option>
+                <option value="1" selected>M</option>
             </select>
         </div>
 
@@ -131,7 +130,7 @@ endif;
             <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ATIVO/INATIVO"
                     name="status" id="status">
                 <option value="0">INATIVO</option>
-                <option value="1">ATIVO</option>
+                <option value="1" selected>ATIVO</option>
             </select>
         </div>
 
@@ -141,7 +140,7 @@ endif;
                     name="nivel_acesso_id" id="nivel_acesso_id">
                 <option value="1">ADMINISTRADOR</option>
                 <option value="2">AVANÇADO</option>
-                <option value="3">USUÁRIO</option>
+                <option value="3" selected>USUÁRIO</option>
             </select>
         </div>
 
