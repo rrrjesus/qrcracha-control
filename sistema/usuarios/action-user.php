@@ -40,8 +40,8 @@
     $cripto_senha = hash('sha3-256', $hashcad.$senha);
 
     //criptografa o cracha com sha3-256 + sal
-    $hashcracha = hash('sha3-256', 'servobomeprudente'.$cpf);
-    $cripto_cracha = hash('sha3-256', $hashcad.$email);
+    $hashcracha = hash('sha3-256', 'servobomeprudente'.$id);
+    $cripto_cracha = hash('sha3-256', $hashcad.$id);
 
     // Valida os dados recebidos
     $mensagem = '';
@@ -55,7 +55,7 @@
 
         // Constrói a data no formato ANSI yyyy/mm/dd
         $data_temp = explode('/', $datanascimento);
-        $data_ansi = $data_temp[2] . '/' . $data_temp[1] . '/' . $data_temp[0];
+        $data_ansi = $data_temp[2] . '-' . $data_temp[1] . '-' . $data_temp[0];
     endif;
 
 

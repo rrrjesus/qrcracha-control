@@ -16,7 +16,12 @@ $getlixeira = isset($_GET['getlixeira']) ? $_GET['getlixeira'] : 0; // Recebe o 
 
 // tabela DB para usar
 $table = <<<EOT
- (SELECT * FROM usuarios WHERE lixeira=$getlixeira)temp
+ (SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, usuarios.datanascimento, usuarios.cpf, 
+       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo,
+            setor.nome_setor AS setor, usuarios.lixeira
+        FROM usuarios
+LEFT JOIN setor
+ON usuarios.setor = setor.id WHERE usuarios.lixeira=$getlixeira)temp
 EOT;
 
 // chave primária da tabela
@@ -43,12 +48,14 @@ $columns = array(
     ),
     array('db' => 'cpf', 'dt' => 6,
         'formatter' => function($d) {
+        if($d != null):
         if(strlen($d) < 12):
             $cpf_1 = substr($d, 0, 3);  // retorna "123"
             $cpf_2 = substr($d, 3, 3);  // retorna "123"
             $cpf_3 = substr($d, 6, 3);  // retorna "123"
             $cpf_4 = substr($d, 9, 2);  // retorna "123"
         return $cpf_1.'.'.$cpf_2.'.'.$cpf_3.'-'.$cpf_4;
+        endif;
         else:
             return '';
         endif;
@@ -102,22 +109,6 @@ $columns = array(
         }
     ),
     array('db' => 'setor', 'dt' => 12,
-        'formatter' => function($d) {
-            $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
-            $sql = "SELECT id, nome_setor FROM setor";
-            $stm = $conexao->prepare($sql);
-            $stm->execute();
-            $setor = $stm->fetchAll(PDO::FETCH_OBJ);
-            $stm = null; //Encerra a conexão
-
-            foreach ($setor as $setor_for):
-                if($setor_for->id == $d):
-                    return strtoupper($setor_for->nome_setor);
-                else:
-                    return 'OUTROS';
-                endif;
-                endforeach;
-        }
         ),
     array('db' => 'lixeira', 'dt' => 13)
 );

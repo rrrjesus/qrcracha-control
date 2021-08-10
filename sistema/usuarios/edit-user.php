@@ -11,8 +11,13 @@ if (!empty($id) && is_numeric($id)): // Valida se existe um id e se ele é numé
 
 $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
 
-$sql = "SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, nivel_acesso_id, celular, status, sexo,
-            setor FROM usuarios WHERE id = :id";
+$sql = "SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, usuarios.datanascimento, usuarios.cpf, 
+       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo,
+            setor.nome_setor AS setor, setor.id as id_setor
+        FROM usuarios
+LEFT JOIN setor
+ON usuarios.setor = setor.id
+WHERE usuarios.id = :id";
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':id', $id);
 $stm->execute();
@@ -151,6 +156,7 @@ endif;
                         $stm = null;
                             foreach ($setor as $id_setor):
                         ?>
+                        <option value="<?=$user->id_setor?>" selected><?=strtoupper($user->setor)?></option>
                         <option value="<?=$id_setor->id?>"><?=strtoupper($id_setor->nome_setor)?></option>
                         <?php
                             endforeach;
