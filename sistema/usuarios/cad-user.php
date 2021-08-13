@@ -7,8 +7,8 @@
 
 $get_session = $_GET['session'] ?? '';
 
-if($get_session !== $hashprimary):
-    header("Location: $pag_system");
+if(empty($hashsession)):
+    header("Location: index");
 endif;
 
 ?>
@@ -39,6 +39,7 @@ endif;
     </div>
 
     <div class="row">
+        <?=$pag_system?>
         <div class="col-md-4 mb-1">
             <label class="col-form-label col-form-label-sm" for="inputNome"><strong><i class="fa fa-user fa-muted me-3 ms-3"></i> Nome</strong></label>
             <input type="text" data-toggle="tooltip" title="Ex: RODOLFO" class="form-control form-control-sm"

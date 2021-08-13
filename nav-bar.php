@@ -28,7 +28,7 @@
                 if (atualdata < fiveSeconds) {
                     $(this).html(event.strftime('%H:%M:%S'));
                 } else {
-                    window.location.href = '././index.php';
+                    window.location.href = '././index';
                 }
             });
         </script>
@@ -59,7 +59,7 @@
             </div>
             <div class="modal-body">
                     <div class="text-center">
-                        <a href='sair.php' role="button" class="btn btn-success">SIM</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href='sair' role="button" class="btn btn-success">SIM</a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="button" class="btn btn-danger" data-dismiss="modal">NÃO</button>
                     </div>
             </div>

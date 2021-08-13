@@ -13,15 +13,14 @@ const HOST = '10.47.171.69';
 const DBNAME = 'jacana_system';
 const USER = 'jacana_system';
 const PASSWORD = 'ZisYeMsoTJkbEhth';
-const PAGSYSTEM = 'menu-principal.php';
+const PAGSYSTEM = 'menu-principal';
 const SYSTEM = 'jacana-control';
 
 /** Algumas variáveis padrões utilizadas constantemente */
 
-$admin = 'index.php';
-$pag_system = 'menu-principal.php';
-$pag_painel = 'index.php';
-$index = 'index.php';
+$admin = 'index';
+$pag_painel = 'index';
+$index = 'index';
 $today_year = date('Y');
 $system = 'JAÇANÃ CONTROLE';
 

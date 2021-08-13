@@ -38,7 +38,7 @@ $smt = null;
 
 
 if (empty($user)):
-    header("Location: ../index.php?erro=true&email=$email");
+    header("Location: ../index?erro=true&email=$email");
     exit;
 else:
     if(!strcmp($cripto_senha_login, $user->senha)): // Agora verifica a senha
@@ -61,11 +61,11 @@ else:
             if(isset($_SESSION['url']) && $_SESSION['url'] != ""):
                 header("Location: ".$_SESSION['url']);
             else :
-                header("Location: ../menu-principal.php");
+                header("Location: ../menu-principal");
             endif;
             exit;
     else:
-        header("Location: ../index.php?erro=true&email=$email");
+        header("Location: ../index?erro=true&email=$email");
         exit;
 
     endif;
