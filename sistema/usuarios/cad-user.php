@@ -5,8 +5,6 @@
 * Sisdam Web - 2.0 - 2017 - Todos os direitos reservados
 */
 
-$get_session = $_GET['session'] ?? '';
-
 if(empty($hashsession)):
     header("Location: index");
 endif;
@@ -24,7 +22,7 @@ endif;
                 else: echo '';
                     endif; ?>>
 
-<form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='user' enctype='multipart/form-data'>
+<form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios'?>" method="post" id='user' enctype='multipart/form-data'>
 
     <div class="row mb-1">
         <div class="col-md-1 mb-1">
@@ -39,7 +37,6 @@ endif;
     </div>
 
     <div class="row">
-        <?=$pag_system?>
         <div class="col-md-4 mb-1">
             <label class="col-form-label col-form-label-sm" for="inputNome"><strong><i class="fa fa-user fa-muted me-3 ms-3"></i> Nome</strong></label>
             <input type="text" data-toggle="tooltip" title="Ex: RODOLFO" class="form-control form-control-sm"
@@ -151,7 +148,7 @@ endif;
         <div class="col-md-12">
             <input type="hidden" name="acao" value="incluir">
             <?=$button->BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso);?>
-            <?=$button->BtnListar($pag_system,$get_pag, $get_year, $hashprimary);?>
+            <?=$button->BtnListar($pag_system,$get_pag, $get_year);?>
             <?=$button->BtnSair($pag_system);?>
         </div>
     </div>

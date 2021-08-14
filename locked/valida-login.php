@@ -55,7 +55,7 @@ else:
         $_SESSION['usuarioSenha'] = $user->senha;
         $_SESSION['usuarioFoto'] = $user->foto;
         $_SESSION['usuarioLixeira'] = $user->lixeira;
-        $_SESSION['hashenter'] = sha1(md5($user->cpf.date('dmYHis')));
+        $_SESSION['hashenter'] = hash('sha3-256', $user->nome.$user->email);
 
             // Script para encamninhar para a página anterior ou para principal
             if(isset($_SESSION['url']) && $_SESSION['url'] != ""):

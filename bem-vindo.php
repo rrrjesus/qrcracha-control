@@ -91,9 +91,9 @@ $imagemjumbo = '/imagens/sistemsisdam.jpg';
                 <h2 class="blog-post-title fs-3">Lista de Telas</h2>
                 <p class="fs-6">Para facilitar o acesso seguem os links das principais telas do sistema:</p>
                 <ul>
-                    <li><a class="btn btn-outline-success btn-sm mb-2 pe-3 fs-6" type="button" href="<?php echo 'menu-principal.php?pag=cadastro_usuarios&year='.$year.'&session='.$hashprimary;?>"><i class="fa fa-user me-2 ms-2"></i>Cadastro de usuários</a></li>
-                    <li><a class="btn btn-outline-primary btn-sm mb-2 pe-3 fs-6" type="button" href="<?php echo 'menu-principal.php?pag=lista_usuarios&year='.$year.'&session='.$hashprimary;?>"><i class="fa fa-list me-2 ms-2"></i> Lista de usuários </a></li>
-                    <li><a class="btn btn-outline-secondary btn-sm mb-2 pe-3 fs-6" type="button" href="<?php echo 'menu-principal.php?pag=lista_usuarios&year='.$year.'&lixeira=1&session='.$hashprimary;?>"><i class="fa fa-trash me-2 ms-2"></i> Lixeira de usuários </a></li>
+                    <li><a class="btn btn-outline-success btn-sm mb-2 pe-3 fs-6" type="button" href="<?php echo 'menu-principal.php?pag=cadastro_usuarios&year='.$year;?>"><i class="fa fa-user me-2 ms-2"></i>Cadastro de usuários</a></li>
+                    <li><a class="btn btn-outline-primary btn-sm mb-2 pe-3 fs-6" type="button" href="<?php echo 'menu-principal.php?pag=lista_usuarios&year='.$year;?>"><i class="fa fa-list me-2 ms-2"></i> Lista de usuários </a></li>
+                    <li><a class="btn btn-outline-secondary btn-sm mb-2 pe-3 fs-6" type="button" href="<?php echo 'menu-principal.php?pag=lista_usuarios&year='.$year.'&lixeira=1'?>"><i class="fa fa-trash me-2 ms-2"></i> Lixeira de usuários </a></li>
                 </ul>
                 <p class="fs-6">Lembre-se do passo a passo para cadastro:</p>
                 <ol>

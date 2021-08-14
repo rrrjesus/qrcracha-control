@@ -5,14 +5,14 @@
 include_once 'locked/seguranca.php'; // Garantindo a session
 
 $id = $_GET['id'] ?? ''; // Recebendo o id do usuario solicitado via GET
-$get_session = $_GET['session'] ?? ''; // Recebendo a hash da session via GET mesmo
+$reativacao = $_GET['reativacao'] ?? 'error'; // Recebendo o id do usuario solicitado via GET
 
 if (!empty($id) && is_numeric($id)): // Valida se existe um id e se ele é numérico
 
 $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
 
 $sql = "SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, usuarios.datanascimento, usuarios.cpf, 
-       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo,
+       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo, usuarios.lixeira,
             setor.nome_setor AS setor, setor.id as id_setor
         FROM usuarios
 LEFT JOIN setor
@@ -23,23 +23,28 @@ $stm->bindValue(':id', $id);
 $stm->execute();
 $user = $stm->fetch(PDO::FETCH_OBJ);
 
+$lixeira = $user->lixeira;
 
-    if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
-        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
-                    <strong>PARA EDITAR O '.$id.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&lixeira=1");
+    if ($reativacao == 'true') : // If caso o id tenha sido enviado a lixeira
+        echo '<div class="alert alert-success pt-1 pb-1 text-center text-uppercase" role="alert"><button class="btn btn-outline-warning btn-sm btn-circle me-1 pt-0 pb-0"><i class="fa fa-arrow-circle-o-up text-dark"></i></button>
+                    <strong>CRACHÁ REATIVADO COM SUCESSO !!!</strong></div>';
     endif;
 
-    if ($get_session <> $hashprimary) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
+    if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
+        echo '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
+                    <strong>PARA EDITAR O CRACHA DO '.$user->nome.' É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
+    endif;
+
+    if(empty($hashsession)): // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+        header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
     endif;
 
     if ($stm->rowCount() < 1) : // If caso o usuário não seja encontrado !!!
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+        header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
     endif;
 
     if(!empty($user)): // If caso encontre o id do usuário solicitado
@@ -52,15 +57,13 @@ $user = $stm->fetch(PDO::FETCH_OBJ);
 else : // Caso não encontre o usuário !!!
     $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id.' - NÃO ENCONTRADO !!!</strong></div>';
-    header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+    header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
 endif;
 
 ?>
 
 <div class="d-grid mb-2"><button disabled type="button" class="btn btn-warning fw-bold btn-block pt-1 pb-1 border-dark"><i
             class="far fa-file-edit px-2"></i> EDITAR USUÁRIO </button></div>
-
-<?=$button->AlertSession()?>
 
 <fieldset
     <?php if ($usuarioid < 1) :  echo 'disabled';
@@ -69,7 +72,7 @@ endif;
                 else: echo '';
                     endif; ?>>
 
-            <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
+            <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios'?>" method="post" id='edit_user' enctype='multipart/form-data'>
 
             <div class="row mb-1">
                 <div class="col-md-1 mb-1">
@@ -190,15 +193,16 @@ endif;
                 <div class="col-md-12">
                     <input type="hidden" name="acao" value="editar">
                     <input type="hidden" name="edit" value="edit_user">
+                    <input type="hidden" name="lixeira" value="<?=$user->lixeira?>">
                     <input type="hidden" name="id" value="<?=$user->id?>">
                     <input type="hidden" name="foto_atual" value="<?=$user->foto?>">
                     <?=$button->BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso);?>
-                    <?=$button->BtnListar($pag_system,$get_pag, $get_year, $hashprimary);?>
-                    <?=$button->BtnImprimirCracha($usuarioid, $usuariostatus, $usuarioniveldeacesso, $id, $hashprimary);?>
-                    <?=$button->BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso)?>
+                    <?=$button->BtnListar($pag_system,$get_pag, $get_year);?>
+                    <?=$button->BtnImprimirCracha($usuarioid, $usuariostatus, $usuarioniveldeacesso, $id);?>
+                    <?=$button->BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso, $lixeira)?>
                     <?=$button->BtnSair($pag_system);?>
                     <!-- Modal Delete-->
-                    <?=$modal->ModalLixeiraEdit($usuarioniveldeacesso,$user,$get_year,$hashprimary)?>
+                    <?=$modal->ModalLixeiraEdit($usuarioniveldeacesso,$user,$get_year, $lixeira)?>
                 </div>
             </div>
         </form>

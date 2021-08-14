@@ -11,7 +11,7 @@
     <div class="col-12 col-lg-4">
         <ul class="list-inline list-group-flush list-group-borderless text-center text-xl-right mb-0">
             <li class="list-inline-item px-0 px-sm-2"><i class="fa fa-question-circle me-2" style="color: #fafafb"></i><a target="_blank" href="index.php" class="link-light">Sobre</a></li>
-            <li class="list-inline-item px-0 px-sm-2"><i class="fa fa-globe-americas me-2" style="color: #1da1f2"></i><a target="_blank" href="https://<?=HOST?>/sisdamwebsite/" class="link-light">Site</a></li>
+            <li class="list-inline-item px-0 px-sm-2"><i class="fa fa-globe-americas me-2" style="color: #1da1f2"></i><a target="_blank" href="https://<?=HOST?>/" class="link-light">Site</a></li>
             <li class="list-inline-item px-0 px-sm-2"><i class="fa fa-whatsapp me-1" style="color: forestgreen"></i>
                 <!-- Link original -> "https://wa.me/5511991091365?text=Olá,%20meu%20amigo/a!%0AEsse%20é%20o%20suporte%20do%20Sistema%20SisdamWeb%0A.Como%20podemos%20te%20ajudar?"
                         Link encurtado -> "https://bit.ly/3m7H0iQ" no site -> https://app.bitly.com/ -->

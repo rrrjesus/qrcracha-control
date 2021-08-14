@@ -1,16 +1,15 @@
 <?php
-$get_session = $_GET['session'] ?? ''; // Recebendo a hash da session via GET mesmo
 
-if ($get_session <> $hashprimary) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
+if(empty($hashsession)): // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
     $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR SENHA DE USUÁRIO !!!</strong></div>';
-    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
+    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
 endif;
 ?>
 
 <fieldset <?php if (($usuariostatus == 0)) :  echo 'disabled'; endif; ?>>
 
-<form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id="edicao_senha">
+<form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios'?>" method="post" id="edicao_senha">
 
     <div class="form-row d-flex justify-content-center">
         <div class="col-md-4 mb-3 text-center">

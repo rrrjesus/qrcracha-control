@@ -4,9 +4,7 @@ error_reporting(0);
 // Garantindo a autenticidade da session atual ou destruindo caso false
 include_once '../../locked/seguranca.php';
 
-$get_session = $_GET['session'] ?? '';
-
-if($get_session !== $hashprimary):
+if(empty($hashsession)):
     header("Location: $pag_system");
 endif;
 
@@ -23,8 +21,8 @@ $nu_lixeira = $tables->CountLixeira($tabela, $get_pag, $conexaotable);
 $alertlixeira = $button->AlertLixeira($get_lixeira, $nu_lixeira);
 $alertsemregistros = $button->AlertSemRegistros($nu_registro);
 $btncolor = $button->BtnColor($get_lixeira, $get_year, $ano_atual);
-$btncadlist = $button->BtnCadlist($get_year, $ano_atual, $usuarioid, $pag_system, $get_pag, $hashprimary); // Botão bootstrap-success para novo cadastro (apenas se: ano = atual e usuário = logado)
-$btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeira, $pag_system, $hashprimary);
+$btncadlist = $button->BtnCadlist($get_year, $ano_atual, $usuarioid, $pag_system, $get_pag); // Botão bootstrap-success para novo cadastro (apenas se: ano = atual e usuário = logado)
+$btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeira, $pag_system);
 
 ?>
 
@@ -63,7 +61,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&session=<?=$hashprimary?>&lixeira=' + full[13] + '" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
+                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&lixeira=' + full[13] + '" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
                         }
                     },
                     {
@@ -75,7 +73,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [2], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="<?=PAGSYSTEM?>?pag=print_cracha&id=' + full[0] + '&session=<?=$hashprimary?>" target="_blank"  data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm text-center mt-1"><i class="fa fa-print"></i></a>';
+                            return '<a href="<?=PAGSYSTEM?>?pag=print_cracha&id=' + full[0] + '" target="_blank"  data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm text-center mt-1"><i class="fa fa-print"></i></a>';
                         }
                     },
                     {
@@ -109,20 +107,20 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 if(lixos === '0') {
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja apagar o usuário id: <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[0] + '</span> - ' + data[3] + ' ?</div>'
+                        '<div class="modal-title text-center">Deseja apagar o cracha de <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[3] + ' ' + data[4] + '</span> ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&session=<?=$hashprimary?>&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                 }else{
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja reativar o usuário id: <span class="badge rounded-pill bg-warning pt-2 pb-2">' + data[0] + '</span> ?</div>'
+                        '<div class="modal-title text-center">Deseja reativar o crachá de : <span class="badge rounded-pill bg-warning pt-2 pb-2">' + data[3] + ' ' + data[4] + '</span> ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
-                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&session=<?=$hashprimary?>&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
+                        '<a type="button" href="<?=PAGSYSTEM?>?pag=acao_usuarios&idaction=' + data[0] + '&useraction=' + data[3] + '&year=<?=$get_year?>&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>'
                     );
                     $('#myModalLixo').modal('show'); // calling the bootstrap modal
                 }
@@ -133,7 +131,8 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
 
 <?=$button->BtnTitleList($get_pag, $get_year, $nameform, $ano_atual, $get_lixeira);?>
 
-<?=$button->AlertSession()?>
+<?= /** @var TYPE_NAME $button */
+$button->AlertSession()?>
 
     <div class="col-md-12 text-center py-0">
 

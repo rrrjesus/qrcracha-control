@@ -48,9 +48,27 @@ class Modal {
                     </div>';
         endif;
     }
-    public function ModalLixeiraEdit($usuarioniveldeacesso,$user,$get_year,$hashprimary) {
-        if($usuarioniveldeacesso > 0 && $usuarioniveldeacesso < 3) :
+    public function ModalLixeiraEdit($usuarioniveldeacesso,$user,$get_year, $lixeira) {
+        if($usuarioniveldeacesso > 0 && $usuarioniveldeacesso < 3 && $lixeira == 1) :
             return '<div class="modal fade" id="modalLixeira" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content fs-5 fw-bold">
+                                <div class="modal-header text-white bg-warning pt-2 pb-0">
+                                    <div class="text-center"><p class="text-dark"><i class="fa fa-arrow-circle-o-up me-3"></i> Reativação da Lista</p></div>
+                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-center"><div class="modal-title text-center">Deseja reativar o crachá de <span class="badge rounded-pill bg-danger pt-2 pb-2">'.$user->nome.'</span> ?</div></div>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <a type="button" href="'.PAGSYSTEM.'?pag=acao_usuarios&idaction='.$user->id.'&useraction='.$user->nome.'&year='.$get_year.'&editaction=true&action=reativacao" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+            elseif($usuarioniveldeacesso > 0 && $usuarioniveldeacesso < 3) :
+                return '<div class="modal fade" id="modalLixeira" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-sm" role="document">
                             <div class="modal-content fs-5 fw-bold">
                                 <div class="modal-header text-white bg-secondary pt-2 pb-0">
@@ -58,16 +76,16 @@ class Modal {
                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="text-center"><div class="modal-title text-center">Deseja apagar o usuário id: <span class="badge rounded-pill bg-danger pt-2 pb-2">'.$user->id.'</span> - '.$user->nome.' ?</div></div>
+                                        <div class="text-center"><div class="modal-title text-center">Deseja apagar o crachá de <span class="badge rounded-pill bg-danger pt-2 pb-2">'.$user->nome.'</span> ?</div></div>
                                     </div>
                                     <div class="modal-footer justify-content-center">
-                                        <a type="button" href="'.PAGSYSTEM.'?pag=acao_usuarios&idaction='.$user->id.'&useraction='.$user->nome.'&year='.$get_year.'&session='.$hashprimary.'&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>
+                                        <a type="button" href="'.PAGSYSTEM.'?pag=acao_usuarios&idaction='.$user->id.'&useraction='.$user->nome.'&year='.$get_year.'&action=lixeira" class="btn btn-outline-success btn-sm fw-bold me-3"><i class="fa fa-arrow-circle-o-up me-2"></i> <u>S</u>IM</a><button type="button" class="btn btn-outline-danger btn-sm fw-bold" data-dismiss="modal"><i class="fa fa-remove me-2"></i>NÃO</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>';
-        else:
+            else:
             return '<div class="modal fade" id="modalLixeira" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-sm" role="document">
                             <div class="modal-content fs-5 fw-bold">

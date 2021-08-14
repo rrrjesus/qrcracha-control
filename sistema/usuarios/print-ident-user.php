@@ -6,7 +6,6 @@ require_once 'qrcode/qrcode.php';
 
 // Recebe o id do usuario solicitado via GET
 $id = $_GET['id'] ?? '';
-$get_session = $_GET['session'] ?? '';
 
 // Valida se existe um id e se ele é numérico
 if (!empty($id) && is_numeric($id)):
@@ -21,22 +20,22 @@ $stm->execute();
 $user = $stm->fetch(PDO::FETCH_OBJ);
 
     // Caso o id tenha sido enviado a lixeira
-    if ($get_session <> $hashprimary) :
+    if(empty($hashsession)):
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+        header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
     endif;
 
     if ($stm->rowCount() < 1):
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
-        header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+        header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
     endif;
 
 else :
     $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id.' - NÃO ENCONTRADO !!!</strong></div>';
-    header("Location: $pag_system?pag=lista_usuarios&year=$get_year&session=$hashprimary");
+    header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
 endif;
 ?>
 

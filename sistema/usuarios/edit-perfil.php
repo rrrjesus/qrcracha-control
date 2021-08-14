@@ -5,10 +5,9 @@ if(isset($_SESSION['usuarioId'])){$id_user = $usuarioid;}
     else {$id_user = 1;
 }
 
-$get_session = $_GET['session'] ?? ''; // Recebendo a hash da session via GET mesmo
 $get_id = $_GET['id'] ?? ''; // Recebendo a hash da session via GET mesmo
 
-if($get_session !== $hashprimary):
+if(empty($hashsession)):
     header("Location: $pag_system");
 endif;
 
@@ -42,14 +41,14 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 else{ echo 'sistema/imagens/padrao.jpg';}?>" alt="Card image cap">
                 </a>
                 <h5 class="card-title fs-5 mb-1"><?=$user->nome.' '.$user->sobrenome?></h5>
-                <p <?php if($user->datanascimento == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
-                elseif($user->datanascimento == 0000-00-00) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                <p <?php if($user->datanascimento == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario" class="card-text text-danger mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                elseif($user->datanascimento == 0000-00-00) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario" class="card-text text-danger mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i> DATA DE NASCIMENTO : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
                 else: echo 'class="card-text mb-1"><strong><i class="fa fa-calendar-day fa-muted me-2"></i>DATA DE NASCIMENTO : '.$data_formatada.'</strong></p>'; endif;?>
-                <p <?php if($user->email == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-envelope-o fa-muted me-2"></i> EMAIL : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                <p <?php if($user->email == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario" class="card-text text-danger mb-1"><strong><i class="fa fa-envelope-o fa-muted me-2"></i> EMAIL : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
                 else: echo 'class="card-text mb-1"><strong><i class="fa fa-envelope-o fa-muted me-2"></i>EMAIL : '.$user->email.'</strong></p>'; endif;?>
-                <p <?php if($user->cpf == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-files-o fa-muted me-2"></i> CPF : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                <p <?php if($user->cpf == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario" class="card-text text-danger mb-1"><strong><i class="fa fa-files-o fa-muted me-2"></i> CPF : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
                 else: echo 'class="card-text mb-1"><strong><i class="fa fa-files-o fa-muted me-2"></i>CPF : '.$user->cpf.'</strong></p>'; endif;?>
-                <p <?php if($user->celular == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary.'" class="card-text text-danger mb-1"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i> CELULAR : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
+                <p <?php if($user->celular == NULL) : echo '<p><a href="'.$pag_system.'?pag=edicao_perfil_usuario" class="card-text text-danger mb-1"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i> CELULAR : COMPLETE SUAS INFORMAÇÕES</strong></a></p>';
                 else: echo 'class="card-text mb-1"><strong><i class="fa fa-mobile-phone fa-muted me-2"></i>CELULAR : '.$user->celular.'</strong></p>'; endif;?>
             </div>
         </div>
@@ -61,7 +60,7 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 <h5 class="card-title mb-3"> SENHA</h5>
                 <img class="img-fluid mb-3" height="100" width="100" src="sistema/imagens/chave-icon.png" alt="Card image cap">
                 <p class="card-text h6 mb-3">Torne sua senha mais forte ou altere-a se alguém mais a souber.</p>
-                <a href="<?=$pag_system.'?pag=alteracao_senha&id='.$usuarioid.'&session='.$hashprimary?>" class="card-link mb-3"><strong>ALTERAR SENHA </strong></a>
+                <a href="<?=$pag_system.'?pag=alteracao_senha&id='.$usuarioid?>" class="card-link mb-3"><strong>ALTERAR SENHA </strong></a>
             </div>
         </div>
     </div>
@@ -72,7 +71,7 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 <h5 class="card-title mb-3">INFORMAÇÕES</h5>
                 <img class="img-fluid mb-3" height="100" width="100" src="sistema/imagens/icon-edit-user.jpg" alt="Card image cap">
                 <p class="card-text h6 mb-3">Mantenha suas informações atualizados no <?=$systemfetch->title?>.</p>
-                <a href="<?=$pag_system.'?pag=edicao_perfil_usuario&session='.$hashprimary?>" class="card-link mb-3"><strong>ATUALIZAR INFORMAÇÕES </strong></a>
+                <a href="<?=$pag_system.'?pag=edicao_perfil_usuario'?>" class="card-link mb-3"><strong>ATUALIZAR INFORMAÇÕES </strong></a>
             </div>
         </div>
     </div>

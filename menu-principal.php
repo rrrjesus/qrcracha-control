@@ -24,11 +24,8 @@ $usuarionivelacesso = isset($_SESSION['usuarioNivelAcesso']) ? $_SESSION['usuari
 $usuariofoto = isset($_SESSION['usuarioFoto']) ? $_SESSION['usuarioFoto'] : 'imagens/padrao.jpg';
 $usuariolixeira = isset($_SESSION['usuarioLixeira']) ? $_SESSION['usuarioLixeira'] : 0;
 
+//hash para session
 $hashsession = isset($_SESSION['hashenter']) ? $_SESSION['hashenter'] : '';
-
-$haship = hash('sha3-256', $tables->get_client_ip());
-
-$hashprimary = hash('sha3-256', $hashsession.$haship);
 
 ?>
 

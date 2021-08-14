@@ -32,13 +32,13 @@
                 }
             });
         </script>
-        <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="<?=$pag_system.'?pag=cadastro_usuarios&session='.$hashprimary?>">Cadastro</a>
-        <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="<?=$pag_system.'?pag=lista_usuarios&session='.$hashprimary?>">Lista</a>
+        <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="<?=$pag_system.'?pag=cadastro_usuarios'?>">Cadastro</a>
+        <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="<?=$pag_system.'?pag=lista_usuarios'?>">Lista</a>
         <?php if (isset($_SESSION['usuarioId'])): ?>
         <img class="img-profile rounded-circle" height="38" width="38" src="<?php if (file_exists($usuariofoto))
         {echo $usuariofoto;}
         else{ echo 'sistema/imagens/padrao.jpg';}?>">
-        <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="<?=$pag_system.'?pag=edicao_perfil&id='.$usuarioid.'&session='.$hashprimary?>">Perfil</a>
+        <a class="me-3 py-2 text-dark text-decoration-none fw-bold fs-6" href="<?=$pag_system.'?pag=edicao_perfil&id='.$usuarioid?>">Perfil</a>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger btn-sm fw-bold" data-toggle="modal" data-target="#sairModal"><i class="far fa-reply-all me-1" data-toggle="tooltip" title="SAIR DO SISTEMA"></i> SAIR</button>
         <?php

@@ -145,13 +145,13 @@ class Buttons extends Tables {
     }
 
     // Função do botão de cadastro na lista de usuários
-    public function BtnCadlist($get_year, $ano_atual, $usuarioid, $pag_system, $get_pag, $hashprimary) {
+    public function BtnCadlist($get_year, $ano_atual, $usuarioid, $pag_system, $get_pag) {
 
         $cadastro = substr($get_pag, 6);
 
         if(!empty($get_pag)):
             if ($get_year === $ano_atual && $usuarioid > 1) :
-                return '<a href = "'.$pag_system.'?pag=cadastro_'.$cadastro.'&year='.$ano_atual.'&session='.$hashprimary.'" role="button" class="btn btn-outline-success btn-sm fw-bold mb-3 me-3"
+                return '<a href = "'.$pag_system.'?pag=cadastro_'.$cadastro.'&year='.$ano_atual.'" role="button" class="btn btn-outline-success btn-sm fw-bold mb-3 me-3"
                 accesskey="N" data-toggle="tooltip" data-placement="bottom" title="CADASTRAR"><i class="far fa-plus-circle px-2"></i><u>N</u>OVO</a>';
             endif;
         endif;
@@ -177,7 +177,7 @@ class Buttons extends Tables {
     }
 
     // Função para o botão listar
-    public function BtnListar($pag_system,$get_pag, $get_year, $hashprimary) {
+    public function BtnListar($pag_system,$get_pag, $get_year) {
 
         if(substr($get_pag, 0,8) === 'cadastro'):
             $lista = substr($get_pag, 9);
@@ -185,14 +185,14 @@ class Buttons extends Tables {
             $lista = substr($get_pag, 7);
         endif;
 
-        return '<a href="'.$pag_system.'?pag=lista_'.$lista.'&year='.$get_year.'&session='.$hashprimary.'" role="button" data-toggle="tooltip" title="LISTAR REGISTROS"
+        return '<a href="'.$pag_system.'?pag=lista_'.$lista.'&year='.$get_year.'" role="button" data-toggle="tooltip" title="LISTAR REGISTROS"
                     accesskey="L" class="btn btn-outline-info btn-sm fw-bold mb-2 me-2 mr-sm-4"><i class="fa fa-list-ol me-2"></i><u>L</u>ISTAR</a>';
     }
 
     // Função para verificar se o usuário esta cadastrado no sistema
-    public function HashPag($get_hash, $hashprimary) {
-        if (isset($hashprimary)) {
-            if($hashprimary !== $get_hash):
+    public function HashPag($get_hash) {
+        if (isset($hashsession)) {
+            if(empty($hashsession)):
                 $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                         <strong>É NECESSÁRIO ESTAR LOGADO !!!</strong></div>';
                     header("Location: $pag_system");
@@ -208,13 +208,16 @@ class Buttons extends Tables {
     }
 
     // Função para modal de lixeira
-    public function BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso) {
+    public function BtnModalLixo($usuarioid, $usuariostatus, $usuarioniveldeacesso, $lixeira) {
         if ($usuarioid === 1):
             return '';
         elseif ($usuariostatus === 0):
             return '';
         elseif ($usuarioniveldeacesso === 4):
             return '';
+        elseif ($lixeira == 1):
+            return '<button type="button" title="REATIVAR" class="btn btn-outline-warning btn-sm btn-circle mb-2 me-2 ms-2 mr-sm-4" data-toggle="modal" data-target="#modalLixeira">
+                        <i class="fa fa-arrow-circle-o-up" data-toggle="tooltip" title="REATIVAR"></i></button>';
         else:
             return '<button type="button" title="APAGAR" class="btn btn-outline-danger btn-sm btn-circle mb-2 me-2 ms-2 mr-sm-4" data-toggle="modal" data-target="#modalLixeira">
                         <i class="fa fa-trash-o" data-toggle="tooltip" title="LIXEIRA"></i></button>';
@@ -222,7 +225,7 @@ class Buttons extends Tables {
     }
 
     // Função para modal de lixeira
-    public function BtnImprimirCracha($usuarioid, $usuariostatus, $usuarioniveldeacesso, $id, $hashprimary) {
+    public function BtnImprimirCracha($usuarioid, $usuariostatus, $usuarioniveldeacesso, $id) {
         if ($usuarioid === 1):
             return '';
         elseif ($usuariostatus === 0):
@@ -230,20 +233,20 @@ class Buttons extends Tables {
         elseif ($usuarioniveldeacesso === 4):
             return '';
         else:
-            return '<a href="'.PAGSYSTEM.'?pag=print_cracha&id='.$id.'&session='.$hashprimary.'" data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm btn-circle mb-2 me-1 ms-1 mr-sm-4"><i class="fa fa-print"></i></a>';
+            return '<a href="'.PAGSYSTEM.'?pag=print_cracha&id='.$id.'" data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm btn-circle mb-2 me-1 ms-1 mr-sm-4"><i class="fa fa-print"></i></a>';
         endif;
     }
 
     /** Função para botão de lixeira em lista
      * @param $usuarioniveldeacesso //
      */
-    public function Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeira, $pag_system, $hashprimary) {
+    public function Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeira, $pag_system) {
         if ($usuarioniveldeacesso === '1'):
             if ($get_lixeira === 0):
-                return '<a href="'.$pag_system .'?pag='.$get_pag.'&year='.$get_year.'&lixeira=1&session='.$hashprimary.'" role="button" accesskey="L" class="btn btn-outline-secondary btn-sm fw-bold mb-3"
+                return '<a href="'.$pag_system .'?pag='.$get_pag.'&year='.$get_year.'&lixeira=1" role="button" accesskey="L" class="btn btn-outline-secondary btn-sm fw-bold mb-3"
                         data-toggle="tooltip" data-placement="bottom" title="LIXEIRA"><i class="fa fa-trash-o px-2"></i><u>L</u>IXO <span class="badge rounded-pill bg-danger">' . $nu_lixeira . '</a>';
             else:
-                return '<a href="' . $pag_system . '?pag='.$get_pag.'&year='.$get_year.'&session='.$hashprimary.'" accesskey="S" role="button" class="btn btn-outline-danger btn-sm fw-bold mb-3"><i class="fa fa-arrow-circle-o-left px-2"></i><u>S</u>AIR</a>';
+                return '<a href="' . $pag_system . '?pag='.$get_pag.'&year='.$get_year.'" accesskey="S" role="button" class="btn btn-outline-danger btn-sm fw-bold mb-3"><i class="fa fa-arrow-circle-o-left px-2"></i><u>S</u>AIR</a>';
             endif;
         endif;
     }

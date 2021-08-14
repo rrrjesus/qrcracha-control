@@ -9,9 +9,7 @@ error_reporting(-1);
 // Recebe o id do cliente do cliente via GET
 $id_user = (isset($usuarioid) ? $usuarioid : '');
 
-$get_session = $_GET['session'] ?? '';
-
-if($get_session !== $hashprimary):
+if(empty($hashsession)):
     header("Location: $pag_system");
 endif;
 
@@ -29,19 +27,19 @@ if (!empty($id_user) && is_numeric($id_user)): // Valida se existe um id e se el
     if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>USUÁRIO DESATIVADO !!! PARA EDITAR O '.$id_user.' - É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
-        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
+        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
     endif;
 
-    if ($get_session <> $hashprimary) : // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
+    if(empty($hashsession)): // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR O USUÁRIO !!!</strong></div>';
-        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
+        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
     endif;
 
     if ($stm->rowCount() < 1) : // If caso o usuário não seja encontrado !!!
         $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: USUÁRIO NÃO ENCONTRADO !!!</strong></div>';
-        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
+        header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
     endif;
 
     if(!empty($user)): // If caso encontre o id do usuário solicitado
@@ -52,7 +50,7 @@ if (!empty($id_user) && is_numeric($id_user)): // Valida se existe um id e se el
 else : // Caso não encontre o usuário !!!
     $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
     <strong>ERRO AO EDITAR: '.$id_user.' - NÃO ENCONTRADO !!!</strong></div>';
-    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid&session=$hashprimary");
+    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
 endif;
 ?>
 <fieldset
@@ -61,7 +59,7 @@ endif;
                 else: echo '';
                     endif; ?>>
 
-    <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios&session='.$hashprimary?>" method="post" id='edit_user' enctype='multipart/form-data'>
+    <form class="needs-validation" novalidate action="<?=$pag_system.'?pag=acao_usuarios'?>" method="post" id='edit_user' enctype='multipart/form-data'>
         <div class="row mb-1">
             <div class="col-md-1 mb-1">
                 <a href="<?php if (file_exists($user->foto))

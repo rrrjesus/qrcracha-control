@@ -61,7 +61,7 @@ if($stm->rowCount() < 1): ?>
 
         <div class="row align-items-center mb-1">
             <div class="col-sm-6 col-md-4 text-center">
-                <a class="btn btn-secondary" href="<?=PAGSYSTEM.'?pag=print_cracha&id='.$id.'&session='.$hashprimary?>" role="button"><i class="fa fa-print me-2"></i>IMPRIMIR</a>
+                <a class="btn btn-secondary" href="<?=PAGSYSTEM.'?pag=print_cracha&id='.$id?>" role="button"><i class="fa fa-print me-2"></i>IMPRIMIR</a>
             </div>
         </div>
 
