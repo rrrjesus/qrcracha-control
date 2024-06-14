@@ -3,7 +3,7 @@
 if(empty($hashsession)): // If caso o o hash da session não seja verdadeiro -> redirecionando a lista
     $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>ERRO AO EDITAR SENHA DE USUÁRIO !!!</strong></div>';
-    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
+    header("Location: $pag_system?pag=edicao_perfil");
 endif;
 ?>
 

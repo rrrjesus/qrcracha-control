@@ -1,17 +1,14 @@
 
 <?php
-// Recebe o id do usuário por session ...
-if(isset($_SESSION['usuarioId'])){$id_user = $usuarioid;}
-    else {$id_user = 1;
-}
-
-$get_id = $_GET['id'] ?? ''; // Recebendo a hash da session via GET mesmo
+// Recebe o id do cliente do cliente via session
+/** @var TYPE_NAME $id_user */
+$id_user = ($usuarioid ?? '');
 
 if(empty($hashsession)):
     header("Location: $pag_system");
 endif;
 
-if($get_id !== $usuarioid):
+if(empty($usuarioid)):
     header("Location: $pag_system");
 endif;
 
@@ -60,7 +57,7 @@ $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
                 <h5 class="card-title mb-3"> SENHA</h5>
                 <img class="img-fluid mb-3" height="100" width="100" src="sistema/imagens/chave-icon.png" alt="Card image cap">
                 <p class="card-text h6 mb-3">Torne sua senha mais forte ou altere-a se alguém mais a souber.</p>
-                <a href="<?=$pag_system.'?pag=alteracao_senha&id='.$usuarioid?>" class="card-link mb-3"><strong>ALTERAR SENHA </strong></a>
+                <a href="<?=$pag_system.'?pag=alteracao_senha'?>" class="card-link mb-3"><strong>ALTERAR SENHA </strong></a>
             </div>
         </div>
     </div>

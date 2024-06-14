@@ -53,7 +53,7 @@ $systemfetch = $stmsystem->fetch(PDO::FETCH_OBJ);
                     </div>
                     <div class="row align-items-center mb-0 mt-0 text-center">
                         <div class="col-sm-9 col-md-12 text-center">
-                            <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido de 7 de Setembro de 2021 a 14 de Setembro de 2021"</p>
+                            <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido em 7 de Setembro de 2021"</p>
                         </div>
                     </div>
 

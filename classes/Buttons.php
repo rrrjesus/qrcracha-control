@@ -23,7 +23,7 @@ class Buttons extends Tables {
 
     /** Apenas traduções do datatable */
     public function language() {
-            echo '"language": {
+        echo '"language": {
                 "sEmptyTable": "Nenhum registro encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros","sInfoEmpty": "Mostrando 0 até 0 de 0 registros","sInfoFiltered": "(Filtrados de _MAX_ registros)",
                 "sInfoThousands": ".","sLengthMenu": "_MENU_ Resultados por Página","sLoadingRecords": "Carregando...","sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado",
@@ -159,16 +159,16 @@ class Buttons extends Tables {
 
     // Função para o botão gravar
     public function BtnGravar($usuarioid, $usuariostatus, $usuarioniveldeacesso){
-            if ($usuarioid === 1):
+        if ($usuarioid === 1):
             return '';
-            elseif ($usuariostatus === 0):
-                return '';
-            elseif ($usuarioniveldeacesso === 4):
-                return '';
-            else:
-                return '<button type="submit" accesskey="G" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-outline-success btn-sm fw-bold mb-2 me-2 mr-sm-4">
+        elseif ($usuariostatus === 0):
+            return '';
+        elseif ($usuarioniveldeacesso === 4):
+            return '';
+        else:
+            return '<button type="submit" accesskey="G" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-outline-success btn-sm fw-bold mb-2 me-2 mr-sm-4">
                             <i class="far fa-compact-disc me-2"></i><u>G</u>RAVAR </button>';
-            endif;
+        endif;
     }
 
     // Função para o botão sair
@@ -195,7 +195,7 @@ class Buttons extends Tables {
             if(empty($hashsession)):
                 $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                         <strong>É NECESSÁRIO ESTAR LOGADO !!!</strong></div>';
-                    header("Location: $pag_system");
+                header("Location: $pag_system");
             endif;
         }
     }
@@ -233,7 +233,7 @@ class Buttons extends Tables {
         elseif ($usuarioniveldeacesso === 4):
             return '';
         else:
-            return '<a href="'.PAGSYSTEM.'?pag=print_cracha&id='.$id.'" data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm btn-circle mb-2 me-1 ms-1 mr-sm-4"><i class="fa fa-print"></i></a>';
+            return '<a href="authentic/print.php?id='.$id.'" target="_blank" data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm btn-circle mb-2 me-1 ms-1 mr-sm-4"><i class="fa fa-print"></i></a>';
         endif;
     }
 

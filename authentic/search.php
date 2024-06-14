@@ -28,15 +28,12 @@ $get_hash_cracha = $_GET['crypto'] ?? ''; // Recebendo a hash do cracha via GET 
 // Valida se existe um id e se ele é numérico
 if (!empty($id) && is_numeric($id)):
 
-$sql = "SELECT id, foto, nome, sobrenome, datanascimento, cpf, email, nivel_acesso_id, celular, status, sexo,
-        setor, hash_cracha, lixeira FROM usuarios WHERE id = :id";
+$sql = "SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, setor.nome_setor AS setor, usuarios.adm, usuarios.cidade, usuarios.hash_cracha, usuarios.lixeira,setor.id as id_setor
+        FROM usuarios LEFT JOIN setor ON usuarios.setor = setor.id WHERE usuarios.id = :id";
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':id', $id);
 $stm->execute();
 $user = $stm->fetch(PDO::FETCH_OBJ);
-
-//Encerra a conexão
-$smt = null;
 
     if(!empty($user)): // If caso encontre o id do usuário solicitado
         if ($user->lixeira == 1) : // If caso o id tenha sido enviado a lixeira
@@ -102,10 +99,10 @@ endif;
                         else{ echo '../sistema/imagens/padrao.jpg';}?>" class="img">
                     </div>
                     <div class="col-sm-8 col-md-7 mb-1">
-                        <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2 ps-5">RGE JAÇANÃ/SUPORTE TI</p>
+                        <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">RGE JAÇANÃ</p>
                         <h1 class="display-6 text-dark ms-3 mt-0 mb-0"><?=$user->nome?></h1>
-                        <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">INFORMÁTICA</p>
-                        <p class="h2 text-secondary fw-bold ms-2">RGE 2021</p>
+                        <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2"><?=$user->setor?></p>
+                        <p class="h2 text-secondary fw-bold ms-2">RGE 2022</p>
                     </div>
                 </div>
 
@@ -122,7 +119,7 @@ endif;
                     </div>
                     <div class="row align-items-center mb-0 mt-0 text-center">
                         <div class="col-sm-9 col-md-12 text-center">
-                            <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido de 7 de Setembro de 2021 a 14 de Setembro de 2021"</p>
+                            <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido somente para 17 de abril e 11 de setembro de <?=date('Y')?>.</p>
                         </div>
                     </div>
                     <div class="row align-items-center" style="font-size: 0.80rem">

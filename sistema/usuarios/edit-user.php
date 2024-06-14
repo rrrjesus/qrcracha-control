@@ -6,6 +6,7 @@ include_once 'locked/seguranca.php'; // Garantindo a session
 
 $id = $_GET['id'] ?? ''; // Recebendo o id do usuario solicitado via GET
 $reativacao = $_GET['reativacao'] ?? 'error'; // Recebendo o id do usuario solicitado via GET
+$edit = $_GET['edit'] ?? 'error'; // Recebendo o id do usuario solicitado via GET
 
 if (!empty($id) && is_numeric($id)): // Valida se existe um id e se ele é numérico
 
@@ -33,6 +34,11 @@ $lixeira = $user->lixeira;
     if ($get_lixeira == 1) : // If caso o id tenha sido enviado a lixeira
         echo '<div class="alert alert-danger pb-1 pt-1 text-center text-uppercase" role="alert">
                     <strong>PARA EDITAR O CRACHA DO '.$user->nome.' É NECESSÁRIO REATIVÁ-LO ANTES !!!</strong></div>';
+    endif;
+    
+    if ($edit == 'true') : // If caso a edição seja realizada com sucesso
+        echo '<div class="alert alert-success pt-1 pb-1 text-center" role="alert"><button class="btn btn-outline-warning btn-sm btn-circle me-1 pt-0 pb-0"><i class="fa fa-pencil text-dark"></i></button>
+            <strong>CRACHÁ DE '.$user->nome.' EDITADO COM SUCESSO !!!</strong></div>';
     endif;
 
     if(empty($hashsession)): // If caso o o hash da session não seja verdadeiro -> redirecionando a lista

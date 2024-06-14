@@ -82,7 +82,7 @@ endif;
             </div>
             <div class="row mb-0 mt-0 justify-content-center">
                 <div class="col-7 text-center">
-                    <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido de 7 de Setembro de 2021 a 14 de Setembro de 2021"</p>
+                    <p class="text-dark fw-bold" style="font-size: 0.70rem">"Válido em 7 de Setembro de 2021"</p>
                 </div>
             </div>
 
@@ -113,7 +113,7 @@ endif;
             </div>
         </div>
             <div class="row mt-2">
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             </div>
 
             <div class="row mb-0 mt-0 justify-content-center">

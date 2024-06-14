@@ -49,7 +49,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 dom: "lBftipr",processing: true,serverside: true,
                 ajax: '<?=$listserver?>',
                 "lengthMenu": [[3, 6, 10, 25, 50, -1], [3, 6, 10, 25, 50, "Todos"]],
-                "aaSorting": [0, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
+                "aaSorting": [3, 'asc'], /* 'desc' Carregar table decrescente e 'asc' crescente*/
                 "aoColumnDefs": [
                     {"bVisible": false,"aTargets": [5]},
                     {"bVisible": false,"aTargets": [6]},
@@ -73,7 +73,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [2], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="<?=PAGSYSTEM?>?pag=print_cracha&id=' + full[0] + '" target="_blank"  data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm text-center mt-1"><i class="fa fa-print"></i></a>';
+                            return '<a href="authentic/print.php?id=' + full[0] + '" target="_blank"  data-toggle="tooltip" title="IMPRIMIR" role="button" class="btn btn-outline-secondary btn-sm text-center mt-1"><i class="fa fa-print"></i></a>';
                         }
                     },
                     {

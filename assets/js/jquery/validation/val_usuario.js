@@ -99,6 +99,9 @@ $(function() {
                 sobrenome: {
                     required: true
                 },
+                email: {
+                    required: true
+                },
                 //datanascimento: { required: true, dateBR: true, maxDateE: true },
                 // cpf: {required: true,remote: "remote/user/val-cpf-cad.php" },
                 // email: { required: true, remote: "remote/user/val-email-cad.php" },
@@ -119,6 +122,9 @@ $(function() {
                 },
                 sobrenome: {
                     required:"Digite um SobreNome !!!"
+                },
+                email: {
+                    required:"Digite um Email !!!"
                 },
                 // datanascimento: { required:"Digite uma data válida", dateBR: "Informe uma data válida", maxDateE: "Digite a data até hoje" },
                 // cpf: { required: "Digite o CPF válido", remote: "Esse cpf já esta cadastrado em outro usuário !!!" },
@@ -143,6 +149,9 @@ $(function() {
                 sobrenome: {
                     required: true
                 },
+                email: {
+                    required: true
+                },
                 //datanascimento: { required: true, dateBR: true, maxDateE: true },
                 // cpf: {required: true,remote: "remote/user/val-cpf-edit.php" },
                 // email: { required: true },
@@ -158,6 +167,9 @@ $(function() {
                 },
                 sobrenome: {
                     required:"Digite um SobreNome !!!"
+                },
+                email: {
+                    required:"Digite um Email !!!"
                 },
                 // datanascimento: { required:"Digite uma data válida", dateBR: "Informe uma data válida", maxDateE: "Digite a data até hoje" },
                 // cpf: { required: "Digite o CPF válido", remote: "Esse cpf já esta cadastrado em outro usuário !!!" },

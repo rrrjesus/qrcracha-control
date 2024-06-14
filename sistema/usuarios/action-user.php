@@ -16,7 +16,7 @@
     $foto_atual		  = (isset($_POST['foto_atual'])) ? $_POST['foto_atual'] : '';
     $nome             = (isset($_POST['nome'])) ? $_POST['nome'] : '';
     $sobrenome        = (isset($_POST['sobrenome'])) ? $_POST['sobrenome'] : '';
-    $datanascimento   = (isset($_POST['datanascimento'])) ? $_POST['datanascimento'] : '';
+    $datanascimento   = (isset($_POST['datanascimento'])) ? $_POST['datanascimento'] : '01/01/1970';
     $cpf              = (isset($_POST['cpf'])) ? str_replace(array('.','-'), '', $_POST['cpf']): '';
     $email            = (isset($_POST['email'])) ? $_POST['email'] : '';
     $celular   		  = (isset($_POST['celular'])) ? str_replace(array('(',')','-', ' '), '', $_POST['celular']) : '';
@@ -53,10 +53,12 @@
     // Se for ação diferente de excluir valida os dados obrigatórios
     if ($acao != 'excluir'):
 
-        if(!empty($datanascimento)):
-        // Constrói a data no formato ANSI yyyy/mm/dd
-        $data_temp = explode('/', $datanascimento);
-        $data_ansi = $data_temp[2] . '-' . $data_temp[1] . '-' . $data_temp[0];
+        if(empty($datanascimento)):
+            $data_ansi = '';
+        else:
+            // Constrói a data no formato ANSI yyyy/mm/dd
+            $data_temp = explode('/', $datanascimento);
+            $data_ansi = $data_temp[2] . '-' . $data_temp[1] . '-' . $data_temp[0];
         endif;
     endif;
 
@@ -83,26 +85,26 @@
             // Verifica se o upload foi enviado via POST
             if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
-                if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/cpf" do novo usuário existe
-                    mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
+                if(!file_exists( 'sistema/imagens')): // Verifica se o diretório "imagens/cpf" do novo usuário existe
+                    mkdir( 'sistema/imagens'); // Caso não exista cria o diretório
                 endif;
 
                 // Verifica se o diretório "imagens/id/fotologin" de destino existe, senão existir cria o diretório
-                if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
-                    mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
+                if(!file_exists( 'sistema/imagens/fotologin')): //
+                    mkdir( 'sistema/imagens/fotologin');
                 endif;
 
                 // Monta o caminho de destino com o nome do arquivo
                 $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                 // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
+                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/fotologin/'.$nome_foto)):
                     $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                     Se o erro persistir contate o administrador.</strong></div>';
 
                 endif;
 
-                $nome_foto = 'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto;
+                $nome_foto = 'sistema/imagens/fotologin/'.$nome_foto;
             endif;
         endif;
 
@@ -153,7 +155,7 @@
                     // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
                     if ($foto_atual <> 'sistema/imagens/padrao.jpg'):
                         //unlink("fotos/" . $foto_atual);
-                        unlink('sistema/imagens/'.$cpf.'/fotologin/'.$foto_atual);
+                        unlink('sistema/imagens/fotologin/'.$foto_atual);
                     endif;
 
                     $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
@@ -171,26 +173,26 @@
                     // Verifica se o upload foi enviado via POST
                     if(is_uploaded_file($_FILES['foto']['tmp_name'])):
 
-                        if(!file_exists( 'sistema/imagens/'.$cpf)): // Verifica se o diretório "imagens/login" do novo usuário existe
-                            mkdir( 'sistema/imagens/'.$cpf); // Caso não exista cria o diretório
+                        if(!file_exists( 'sistema/imagens')): // Verifica se o diretório "imagens/login" do novo usuário existe
+                            mkdir( 'sistema/imagens'); // Caso não exista cria o diretório
                         endif;
 
                         // Verifica se o diretório "imagens/login/fotologin" de destino existe, senão existir cria o diretório
-                        if(!file_exists( 'sistema/imagens/'.$cpf.'/fotologin')): //
-                            mkdir( 'sistema/imagens/'.$cpf.'/fotologin');
+                        if(!file_exists( 'sistema/imagens/fotologin')): //
+                            mkdir( 'sistema/imagens/fotologin');
                         endif;
 
                         // Monta o caminho de destino com o nome do arquivo
                         $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
 
                         // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                        if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto)):
+                        if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/fotologin/'.$nome_foto)):
                             $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
                             Se o erro persistir contate o administrador.</strong></div>';
 
                         endif;
 
-                        $nome_foto = 'sistema/imagens/'.$cpf.'/fotologin/'.$nome_foto;
+                        $nome_foto = 'sistema/imagens/fotologin/'.$nome_foto;
 
                     endif;
                 else:
@@ -222,17 +224,13 @@
                 $retorno = $stm->execute();
 
                 if ($retorno && $edit == 'edit_user'):
-                    $_SESSION['msgedit'] = '<div class="alert alert-success pt-1 pb-1 text-center" role="alert"><button class="btn btn-outline-warning btn-sm btn-circle me-1 pt-0 pb-0"><i class="fa fa-pencil text-dark"></i></button>
-                        <strong>CRACHÁ DE '.$nome.' EDITADO COM SUCESSO !!!</strong></div>';
-                        header("Location: $pag_system?pag=lista_usuarios&year=$year");
+                        header("Location: $pag_system?pag=edicao_usuarios&id=$id&edit=true&lixeira=$lixeira");
                 elseif ($retorno && $edit == 'edit_perfil_user'):
                     $_SESSION['msgedit'] = '<div class="alert alert-success pt-1 pb-1 text-center" role="alert"><button class="btn btn-outline-warning btn-sm btn-circle me-1 pt-0 pb-0"><i class="fa fa-pencil text-dark"></i></button>
                     <strong><i class="fa fa-user me-2"></i>'.$usuarionome.' , SEU PERFIL FOI EDITADO COM SUCESSO !!!</strong></div>';
-                    header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
+                    header("Location: $pag_system?pag=edicao_perfil");
                 elseif ($retorno && $edit == ''):
-                    $_SESSION['msgedit'] = '<div class="alert alert-success pt-1 pb-1 text-center" role="alert"><button class="btn btn-outline-warning btn-sm btn-circle me-1 pt-0 pb-0"><i class="fa fa-pencil text-dark"></i></button>
-                    <strong>CRACHÁ DE </strong>'.$nome.' <strong> EDITADO COM SUCESSO !!!</strong></div>';
-                    header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
+                    header("Location: $pag_system?pag=edicao_usuarios&id=$id&edit=true&lixeira=$lixeira");
                 else:
                     $_SESSION['msgerro'] = '<div class="alert alert-danger pt-1 pb-1 text-center" role="alert"><button class="btn btn-outline-warning btn-sm btn-circle me-1 pt-0 pb-0"><i class="fa fa-pencil text-dark"></i></button>
                         <strong>ERRO AO EDITAR USUÁRIO '.$nome.' !!!</strong></div>';
@@ -246,7 +244,7 @@
     if ($acao == 'editar_senha'):
 
         //criptografa a senha com sha3-256 + sal
-        $hasheditsenha = hash('sha3-256', 'jesusobompastor'.$usuarioemail);
+        $hasheditsenha = hash('sha3-256', 'jesusobompastor'.$email);
         $cripto_senha_edit_senha = hash('sha3-256', $hasheditsenha.$senha);
 
         $sql = 'UPDATE usuarios SET senha=:senha, date_alter_senha=NOW() ';
@@ -260,7 +258,7 @@
         if ($retorno):
             $_SESSION['msgsuccess'] = '<div class="alert alert-success pb-1 pt-1 text-center" role="alert">
                 <strong>SENHA ALTERADA COM SUCESSO !!!</strong></div>';
-            header("Location: $pag_system?pag=edicao_perfil&id=$usuarioid");
+            header("Location: $pag_system?pag=edicao_perfil");
         else:
             $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert">
                 <strong>ERRO AO ALTERAR SENHA !!!</strong></div>';
