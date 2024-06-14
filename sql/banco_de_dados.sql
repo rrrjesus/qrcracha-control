@@ -1,13 +1,11 @@
--- drop TABLE albuns, config_system, menu_principal, menu_sub, menu_sub_sub, navfootercolor, pag_system, setor, usuarios;
-
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Jul-2021 às 02:15
--- Versão do servidor: 10.4.19-MariaDB
--- versão do PHP: 8.0.7
+-- Tempo de geração: 14/06/2024 às 05:34
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `jacana_system`
+-- Banco de dados: `banco_de_dados`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `albuns`
+-- Estrutura para tabela `albuns`
 --
 
 CREATE TABLE `albuns` (
@@ -40,10 +38,10 @@ CREATE TABLE `albuns` (
   `data_criado` timestamp NOT NULL DEFAULT current_timestamp(),
   `alterado` varchar(100) NOT NULL,
   `data_alterado` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `albuns`
+-- Despejando dados para a tabela `albuns`
 --
 
 INSERT INTO `albuns` (`id_alb`, `ativo`, `card_img_top`, `card_title`, `card_text`, `href_button`, `criado`, `data_criado`, `alterado`, `data_alterado`) VALUES
@@ -58,7 +56,7 @@ INSERT INTO `albuns` (`id_alb`, `ativo`, `card_img_top`, `card_title`, `card_tex
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `config_system`
+-- Estrutura para tabela `config_system`
 --
 
 CREATE TABLE `config_system` (
@@ -75,35 +73,123 @@ CREATE TABLE `config_system` (
   `ano` int(4) DEFAULT NULL,
   `pag_principal` varchar(50) NOT NULL,
   `unidade_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `config_system`
+-- Despejando dados para a tabela `config_system`
 --
 
 INSERT INTO `config_system` (`id`, `description`, `author`, `title`, `icon`, `sistema`, `versao`, `direitos`, `desenvolvedor`, `email_contato`, `ano`, `pag_principal`, `unidade_name`) VALUES
-(1, 'Sistema de Gerenciamento de Colaboradores desenvolvido por Rodolfo R R de Jesus.', 'Rodolfo Romaioli Ribeiro de Jesus', 'Jaçanã Controle', 'imagens/icons/favicon_jaca_control.ico', 'Jaçanã System', '1.0', 'Todos os direitos reservados', 'Rodolfo R R de Jesus', 'rodolfo.romaioli@gmail.com', 2021, 'menu-principal.php', 'Jaçanã Controle');
+(1, 'Sistema de Gerenciamento de Colaboradores desenvolvido por Rodolfo R R de Jesus.', 'Rodolfo Romaioli Ribeiro de Jesus', 'Jaçanã Controle', 'imagens/icons/favicon_jaca_control.ico', 'Jaçanã System', '1.0', 'Todos os direitos reservados', 'Rodolfo R R de Jesus', 'informatica.setor11@gmail.com', 2021, 'menu-principal', 'Jaçanã Controle');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `menu_principal`
+-- Estrutura para tabela `grupos`
+--
+
+CREATE TABLE `grupos` (
+  `id` int(2) NOT NULL,
+  `nome_grupo` text NOT NULL,
+  `description` varchar(75) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `grupos`
+--
+
+INSERT INTO `grupos` (`id`, `nome_grupo`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'NOME_GRUPO_1', 'Doações e Coletas', '2024-06-14 03:16:18', '2024-06-15 00:44:35'),
+(2, 'NOME_GRUPO_2', 'Compra de Insumos e Alimentação', '2024-06-14 03:16:18', '2024-06-15 00:44:45'),
+(3, 'ALIMENTAÇÃO', 'Refeitórios', '2024-06-14 03:16:18', '2024-06-15 00:44:58'),
+(4, 'NOME_GRUPO_4', 'Brigada e Primeiros Socorros', '2024-06-14 03:16:18', '2024-06-15 00:45:30'),
+(5, 'NOME_GRUPO_5', 'Segurança e Trânsito', '2024-06-14 03:16:18', '2024-06-15 00:45:37'),
+(6, 'NOME_GRUPO_6', 'Limpeza e Organização das Casas de oração', '2024-06-14 03:16:18', '2024-06-15 00:45:42'),
+(7, 'NOME_GRUPO_7', 'Manutenção Som  - Ar Condicionado', '2024-06-14 03:16:18', '2024-06-15 00:45:47'),
+(8, 'NOM8E_GRUPO_8', 'Gráfica Suporte de Papelaria', '2024-06-14 03:16:18', '2024-06-15 00:45:59'),
+(9, 'INFORMÁTICA', 'Processamento de Dados, T.i, Emissão fichas, Credenciamento(Crachás), Telão', '2024-06-14 03:16:18', '2024-06-15 00:45:18'),
+(10, 'NOME_GRUPO_10', 'Apoio aos Grupos de Visitas (outras Localidades)', '2024-06-14 03:16:18', '2024-06-15 00:46:09'),
+(11, 'NOME_GRUPO_11', 'Libras', '2024-06-14 03:16:18', '2024-06-15 00:46:15'),
+(12, 'NOME_GRUPO_12', 'Orquestras Músicos', '2024-06-14 03:16:18', '2024-06-15 00:46:27'),
+(13, 'NOME_GRUPO_13', 'Orientação Geral, Apoio aos GT\'s', '2024-06-14 03:16:18', '2024-06-15 00:46:36'),
+(14, 'NOME_GRUPO_14', 'Apoio aos servos de Deus nos Cultos', '2024-06-14 03:16:18', '2024-06-15 00:46:42'),
+(15, 'NOME_GRUPO_15', 'Não definido', '2024-06-14 23:44:29', '2024-06-15 00:46:47');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `igrejas`
+--
+
+CREATE TABLE `igrejas` (
+  `id` int(11) NOT NULL,
+  `nome_igreja` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `igrejas`
+--
+
+INSERT INTO `igrejas` (`id`, `nome_igreja`, `created_at`, `updated_at`) VALUES
+(1, 'Barrocada', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(2, 'Jaçanã', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(3, 'Jardim Ataliba Leonel', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(4, 'Jardim Cabuçu', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(5, 'Jardim Fontalis', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(6, 'Jardim Hebron', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(7, 'Jardim Japão', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(8, 'Jardim Joamar', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(9, 'Jardim Julieta', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(10, 'Jardim Peri', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(11, 'Jardim Portal 1', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(12, 'Jardim São João', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(13, 'Jardim Tremembé', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(14, 'Joana Darc', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(15, 'Jova Rural', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(16, 'Mandaqui', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(17, 'Parque Edu Chaves', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(18, 'Parque Novo Mundo', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(19, 'Parque Vila Maria', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(20, 'Pedra Branca', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(21, 'Santana', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(22, 'Tremembé', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(23, 'Tucuruvi', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(24, 'Vila Albertina', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(25, 'Vila Aurora', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(26, 'Vila Ayrosa', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(27, 'Vila Cachoeira', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(28, 'Vila Ede', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(29, 'Vila Guilherme', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(30, 'Vila Maria', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(31, 'Vila Medeiros', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(32, 'Vila Nova Galvão', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(33, 'Vila Rosa', '2024-06-14 03:02:14', '2024-06-14 03:02:14'),
+(34, 'Não Informado', '2024-06-14 03:29:05', '2024-06-14 03:29:25');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `menu_principal`
 --
 
 CREATE TABLE `menu_principal` (
   `id` int(11) NOT NULL,
   `id_menu` int(3) DEFAULT NULL,
   `pag` varchar(20) NOT NULL DEFAULT 'index.php',
-  `nome` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `nome` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `icon` varchar(20) DEFAULT NULL,
-  `usuariocad` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  `usuariocad` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `criado` datetime DEFAULT NULL,
-  `usuarioalt` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  `usuarioalt` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `alterado` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 
 --
--- Extraindo dados da tabela `menu_principal`
+-- Despejando dados para a tabela `menu_principal`
 --
 
 INSERT INTO `menu_principal` (`id`, `id_menu`, `pag`, `nome`, `icon`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
@@ -113,23 +199,23 @@ INSERT INTO `menu_principal` (`id`, `id_menu`, `pag`, `nome`, `icon`, `usuarioca
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `menu_sub`
+-- Estrutura para tabela `menu_sub`
 --
 
 CREATE TABLE `menu_sub` (
   `id` int(11) NOT NULL,
   `id_menu` int(11) NOT NULL,
-  `nome` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `pag` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `nome` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `pag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `icon` varchar(20) DEFAULT NULL,
   `usuariocad` varchar(10) DEFAULT NULL,
   `criado` datetime DEFAULT NULL,
   `usuarioalt` varchar(10) DEFAULT NULL,
   `alterado` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 
 --
--- Extraindo dados da tabela `menu_sub`
+-- Despejando dados para a tabela `menu_sub`
 --
 
 INSERT INTO `menu_sub` (`id`, `id_menu`, `nome`, `pag`, `icon`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
@@ -140,23 +226,23 @@ INSERT INTO `menu_sub` (`id`, `id_menu`, `nome`, `pag`, `icon`, `usuariocad`, `c
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `menu_sub_sub`
+-- Estrutura para tabela `menu_sub_sub`
 --
 
 CREATE TABLE `menu_sub_sub` (
   `id` int(11) NOT NULL,
   `id_menu` int(11) NOT NULL,
-  `nome` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `pag` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `nome` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `pag` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `icon` varchar(20) DEFAULT NULL,
   `usuariocad` varchar(10) DEFAULT NULL,
   `criado` datetime DEFAULT NULL,
   `usuarioalt` varchar(10) DEFAULT NULL,
   `alterado` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 
 --
--- Extraindo dados da tabela `menu_sub_sub`
+-- Despejando dados para a tabela `menu_sub_sub`
 --
 
 INSERT INTO `menu_sub_sub` (`id`, `id_menu`, `nome`, `pag`, `icon`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
@@ -166,7 +252,7 @@ INSERT INTO `menu_sub_sub` (`id`, `id_menu`, `nome`, `pag`, `icon`, `usuariocad`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `navfootercolor`
+-- Estrutura para tabela `navfootercolor`
 --
 
 CREATE TABLE `navfootercolor` (
@@ -176,10 +262,10 @@ CREATE TABLE `navfootercolor` (
   `footercolor` varchar(100) NOT NULL DEFAULT 'bg-dark',
   `footertext` varchar(100) NOT NULL DEFAULT 'text-white',
   `stylenavbar` varchar(100) NOT NULL DEFAULT '#000000'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `navfootercolor`
+-- Despejando dados para a tabela `navfootercolor`
 --
 
 INSERT INTO `navfootercolor` (`id`, `navtext`, `navcolor`, `footercolor`, `footertext`, `stylenavbar`) VALUES
@@ -188,7 +274,7 @@ INSERT INTO `navfootercolor` (`id`, `navtext`, `navcolor`, `footercolor`, `foote
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pag_system`
+-- Estrutura para tabela `pag_system`
 --
 
 CREATE TABLE `pag_system` (
@@ -202,10 +288,10 @@ CREATE TABLE `pag_system` (
   `criado` datetime DEFAULT current_timestamp(),
   `usuarioalt` varchar(11) DEFAULT NULL,
   `alterado` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=COMPACT;
 
 --
--- Extraindo dados da tabela `pag_system`
+-- Despejando dados para a tabela `pag_system`
 --
 
 INSERT INTO `pag_system` (`id`, `name_pag`, `name_form`, `caminho`, `tabela`, `unidade`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
@@ -223,123 +309,156 @@ INSERT INTO `pag_system` (`id`, `name_pag`, `name_form`, `caminho`, `tabela`, `u
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `setor`
+-- Estrutura para tabela `setor`
 --
 
 CREATE TABLE `setor` (
   `id` int(11) NOT NULL,
   `nome_setor` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `setor`
+-- Despejando dados para a tabela `setor`
 --
 
 INSERT INTO `setor` (`id`, `nome_setor`) VALUES
-(1, 'administrativo'),
-(2, 'manutencao'),
-(3, 'informatica'),
-(4, 'portaria');
+(1, 'ADMINISTRAÇÃO'),
+(2, 'MANUTENÇÃO'),
+(3, 'INFORMÁTICA'),
+(4, 'PORTEIRO'),
+(5, 'BRIGADISTA'),
+(6, 'COZINHA'),
+(7, 'ASSESSOR'),
+(8, 'ENFERMEIRA'),
+(9, 'ENFERMEIRO'),
+(10, 'ESTACIONAMENTO'),
+(11, 'LIMPEZA C.O'),
+(12, 'LIMPEZA PIEDADE'),
+(13, 'MÉDICO'),
+(14, 'SOM'),
+(15, 'RECEPÇÃO'),
+(16, 'SECRETARIA'),
+(17, 'SEGURANÇA - PM'),
+(18, 'SEGURANÇA - P. CIVIL'),
+(19, 'JURÍDICO-ASSESSOR'),
+(20, 'MÉDICA');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `foto` varchar(100) NOT NULL DEFAULT 'imagens/foto_exists.png',
-  `nome` varchar(36) DEFAULT NULL,
-  `sobrenome` varchar(100) DEFAULT NULL,
-  `datanascimento` date DEFAULT NULL,
-  `cpf` varchar(15) DEFAULT NULL,
-  `email` varchar(57) DEFAULT NULL,
-  `senha` varchar(200) DEFAULT NULL,
+  `foto` varchar(89) DEFAULT NULL,
+  `nome` varchar(150) DEFAULT NULL,
+  `sobrenome` varchar(150) DEFAULT NULL,
+  `datanascimento` varchar(10) NOT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `senha` varchar(64) DEFAULT NULL,
   `nivel_acesso_id` int(1) DEFAULT NULL,
-  `celular` varchar(15) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  `sexo` int(1) NOT NULL DEFAULT 2,
-  `setor` int(1) NOT NULL DEFAULT 4,
-  `hash_cracha` varchar(100) NOT NULL,
-  `usuariocad` varchar(11) DEFAULT NULL,
-  `criado` timestamp NULL DEFAULT current_timestamp(),
+  `celular` bigint(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `sexo` int(1) DEFAULT NULL,
+  `setor` varchar(2) DEFAULT NULL,
+  `adm` varchar(50) NOT NULL DEFAULT 'JAÇANÃ',
+  `cidade` varchar(100) NOT NULL DEFAULT 'SÃO PAULO',
+  `hash_cracha` varchar(64) DEFAULT NULL,
+  `usuariocad` bigint(11) DEFAULT NULL,
+  `criado` datetime NOT NULL DEFAULT current_timestamp(),
   `usuarioalt` varchar(11) DEFAULT NULL,
-  `alterado` datetime DEFAULT NULL,
+  `alterado` varchar(16) DEFAULT NULL,
   `loginenvioemailsenha` varchar(10) DEFAULT NULL,
-  `chavesetsenha` varchar(200) DEFAULT NULL,
-  `datapedidochavesetsenha` datetime DEFAULT NULL,
-  `datafeitonovasenha` datetime DEFAULT NULL,
-  `dataenvioemailsenha` timestamp NULL DEFAULT current_timestamp(),
-  `emailenviadosenha` varchar(3) NOT NULL DEFAULT 'NAO',
-  `resetsenha` varchar(3) DEFAULT 'NAO',
-  `dataresetsenha` datetime DEFAULT NULL,
-  `date_alter_senha` timestamp NULL DEFAULT current_timestamp(),
-  `lixeira` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `chavesetsenha` varchar(10) DEFAULT NULL,
+  `datapedidochavesetsenha` varchar(10) DEFAULT NULL,
+  `datafeitonovasenha` varchar(10) DEFAULT NULL,
+  `dataenvioemailsenha` varchar(16) DEFAULT NULL,
+  `emailenviadosenha` varchar(3) DEFAULT NULL,
+  `resetsenha` varchar(3) DEFAULT NULL,
+  `dataresetsenha` varchar(10) DEFAULT NULL,
+  `date_alter_senha` varchar(16) DEFAULT NULL,
+  `lixeira` int(1) UNSIGNED NOT NULL DEFAULT 0,
+  `igreja_id` int(2) NOT NULL DEFAULT 34,
+  `grupo_id` int(2) NOT NULL DEFAULT 15,
+  `aceite_id` int(2) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `foto`, `nome`, `sobrenome`, `datanascimento`, `cpf`, `email`, `senha`, `nivel_acesso_id`, `celular`, `status`, `sexo`, `setor`, `hash_cracha`, `usuariocad`, `criado`, `usuarioalt`, `alterado`, `loginenvioemailsenha`, `chavesetsenha`, `datapedidochavesetsenha`, `datafeitonovasenha`, `dataenvioemailsenha`, `emailenviadosenha`, `resetsenha`, `dataresetsenha`, `date_alter_senha`, `lixeira`) VALUES
-(1, 'sistema/imagens/padrao.jpg', 'EZEQUIEL', 'GRIMA ROMAIOLI RIBEIRO DE JESUS', '2008-12-21', '18233564654', 'ezequiel.romaioli@gmail.com', 'cde7ee70d15c9cecbc95da5cf9b8f509a64384ed29938561c2a76e2c76b95240', 3, '11955545646', 0, 1, 1, '120e871758b552f450366b802c4c474052ba62d73eaac1a6e017c793da7767ad', '22068876817', '2021-07-12 02:10:22', '22068876817', '2021-07-19 09:57:40', NULL, NULL, NULL, NULL, '2021-07-12 02:10:22', 'NAO', 'NAO', NULL, '2021-07-12 02:10:22', 0),
-(2, 'sistema/imagens/22068876817/fotologin/13072021_gato_macho_neve.jpeg', 'RODOLFO', 'ROMAIOLI RIBEIRO DE JESUS', '1981-02-07', '22068876817', 'rodolfo.romaioli@gmail.com', 'd7c1e9ddb8586f297280695a8c61662ed044156d67e212ec022f244118fecdc0', 1, '11991091365', 1, 1, 0, '380423c936ba6cc37de255f8771a259f8917a6e712ab5985d95b58f7664a75b4', '18233564654', '2021-07-14 02:26:23', '22068876817', '2021-07-13 23:28:16', NULL, NULL, NULL, NULL, '2021-07-14 02:26:23', 'NAO', 'NAO', NULL, '2021-07-14 02:26:23', 0);
+INSERT INTO `usuarios` (`id`, `foto`, `nome`, `sobrenome`, `datanascimento`, `cpf`, `email`, `senha`, `nivel_acesso_id`, `celular`, `status`, `sexo`, `setor`, `adm`, `cidade`, `hash_cracha`, `usuariocad`, `criado`, `usuarioalt`, `alterado`, `loginenvioemailsenha`, `chavesetsenha`, `datapedidochavesetsenha`, `datafeitonovasenha`, `dataenvioemailsenha`, `emailenviadosenha`, `resetsenha`, `dataresetsenha`, `date_alter_senha`, `lixeira`, `igreja_id`, `grupo_id`, `aceite_id`) VALUES
+(175, 'sistema/imagens/22068876817/fotologin/04092021_rodolfo.jpeg', 'RODOLFO', 'ROMAIOLI RIBEIRO DE JESUS', '1981-02-07', '22068876817', 'adm@gmail.com', '2d55fcb231b8e4855dc515dd9487a0caafa9f18549c68a3230cdf386b5fc5bfc', 1, 11991091365, 1, 1, '3', 'JAÇANÃ', 'SÃO PAULO', '259da8e4f7ef0d085b2819c9ea7448b9b6b237c22b594c358c7002b2e8809983', 22068876817, '2024-06-14 01:09:47', '22068876817', '2024-06-14 22:23', NULL, NULL, NULL, NULL, '2022-07-26 02:28', 'NAO', 'NAO', NULL, '2024-06-13 23:36', 0, 23, 9, 1),
+(176, 'sistema/imagens/padrao.jpg', 'TESTE', 'TESTADO', '2024-06-13', '12345678910', 'teste@gmail.com', '2d55fcb231b8e4855dc515dd9487a0caafa9f18549c68a3230cdf386b5fc5bfc', 1, 11987979878, 1, 0, NULL, 'JAÇANÃ', 'SÃO PAULO', '259da8e4f7ef0d085b2819c9ea7448b9b6b237c22b594c358c7002b2e8809983', 22068876817, '2024-06-13 22:53:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 8, 12, 1);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `albuns`
+-- Índices de tabela `albuns`
 --
 ALTER TABLE `albuns`
   ADD PRIMARY KEY (`id_alb`);
 
 --
--- Índices para tabela `config_system`
+-- Índices de tabela `config_system`
 --
 ALTER TABLE `config_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `menu_principal`
+-- Índices de tabela `grupos`
+--
+ALTER TABLE `grupos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `igrejas`
+--
+ALTER TABLE `igrejas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `menu_principal`
 --
 ALTER TABLE `menu_principal`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `menu_sub`
+-- Índices de tabela `menu_sub`
 --
 ALTER TABLE `menu_sub`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `menu_sub_sub`
+-- Índices de tabela `menu_sub_sub`
 --
 ALTER TABLE `menu_sub_sub`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `pag_system`
+-- Índices de tabela `pag_system`
 --
 ALTER TABLE `pag_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `setor`
+-- Índices de tabela `setor`
 --
 ALTER TABLE `setor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -353,6 +472,18 @@ ALTER TABLE `albuns`
 --
 ALTER TABLE `config_system`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `grupos`
+--
+ALTER TABLE `grupos`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `igrejas`
+--
+ALTER TABLE `igrejas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de tabela `menu_principal`
@@ -382,13 +513,13 @@ ALTER TABLE `pag_system`
 -- AUTO_INCREMENT de tabela `setor`
 --
 ALTER TABLE `setor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
