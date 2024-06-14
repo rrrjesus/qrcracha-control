@@ -23,8 +23,11 @@ $id = $_GET['id'] ?? ''; // Recebendo o id do usuario solicitado via GET
 // Valida se existe um id e se ele é numérico
 if (!empty($id) && is_numeric($id)):
 
-$sql = "SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, setor.nome_setor AS setor, usuarios.adm, usuarios.cidade, usuarios.hash_cracha, usuarios.lixeira,setor.id as id_setor
-        FROM usuarios LEFT JOIN setor ON usuarios.setor = setor.id WHERE usuarios.id = :id";
+$sql = "SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, grupos.id AS id_grupos, grupos.nome_grupo AS grupo, igrejas.nome_igreja AS igreja, usuarios.adm, usuarios.cidade, usuarios.hash_cracha, usuarios.lixeira
+        FROM usuarios 
+        LEFT JOIN grupos ON usuarios.grupo_id = grupos.id 
+        LEFT JOIN igrejas ON usuarios.igreja_id = igrejas.id 
+        WHERE usuarios.id = :id";
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':id', $id);
 $stm->execute();
@@ -70,7 +73,7 @@ endif;
     <?php //require(__DIR__ . '/header_auth.php'); ?>
     
     <script type="text/javascript">
-        window.print();
+        /* window.print(); */
     </script>
 
     <main>
@@ -92,10 +95,10 @@ endif;
                     else{ echo 'sistema/imagens/padrao.jpg';}?>" class="img">
                 </div>
                 <div class="col-7 text-center foto">
-                    <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">RGE SETOR <?=$user->adm?></p>
+                    <p class="h6 text-dark fw-bold mt-0 mb-0 ms-2">PROJETO RESGATE <?=$user->adm?></p>
                     <p class="h6 text-dark ms-2 mt-0 mb-0" style="font-size: 40px;font-weight: 500"><?=$user->nome?></p>
-                    <p class="h6 text-dark mt-0 mb-0 ms-2" style="font-size: 20px;font-weight: 800"><?=$user->setor?></p>
-                    <p class="h6 text-secondary mt-0 mb-0 ms-2 foto" style="font-size: 40px;font-weight: 900">RGE <?=date('Y')?></p>
+                    <p class="h6 text-dark mt-0 mb-0 ms-2" style="font-size: 20px;font-weight: 800">GT <?=$user->id_grupos.' - '.$user->grupo?></p>
+                    <p class="h6 text-secondary mt-0 mb-0 ms-2 foto" style="font-size: 40px;font-weight: 900"><?=date('Y')?></p>
                 </div>
 
             </div>
@@ -109,11 +112,12 @@ endif;
             <div class="row justify-content-center">
                 <div class="col-7 mb-0 text-center">
                     <p class="h6 text-dark fw-bold ms-4">Congregação Cristã no Brasil</p>
+                    <p class="h6 text-dark fw-bold ms-4">Setor 11 - <?=$user->igreja?></p>
                 </div>
             </div>
             <div class="row mb-0 mt-0 justify-content-center">
                 <div class="col-8 text-center">
-                    <p class="text-dark fw-bold mt-1 mb-2" style="font-size: 0.70rem">"Válido somente para 17 de abril e 11 de setembro de <?=date('Y')?>."</p>
+                    <p class="text-dark fw-bold mt-1 mb-2" style="font-size: 0.70rem">"Válido somente para Outubro de <?=date('Y')?>."</p>
                 </div>
             </div>
 

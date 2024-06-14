@@ -20,7 +20,8 @@
     $cpf              = (isset($_POST['cpf'])) ? str_replace(array('.','-'), '', $_POST['cpf']): '';
     $email            = (isset($_POST['email'])) ? $_POST['email'] : '';
     $celular   		  = (isset($_POST['celular'])) ? str_replace(array('(',')','-', ' '), '', $_POST['celular']) : '';
-    $setor   	      = (isset($_POST['setor'])) ? $_POST['setor'] : '';
+    $grupo_id   	  = (isset($_POST['grupo'])) ? $_POST['grupo'] : '';
+    $igreja_id   	  = (isset($_POST['igreja'])) ? $_POST['igreja'] : '';
     $senha   		  = (isset($_POST['senha'])) ? $_POST['senha'] : '';
     $status    		  = (isset($_POST['status'])) ? $_POST['status'] : '';
     $lixeira  		  = (isset($_POST['lixeira'])) ? $_POST['lixeira'] : 0;
@@ -36,7 +37,7 @@
     $get_year = isset($_GET['year']) ? $_GET['year'] : $ano_atual;
 
     //criptografa a senha com sha3-256 + sal
-    $hashcad = hash('sha3-256', 'jesusobompastor'.$email);
+    $hashcad = hash('sha3-256', 'jesusobompastor');
     $cripto_senha = hash('sha3-256', $hashcad.$senha);
 
     //criptografa o cracha com sha3-256 + sal
@@ -108,8 +109,8 @@
             endif;
         endif;
 
-        $sql = 'INSERT INTO usuarios (foto, nome, sobrenome, datanascimento, cpf, email, celular, setor, hash_cracha, senha, status, sexo, nivel_acesso_id, usuariocad)
-							   VALUES(:foto, :nome, :sobrenome, :datanascimento, :cpf, :email, :celular, :setor, :hash_cracha, :senha, :status, :sexo, :nivel_acesso_id, :usuariocad)';
+        $sql = 'INSERT INTO usuarios (foto, nome, sobrenome, datanascimento, cpf, email, celular, grupo_id, igreja_id, hash_cracha, senha, status, sexo, nivel_acesso_id, usuariocad)
+							   VALUES(:foto, :nome, :sobrenome, :datanascimento, :cpf, :email, :celular, :grupo_id, :igreja_id, :hash_cracha, :senha, :status, :sexo, :nivel_acesso_id, :usuariocad)';
 
         $stm = $conexao->prepare($sql);
         $stm->bindValue(':foto', $nome_foto);
@@ -119,7 +120,8 @@
         $stm->bindValue(':cpf', $cpf);
         $stm->bindValue(':email', $email);
         $stm->bindValue(':celular', $celular);
-        $stm->bindValue(':setor', $setor);
+        $stm->bindValue(':grupo_id', $grupo_id);
+        $stm->bindValue(':igreja_id', $igreja_id);
         $stm->bindValue(':hash_cracha', $cripto_cracha);
         $stm->bindValue(':senha', $cripto_senha);
         $stm->bindValue(':status', $status);
@@ -203,7 +205,7 @@
 
 
                 $sql = 'UPDATE usuarios SET foto=:foto, nome=:nome, sobrenome=:sobrenome, datanascimento=:datanascimento, cpf=:cpf, email=:email,
-                        celular=:celular, setor=:setor, hash_cracha=:hash_cracha, status=:status, sexo=:sexo, nivel_acesso_id=:nivel_acesso_id, usuarioalt=:usuarioalt,alterado=NOW() ';
+                        celular=:celular, grupo_id=:grupo_id, igreja_id=:igreja_id, hash_cracha=:hash_cracha, status=:status, sexo=:sexo, nivel_acesso_id=:nivel_acesso_id, usuarioalt=:usuarioalt,alterado=NOW() ';
                 $sql .= 'WHERE id = :id';
 
                 $stm = $conexao->prepare($sql);
@@ -214,7 +216,8 @@
                 $stm->bindValue(':cpf', $cpf);
                 $stm->bindValue(':email', $email);
                 $stm->bindValue(':celular', $celular);
-                $stm->bindValue(':setor', $setor);
+                $stm->bindValue(':grupo_id', $grupo_id);
+                $stm->bindValue(':igreja_id', $igreja_id);
                 $stm->bindValue(':hash_cracha', $cripto_cracha);
                 $stm->bindValue(':status', $status);
                 $stm->bindValue(':sexo', $sexouser);
@@ -244,7 +247,7 @@
     if ($acao == 'editar_senha'):
 
         //criptografa a senha com sha3-256 + sal
-        $hasheditsenha = hash('sha3-256', 'jesusobompastor'.$email);
+        $hasheditsenha = hash('sha3-256', 'jesusobompastor');
         $cripto_senha_edit_senha = hash('sha3-256', $hasheditsenha.$senha);
 
         $sql = 'UPDATE usuarios SET senha=:senha, date_alter_senha=NOW() ';

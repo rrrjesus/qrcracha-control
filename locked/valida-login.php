@@ -10,7 +10,7 @@ $email = isset($_POST['email']) ? addslashes(trim($_POST['email'])) : FALSE;
 $senha = isset($_POST['senha']) ? $_POST['senha'] : FALSE;
 
 //criptografa a senha com sha3-256 + sal
-$hashcad = hash('sha3-256', 'jesusobompastor'.$email);
+$hashcad = hash('sha3-256', 'jesusobompastor');
 $cripto_senha_login = hash('sha3-256', $hashcad.$senha);
 
 // Check connection

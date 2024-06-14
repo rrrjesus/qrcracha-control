@@ -9,12 +9,12 @@
 
 /** Constantes de parâmetros para configuração da conexão */
 
-const HOST = '10.47.171.69';
-const DBNAME = 'jacana_system';
-const USER = 'jacana_system';
-const PASSWORD = 'ZisYeMsoTJkbEhth';
+const HOST = '127.0.0.1';
+const DBNAME = 'nome_do_banco';
+const USER = 'root';
+const PASSWORD = '';
 const PAGSYSTEM = 'menu-principal';
-const SYSTEM = 'jacana-control';
+const SYSTEM = 'nome_da_pasta_do_sistema';
 
 /** Algumas variáveis padrões utilizadas constantemente */
 

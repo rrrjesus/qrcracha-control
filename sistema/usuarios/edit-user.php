@@ -13,11 +13,13 @@ if (!empty($id) && is_numeric($id)): // Valida se existe um id e se ele é numé
 $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
 
 $sql = "SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, usuarios.datanascimento, usuarios.cpf, 
-       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo, usuarios.lixeira,
-            setor.nome_setor AS setor, setor.id as id_setor
+       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.grupo_id, usuarios.igreja_id, usuarios.status, usuarios.sexo, usuarios.lixeira,
+            grupos.nome_grupo AS grupo, grupos.id as id_grupo, igrejas.nome_igreja AS igreja, igrejas.id as id_igreja
         FROM usuarios
-LEFT JOIN setor
-ON usuarios.setor = setor.id
+LEFT JOIN grupos
+ON usuarios.grupo_id = grupos.id
+LEFT JOIN igrejas
+ON usuarios.igreja_id = igrejas.id
 WHERE usuarios.id = :id";
 $stm = $conexao->prepare($sql);
 $stm->bindValue(':id', $id);
@@ -153,29 +155,52 @@ endif;
             </div>
 
             <div class="row">
-                <div class="col-md-4 mb-1">
-                    <label class="col-form-label col-form-label-sm" for="inputSetor"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Setor</strong></label>
-                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ADMINISTRATIVO"
-                            name="setor" id="setor">
+                <div class="col-md-3 mb-1">
+                    <label class="col-form-label col-form-label-sm" for="inputGrupo"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Grupo</strong></label>
+                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: INFORMÁTICA"
+                            name="grupo" id="grupo">
                         <?php
-                        $sql = "SELECT DISTINCT id, nome_setor FROM setor";
+                        $sql = "SELECT DISTINCT id, nome_grupo FROM grupos";
                         $stm = $conexao->prepare($sql);
                         $stm->execute();
-                        $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+                        $grupo = $stm->fetchAll(PDO::FETCH_OBJ);
 
                         //Encerra a conexão
                         $stm = null;
-                            foreach ($setor as $id_setor):
+                            foreach ($grupo as $id_grupo):
                         ?>
-                        <option value="<?=$id_setor->id?>"><?=strtoupper($id_setor->nome_setor)?></option>
+                        <option value="<?=$id_grupo->id?>"><?=$id_grupo->nome_grupo?></option>
                         <?php
                             endforeach;
                         ?>
-                        <option value="<?=$user->id_setor?>" selected><?=strtoupper($user->setor)?></option>
+                        <option value="<?=$user->grupo_id?>" selected><?=$user->grupo?></option>
                     </select>
                 </div>
 
-                <div class="col-md-4 mb-1">
+                <div class="col-md-3 mb-1">
+                    <label class="col-form-label col-form-label-sm" for="inputIgreja"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Igreja</strong></label>
+                    <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: JAÇANÃ"
+                            name="igreja" id="igreja">
+                        <?php
+                        $sql = "SELECT DISTINCT id, nome_igreja FROM igrejas";
+                        $stm = $conexao->prepare($sql);
+                        $stm->execute();
+                        $igreja = $stm->fetchAll(PDO::FETCH_OBJ);
+
+                        //Encerra a conexão
+                        $stm = null;
+                            foreach ($igreja as $id_igreja):
+                        ?>
+                        <option value="<?=$id_igreja->id?>"><?=$id_igreja->nome_igreja?></option>
+                        <?php
+                            endforeach;
+                        ?>
+                        <option value="<?=$user->igreja_id?>" selected><?=$user->igreja?></option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-3 mb-1">
                     <label class="col-form-label col-form-label-sm" for="inputStatus"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Status</strong></label>
                     <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ATIVO/INATIVO"
                         name="status" id="status">
@@ -184,7 +209,7 @@ endif;
                     </select>
                 </div>
 
-                <div class="col-md-4 mb-1">
+                <div class="col-md-3 mb-1">
                     <label class="col-form-label col-form-label-sm" for="inputNivelAcesso"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Nível Acesso</strong></label>
                     <select class="form-control form-control-sm" data-toggle="tooltip" data-placement="top" title="Ex: USUÁRIO"
                             name="nivel_acesso_id" id="nivel_acesso_id">

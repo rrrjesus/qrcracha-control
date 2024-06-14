@@ -52,7 +52,7 @@ $smt = null;
     <meta name="author" content="<?=$systemfetch->author?>">
     <link rel="icon" href="<?='../'.$systemfetch->icon?>">
 
-    <title><?=$systemfetch->title?></title>
+    <title>cracha <?=strtolower($user->nome.' '.$user->sobrenome)?></title>
 
     <link rel="canonical" href="https://informaticast11.com.br/controle-rge/authentic/search.php?id=<?=$id?>&crypto=<?=$get_hash_cracha?>/">
 

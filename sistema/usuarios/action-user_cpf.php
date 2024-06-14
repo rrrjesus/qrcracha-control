@@ -36,7 +36,7 @@
     $get_year = isset($_GET['year']) ? $_GET['year'] : $ano_atual;
 
     //criptografa a senha com sha3-256 + sal
-    $hashcad = hash('sha3-256', 'jesusobompastor'.$email);
+    $hashcad = hash('sha3-256', 'jesusobompastor');
     $cripto_senha = hash('sha3-256', $hashcad.$senha);
 
     //criptografa o cracha com sha3-256 + sal

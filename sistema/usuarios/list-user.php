@@ -61,7 +61,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&lixeira=' + full[13] + '" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
+                            return '<a href="<?=PAGSYSTEM?>?pag=edicao_usuarios&id=' + full[0] + '&lixeira=' + full[14] + '" data-toggle="tooltip" title="EDITAR" role="button" class="btn btn-outline-warning btn-sm text-center pb-0"><p class="h6 fw-bold me-2 ms-2"> ' + full[0] + '<i class="fa fa-pencil ms-2"></i></p></a>';
                         }
                     },
                     {
@@ -77,15 +77,15 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                         }
                     },
                     {
-                        "aTargets": [13], // o numero 6 é o nº da coluna
+                        "aTargets": [14], // o numero 6 é o nº da coluna
                         "data": null,
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                            var lixo = full[13];
+                            var lixo = full[14];
                             switch (lixo) {
-                                case '0' :
+                                case 0 :
                                     lixo = '<button type="button" class="btn btn-outline-danger btn-sm btn-circle" data-toggle="modal" data-target="#myModalLixo"><i class="fa fa-trash" data-toggle="tooltip" title="DESCARTAR"></i></button>';
                                     break;
-                                case '1' :
+                                case 1 :
                                     lixo = '<button type="button" class="btn btn-outline-warning btn-sm btn-circle" data-toggle="modal" data-target="#myModalLixo"><i class="fa fa-arrow-circle-o-up" data-toggle="tooltip" title="REATIVAR"></i></button>';
                                     break;
                                 case null:
@@ -102,12 +102,12 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
             });
             $('#lista-usuario-cracha tbody').on('click', 'button', function() {
                 var data = table.row($(this).parents('tr')).data(); // getting target row data
-                var lixos = data[13];
+                var lixos = data[14];
 
-                if(lixos === '0') {
+                if(lixos === 0) {
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja apagar o cracha de <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[3] + ' ' + data[4] + '</span> ?</div>'
+                        '<div class="modal-title text-center">Deseja apagar o cracha de <span class="badge rounded-pill bg-danger pt-2 pb-2">' + data[3] + '</span> ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
@@ -116,7 +116,7 @@ $btnlixo = $button->Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year
                 }else{
                     $('.textdel').html(
                         // Adding and structuring the full data
-                        '<div class="modal-title text-center">Deseja reativar o crachá de : <span class="badge rounded-pill bg-warning pt-2 pb-2">' + data[3] + ' ' + data[4] + '</span> ?</div>'
+                        '<div class="modal-title text-center">Deseja reativar o crachá de : <span class="badge rounded-pill bg-warning pt-2 pb-2">' + data[3] + '</span> ?</div>'
                     );
                     $('.buttondel').html(
                         // Adding and structuring the full data
@@ -163,7 +163,8 @@ $button->AlertSession()?>
             <th class="text-center">TELEFONE</th>
             <th class="text-center">STATUS</th>
             <th class="text-center">SEXO</th>
-            <th class="text-center">SETOR</th>
+            <th class="text-center">GRUPO</th>
+            <th class="text-center">IGREJA</th>
             <?php if($get_lixeira === 0) :
                 echo '<th class="text-center">EXCLUIR</th>';
             else :

@@ -17,11 +17,12 @@ $getlixeira = isset($_GET['getlixeira']) ? $_GET['getlixeira'] : 0; // Recebe o 
 // tabela DB para usar
 $table = <<<EOT
  (SELECT usuarios.id, usuarios.foto, usuarios.nome, usuarios.sobrenome, usuarios.datanascimento, usuarios.cpf, 
-       usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo,
-            setor.nome_setor AS setor, usuarios.lixeira
-        FROM usuarios
-LEFT JOIN setor
-ON usuarios.setor = setor.id WHERE usuarios.lixeira=$getlixeira)temp
+ usuarios.email, usuarios.nivel_acesso_id, usuarios.celular, usuarios.status, usuarios.sexo, grupos.nome_grupo AS grupo, 
+ igrejas.nome_igreja AS igreja, usuarios.lixeira
+FROM usuarios
+LEFT JOIN grupos ON usuarios.grupo_id = grupos.id 
+LEFT JOIN igrejas ON usuarios.igreja_id = igrejas.id 
+WHERE usuarios.lixeira=$getlixeira)temp
 EOT;
 
 // chave primária da tabela
@@ -108,9 +109,11 @@ $columns = array(
                 return '<button type="button" class="btn disabled btn-outline-primary btn-sm fw-bold"><i class="fa fa-mars me-1"></i>MASC</button>';
         }
     ),
-    array('db' => 'setor', 'dt' => 12,
+    array('db' => 'grupo', 'dt' => 12,
         ),
-    array('db' => 'lixeira', 'dt' => 13)
+    array('db' => 'igreja', 'dt' => 13,
+        ),
+    array('db' => 'lixeira', 'dt' => 14)
 );
 
 // SQL server connection information

@@ -241,7 +241,7 @@ class Buttons extends Tables {
      * @param $usuarioniveldeacesso //
      */
     public function Btnlistlixeira($usuarioniveldeacesso,$get_lixeira, $get_year, $get_pag, $nu_lixeira, $pag_system) {
-        if ($usuarioniveldeacesso === '1'):
+        if ($usuarioniveldeacesso === 1):
             if ($get_lixeira === 0):
                 return '<a href="'.$pag_system .'?pag='.$get_pag.'&year='.$get_year.'&lixeira=1" role="button" accesskey="L" class="btn btn-outline-secondary btn-sm fw-bold mb-3"
                         data-toggle="tooltip" data-placement="bottom" title="LIXEIRA"><i class="fa fa-trash-o px-2"></i><u>L</u>IXO <span class="badge rounded-pill bg-danger">' . $nu_lixeira . '</a>';

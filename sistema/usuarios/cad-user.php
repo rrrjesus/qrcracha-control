@@ -95,28 +95,28 @@ endif;
     </div>
 
     <div class="row">
-        <div class="col-md-3 mb-1">
+        <div class="col-md-2 mb-1">
             <label class="col-form-label col-form-label-sm" for="inputSenha"><strong><i class="fa fa-lock fa-muted ms-3 me-3"></i> Senha</strong></label>
             <input class="form-control form-control-sm" type="password" data-toggle="tooltip" title="Ex: ddd123"
                    name="senha" id="senha" value="mudar123" placeholder="******">
         </div>
 
         <div class="col-md-3 mb-1">
-            <label class="col-form-label col-form-label-sm" for="inputSetor"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Setor</strong></label>
+            <label class="col-form-label col-form-label-sm" for="inputGrupo"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Grupo</strong></label>
             <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: INFORMÁTICA"
-                    name="setor" id="setor">
+                    name="grupo" id="grupo">
                 <?php
                     $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
-                    $sql = "SELECT id, nome_setor FROM setor";
+                    $sql = "SELECT id, nome_grupo FROM grupos";
                     $stm = $conexao->prepare($sql);
                     $stm->execute();
-                    $setor = $stm->fetchAll(PDO::FETCH_OBJ);
+                    $grupo = $stm->fetchAll(PDO::FETCH_OBJ);
 
                     $stm = null; //Encerra a conexão
 
-                    foreach ($setor as $setor_for):
+                    foreach ($grupo as $grupo_nome):
                 ?>
-                <option value="<?=$setor_for->id?>>"><?=strtoupper($setor_for->nome_setor)?></option>
+                <option value="<?=$grupo_nome->id?>>"><?=$grupo_nome->nome_grupo?></option>
                 <?php
                     endforeach;
                 ?>
@@ -124,6 +124,28 @@ endif;
         </div>
 
         <div class="col-md-3 mb-1">
+            <label class="col-form-label col-form-label-sm" for="inputGrupo"><strong><i class="fa fa-globe fa-muted fa-fw ms-3 me-3"></i> Igreja</strong></label>
+            <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: JAÇANÃ"
+                    name="igreja" id="igreja">
+                <?php
+                    $conexao = conexao::getInstance(); // Instanciando uma conexão segura através da classe conexão
+                    $sql = "SELECT id, nome_igreja FROM igrejas";
+                    $stm = $conexao->prepare($sql);
+                    $stm->execute();
+                    $igreja = $stm->fetchAll(PDO::FETCH_OBJ);
+
+                    $stm = null; //Encerra a conexão
+
+                    foreach ($igreja as $igreja_nome):
+                ?>
+                <option value="<?=$igreja_nome->id?>>"><?=$igreja_nome->nome_igreja?></option>
+                <?php
+                    endforeach;
+                ?>
+            </select>
+        </div>
+
+        <div class="col-md-2 mb-1">
             <label class="col-form-label col-form-label-sm" for="inputStatus"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Status</strong></label>
             <select class="form-control form-control-sm" data-toggle="tooltip" title="Ex: ATIVO/INATIVO"
                     name="status" id="status">
@@ -132,7 +154,7 @@ endif;
             </select>
         </div>
 
-        <div class="col-md-3 mb-1">
+        <div class="col-md-2 mb-1">
             <label class="col-form-label col-form-label-sm" for="inputNivelAcesso"><strong><i class="fa fa-hand-o-right fa-muted ms-3 me-3"></i> Nível Acesso</strong></label>
             <select class="form-control form-control-sm" data-toggle="tooltip" data-placement="top" title="Ex: USUÁRIO"
                     name="nivel_acesso_id" id="nivel_acesso_id">
