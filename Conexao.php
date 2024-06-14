@@ -10,11 +10,11 @@
 /** Constantes de parâmetros para configuração da conexão */
 
 const HOST = '127.0.0.1';
-const DBNAME = 'nome_do_banco';
+const DBNAME = 'qrcontrol';
 const USER = 'root';
 const PASSWORD = '';
 const PAGSYSTEM = 'menu-principal';
-const SYSTEM = 'nome_da_pasta_do_sistema';
+const SYSTEM = 'qrcontrol';
 
 /** Algumas variáveis padrões utilizadas constantemente */
 

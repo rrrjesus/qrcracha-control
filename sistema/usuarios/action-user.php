@@ -69,6 +69,7 @@
     if ($acao == 'incluir'):
 
         $nome_foto = 'sistema/imagens/padrao.jpg';
+
         if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0):
 
             $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
@@ -95,17 +96,49 @@
                     mkdir( 'sistema/imagens/fotologin');
                 endif;
 
-                // Monta o caminho de destino com o nome do arquivo
-                $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];
+                //Validar extensão da imagem
+                switch($_FILES['foto']['type']):
+                    case 'image/jpeg';
+                    case 'image/jpg';
+                        //Criar a imagem temporaria a ser manipulada
+                        $nome_foto = imagecreatefromjpeg($_FILES['foto']['tmp_name']);
+                    break;
+                    case 'image/png';
+                    case 'image/x-png';
+                        //Criar a imagem temporaria a ser manipulada
+                        $nome_foto = imagecreatefrompng($_FILES['foto']['tmp_name']);
+                    break;
+                    default:
+                        $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Extensão de foto inválida! <br>
+                        Extenções de foto aceitas '.$_FILES['foto']['type'].': .bmp , .png, .svg, .jpeg e .jpg</strong></div>';
+                        echo "<script>javascript:history.go(-1)</script>";
+                endswitch;
+	
 
-                // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'],  'sistema/imagens/fotologin/'.$nome_foto)):
-                    $_SESSION['msgerro'] = '<div class="alert alert-danger pb-1 pt-1 text-center" role="alert"><strong>Houve um erro ao gravar arquivo na pasta de destino! <br>
-                    Se o erro persistir contate o administrador.</strong></div>';
+                //Importar a logo
+                $logo = imagecreatefromgif('sistema/usuarios/logo_cracha_st11.gif');
+                
+                //Obter a largura da logo
+                $largura_logo = imagesx($logo);
+                
+                //Obter a altura da logo
+                $altura_logo = imagesy($logo);
+                //echo "$altura_logo - $largura_logo";
+                
+                //Calcular posição x sendo 6px da lateral direita
+                $x_logo = imagesx($nome_foto) - $largura_logo - 12;
+                
+                //Calcular posição y sendo 6px do rodape
+                $y_logo = imagesy($nome_foto) - $altura_logo - 12;
+                
+                imagecopymerge($nome_foto, $logo, $x_logo, $y_logo, 0, 0, $largura_logo, $altura_logo, 100);
 
-                endif;
+                //http://celke.com.br/posts/141/como-retirar-caracteres-especiais-em-upload-de-imagem-com-php
+                imagejpeg($nome_foto, 'sistema/imagens/fotologin/'.date('dmY') . '_' . $_FILES['foto']['name']);
 
-                $nome_foto = 'sistema/imagens/fotologin/'.$nome_foto;
+                $id_foto = date('dmY') . '_' . $_FILES['foto']['name'];
+
+                $nome_foto = 'sistema/imagens/fotologin/'.$id_foto;
             endif;
         endif;
 
