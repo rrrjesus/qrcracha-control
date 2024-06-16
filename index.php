@@ -48,8 +48,8 @@ session_unset();
 <!-- FOOTER -->
 <?php require(__DIR__ . '/footer.php'); ?>
 
-    <script src="assets/js/jquery/validation/1.15.0.jquery.validate.min.js"></script>
-    <script src="assets/js/jquery/validation/1.13.0.additional-methods.min.js"></script>
+    <script src="assets/js/jquery/validation/1.15.1.jquery.validate.min.js"></script>
+    <script src="assets/js/jquery/validation/1.15.1.additional-methods.min.js"></script>
     <script src="assets/js/1.4.1.jquery.maskedinput.js"></script>
 
     <!-- Bootstrap core JavaScript -->

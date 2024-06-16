@@ -76,6 +76,7 @@ $icon = $systemfetch->icon;
 <link href="assets/fontawesome/css/solid.css" rel="stylesheet"> <!--load all styles -->
 <link href="assets/fontawesome/css/svg-with-js.css" rel="stylesheet"> <!--load all styles -->
 <link href="assets/fontawesome/css/v4-shims.css" rel="stylesheet"> <!--load all styles -->
+<link href="assets/css/croppie.css" rel="stylesheet"> <!--load all styles -->
 
 <!-- SmartMenus jQuery Bootstrap 4 Addon CSS -->
 <link href="assets/css/jquery.smartmenus.bootstrap-4.css" rel="stylesheet">
@@ -112,7 +113,7 @@ $icon = $systemfetch->icon;
 <script type="text/javascript" src="assets/js/typeahead.js"></script>
 <script src="assets/js/docs.min.js"></script>
 <!--Javascript Datatable & validation-->
-<script type="text/javascript" src="assets/js/jquery/validation/1.15.0.jquery.validate.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery/validation/1.15.1.jquery.validate.min.js"></script>
 
 <!-- Datatables Bootstrap 4 JS disponível em https://cdn.datatables.net/-->
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> <!-- Bootstrap 5-->

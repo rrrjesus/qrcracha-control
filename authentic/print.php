@@ -73,7 +73,7 @@ endif;
     <?php //require(__DIR__ . '/header_auth.php'); ?>
     
     <script type="text/javascript">
-        /* window.print(); */
+        window.print();
     </script>
 
     <main>

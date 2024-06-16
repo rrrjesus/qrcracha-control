@@ -105,10 +105,6 @@ $(function() {
                 //datanascimento: { required: true, dateBR: true, maxDateE: true },
                 // cpf: {required: true,remote: "remote/user/val-cpf-cad.php" },
                 // email: { required: true, remote: "remote/user/val-email-cad.php" },
-                setor: {
-                    required: true,
-                    remote: "remote/user/val-setor.php"
-                },
                 // senha: { required: true, strongPassword: true },
                 // celular: { required:true },
                 sexouser: {
@@ -129,10 +125,6 @@ $(function() {
                 // datanascimento: { required:"Digite uma data válida", dateBR: "Informe uma data válida", maxDateE: "Digite a data até hoje" },
                 // cpf: { required: "Digite o CPF válido", remote: "Esse cpf já esta cadastrado em outro usuário !!!" },
                 // email: { required: "Digite um email !!!", remote: "Esse email já esta cadastrado em outro usuário !!!" },
-                setor: {
-                    required: "Digite o setor válido",
-                    remote: "Não encontrado, cadastre o setor e retorne para editar !!!"
-                },
                 // senha: { required: "Digite uma senha !!!", strongPassword: "Sua senha deve ter no mínimo 6 caracteres e conter pelo menos um número e um caractere" },
                 // celular: { required: "Digite um telefone" },
                 sexouser: {

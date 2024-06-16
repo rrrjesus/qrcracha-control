@@ -50,8 +50,8 @@ include_once 'head.php';
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="assets/js/jquery/validation/1.15.0.jquery.validate.min.js"></script>
-<script src="assets/js/jquery/validation/1.13.0.additional-methods.min.js"></script>
+<script src="assets/js/jquery/validation/1.15.1.jquery.validate.min.js"></script>
+<script src="assets/js/jquery/validation/1.13.1.additional-methods.min.js"></script>
 
 </body>
 </html>

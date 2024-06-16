@@ -9,12 +9,12 @@
 
 /** Constantes de parâmetros para configuração da conexão */
 
-const HOST = '127.0.0.1';
-const DBNAME = 'qrcontrol';
-const USER = 'root';
-const PASSWORD = '';
+const HOST = '192.168.15.54';
+const DBNAME = 'u136567021_st11control';
+const USER = 'u136567021_st11control';
+const PASSWORD = 'jovogZke4LQpAQzD';
 const PAGSYSTEM = 'menu-principal';
-const SYSTEM = 'qrcontrol';
+const SYSTEM = 'qrcracha-control';
 
 /** Algumas variáveis padrões utilizadas constantemente */
 
