@@ -36,7 +36,16 @@ $primaryKey = 'id';
 
 $columns = array(
     array('db' => 'id', 'dt' => 0),
-    array('db' => 'foto', 'dt' => 1),
+    array('db' => 'foto', 'dt' => 1,
+    'formatter' => function($d) {
+        if ($d == '')
+            return 'sistema/imagens/padrao.jpg';
+        elseif ($d == null)
+            return 'sistema/imagens/padrao.jpg';
+        else
+            return $d;
+    }
+    ),
     array('db' => 'id', 'dt' => 2),
     array('db' => 'nome', 'dt' => 3),
     array('db' => 'sobrenome', 'dt' => 4),

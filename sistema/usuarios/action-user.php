@@ -190,7 +190,7 @@
                     // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
                     if ($foto_atual <> 'sistema/imagens/padrao.jpg'):
                         //unlink("fotos/" . $foto_atual);
-                        unlink('sistema/imagens/fotologin/'.$foto_atual);
+                        unlink($foto_atual);
                     endif;
 
                     $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');

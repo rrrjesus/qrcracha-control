@@ -55,7 +55,7 @@ $lixeira = $user->lixeira;
         header("Location: $pag_system?pag=lista_usuarios&year=$get_year");
     endif;
 
-    if(!empty($user)): // If caso encontre o id do usuário solicitado
+    if(!isset($user)): // If caso encontre o id do usuário solicitado
         if($user->datanascimento !== ''):
         $array_data     = explode('-', $user->datanascimento); // Formata a data no formato nacional
         $data_formatada = $array_data[2] . '/' . $array_data[1] . '/' . $array_data[0];
@@ -85,11 +85,11 @@ endif;
             <div class="row mb-1">
                 <div class="col-md-1 mb-1">
                     <a href="<?php if (file_exists($user->foto))
-                    {echo $user->foto;}
-                    else{echo 'sistema/imagens/padrao.jpg';}?>">
+                        {echo $user->foto;}
+                        else{echo 'sistema/imagens/padrao.jpg';}?>">
                         <img  height="90" width="90" src="<?php if (file_exists($user->foto))
                         {echo $user->foto;}
-                        else{echo '"sistema/imagens/padrao.jpg"';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
+                        else{echo 'sistema/imagens/padrao.jpg';}?>" class="img-thumbnail rounded-circle float-left" height="190" width="150" id="foto-cliente">
                     </a>
                 </div>
                 <div class="col-md-4 mb-1">
